@@ -2,194 +2,327 @@
 
 ## Proyecto Transformación Digital 2026
 
-Fecha de levantamiento inicial: 9 de septiembre de 2026.
+Fecha de levantamiento inicial: 9 de septiembre de 2026.  
+Última actualización: 9 de septiembre de 2026, posterior al rescate mediante Google Takeout.
 
-Este documento registra qué material ha sido localizado, qué contenido debe migrarse desde el antiguo Google Sites y cómo se propone reorganizarlo en la nueva plataforma independiente.
+Este documento registra el contenido efectivamente recuperado del antiguo Google Sites, el material institucional asociado y la decisión de migración hacia la nueva plataforma independiente.
 
 ---
 
-## 1. Fuente original
+## 1. Fuente original y rescate
 
 Sitio de referencia:
 
 `https://sites.google.com/mconstitucion.cl/transformaciondigital/p%C3%A1gina-principal`
 
-### Estado del levantamiento automático
+La exportación de Google Takeout permitió recuperar las versiones `PUBLISHED` y `DRAFT` de `Página principal`.
 
-La URL pública responde, pero el contenido interno del Google Sites no está siendo expuesto de forma íntegra a los mecanismos de extracción utilizados durante esta primera auditoría. La fuente nativa del Site tampoco apareció como archivo `application/vnd.google-apps.site` dentro del Drive conectado.
+### Hallazgo principal
 
-Por lo tanto, **no se considerará migrado ni inventariado ningún bloque del Google Sites que no haya sido efectivamente recuperado**. El levantamiento exacto de sus páginas, imágenes, enlaces, botones, videos, documentos embebidos y textos queda como tarea de migración pendiente.
+El sitio antiguo no estaba construido principalmente con bloques nativos de Google Sites. Google Sites funcionaba como contenedor de una **aplicación HTML/CSS/JavaScript de una sola página**, incrustada mediante un bloque de código.
 
-Esto evita reconstruir contenido por inferencia o memoria y mantiene trazabilidad sobre la fuente.
+El HTML interno fue recuperado íntegramente desde el atributo `data-code` de la exportación.
+
+- Tamaño aproximado del portal incrustado: 104 KB.
+- `PUBLISHED` y `DRAFT` contienen exactamente el mismo portal interno.
+- 9 secciones principales.
+- 30 encabezados.
+- 10 enlaces estáticos visibles en el HTML base.
+- 15 botones.
+- 3 imágenes institucionales cargadas desde Google Drive.
+- 2 videos embebidos mediante `iframe` de Google Drive.
+- 30 recursos oficiales almacenados como matriz JavaScript.
+- 10 noticias/referencias oficiales precargadas.
+- 3 encuestas.
+- 5 preguntas de quiz técnico.
+- 3 mini-quizzes.
+- Generador de dinámicas con 5 temas.
+- Bitácora y resultados almacenados localmente mediante `localStorage`.
+
+Por tanto, el inventario del sitio antiguo ya no se considera pendiente.
 
 ---
 
-## 2. Corpus institucional relacionado ya localizado
+## 2. Estructura exacta del portal antiguo
 
-Aun cuando la estructura íntegra del Google Sites no pudo extraerse en esta primera pasada, se localizaron materiales institucionales directamente vinculados al proceso de Transformación Digital municipal que constituyen la base editorial y documental del nuevo sitio.
+### 2.1 Hero institucional
 
-### 2.1 Política Institucional de Transformación Digital
+Título principal:
 
-Documento localizado:
+**Política, contenidos y herramientas para fortalecer la Transformación Digital**
 
-- `080 Remite propuesta de Política Institucional de Transformación Digital de la I. Municipalidad de Constitución`
+Incluía:
 
-Contenidos útiles para migrar o convertir en cápsulas/secciones:
+- identificación de la Municipalidad de Constitución;
+- logos institucionales;
+- mensaje de apoyo, aprendizaje y acción;
+- explicación del propósito del portal;
+- conceptos destacados: Ley 21.180, FirmaGob, DocDigital, CasillaÚnica y ciberseguridad;
+- explicación de las novedades incorporadas a la versión.
 
-- marco institucional del proceso;
-- Ley N.º 21.180 y normas relacionadas;
-- gestión documental y expediente electrónico;
-- firma electrónica;
-- interoperabilidad y PISEE 2.0;
-- infraestructura tecnológica;
+### 2.2 Acceso inmediato
+
+Bloque de entradas rápidas a:
+
+- descripción/ficha del curso;
+- Ley 21.180;
+- portal Gobierno Digital;
+- FirmaGob.
+
+Además incluía mini retos rápidos.
+
+### 2.3 Videos destacados
+
+Dos piezas audiovisuales:
+
+1. Transformación digital en el ámbito municipal.
+2. Ciberseguridad y resguardo institucional.
+
+### 2.4 Recursos principales
+
+Cuatro accesos principales:
+
+- documento de presentación;
+- presentación institucional;
+- Ley 21.180;
+- portal Gobierno Digital.
+
+### 2.5 Laboratorio interactivo
+
+El sitio contenía un módulo funcional con:
+
+- encuestas rápidas;
+- resultados almacenados en el navegador;
+- quiz técnico;
+- generador de preguntas y microactividades;
+- bitácora local de ideas/notas.
+
+### 2.6 Noticias oficiales
+
+Bloque denominado **Actualidad reciente de Gobierno Digital**.
+
+Las noticias no provenían de una API ni de un feed automático. Existían 10 registros precargados en JavaScript y debían actualizarse manualmente.
+
+### 2.7 Recursos oficiales
+
+Matriz de 30 recursos con filtros por:
+
+- categoría;
+- prioridad;
+- público objetivo;
+- orden.
+
+Cada recurso contenía título, fuente, URL, tipo, prioridad, público objetivo, uso sugerido, sección del sitio y propuestas de material derivado.
+
+### 2.8 Ejes temáticos
+
+Tres líneas principales:
+
+- Ley 21.180 y procedimientos electrónicos;
+- DocDigital, firma electrónica y documentos;
+- ciberseguridad y resguardo de la información.
+
+### 2.9 Preguntas frecuentes
+
+Bloque introductorio con preguntas sobre:
+
+- cambios de la integración;
+- incorporación de nuevos recursos;
+- uso de la sección interactiva;
+- actualidad de las noticias.
+
+---
+
+## 3. Matriz de 30 recursos recuperada
+
+### Distribución por categoría
+
+| Categoría | Cantidad |
+|---|---:|
+| Firma electrónica | 10 |
+| Notificaciones electrónicas | 4 |
+| Guías técnicas | 2 |
+| Autenticación | 2 |
+| Capacitación | 2 |
+| Gestión del cambio | 2 |
+| Marco normativo | 1 |
+| Plataformas transversales | 1 |
+| DocDigital | 1 |
+| Interoperabilidad | 1 |
+| Calidad de plataformas | 1 |
+| Ciberseguridad | 1 |
+| Gobierno Digital | 1 |
+| Soporte | 1 |
+
+Prioridad declarada en el sitio viejo:
+
+- 23 recursos de prioridad alta;
+- 7 recursos de prioridad media.
+
+Entre los recursos se encuentran Ley 21.180, documentos y expedientes electrónicos, metadatos, FirmaGob, manuales de roles, segundo factor OTP, API de FirmaGob, habilitación de plataformas, DocDigital, autenticación, ClaveÚnica, notificaciones electrónicas, PISEE, calidad de plataformas, ciberseguridad, capacitación, manual del Coordinador TD y WikiGuías.
+
+**Decisión:** conservar la matriz como fuente editorial, pero trasladarla desde JavaScript incrustado a archivos de contenido editables y revisar la vigencia de cada URL antes de publicación definitiva.
+
+---
+
+## 4. Componentes interactivos recuperados
+
+### Encuestas
+
+Tres preguntas iniciales sobre:
+
+- tema que requiere mayor apoyo;
+- principal barrera para la transformación digital;
+- formato preferido para próximas cápsulas.
+
+### Quiz técnico
+
+Cinco preguntas sobre:
+
+- expediente electrónico;
+- CasillaÚnica;
+- interoperabilidad;
+- habilitación de FirmaGob;
+- ciberseguridad.
+
+### Mini-quizzes
+
+- Ley 21.180.
+- CasillaÚnica.
+- Ciberseguridad.
+
+### Generador de actividades
+
+Cinco bancos temáticos:
+
+- FirmaGob;
+- DocDigital;
+- Ley 21.180;
 - ciberseguridad;
-- simplificación y mejora de procesos;
-- capacitación y gestión del cambio;
-- atención ciudadana digital;
-- herramientas digitales del Estado;
-- gobernanza y seguimiento institucional.
+- coordinación y gestión del cambio.
 
-### 2.2 Diagnóstico y Plan de Intervención 2026
-
-Documento localizado:
-
-- `457 remite diagnostico transformacion digital`
-
-Contenidos útiles:
-
-- estado inicial de madurez digital;
-- brechas de integración de procesos;
-- brechas de interoperabilidad;
-- ciberseguridad y continuidad operacional;
-- capacitación y resistencia al cambio;
-- infraestructura tecnológica;
-- líneas de intervención 2026;
-- hoja de ruta y seguimiento.
-
-### 2.3 Gestión documental
-
-Material localizado:
-
-- carpeta `Gestor_Documental2026`;
-- antecedentes de contratación del gestor documental y servicios asociados;
-- documentos de autorización y requerimientos técnicos vinculados al proyecto.
-
-Uso editorial propuesto:
-
-- sección especial "Gestión documental";
-- cápsulas sobre expediente electrónico, trazabilidad, firma y flujos;
-- cronología de implementación;
-- preguntas frecuentes para funcionarios.
-
-### 2.4 Capacitación y gestión del cambio
-
-Material localizado:
-
-- consolidado de funcionarios en cursos de Transformación Digital;
-- ficha general de cursos de Transformación Digital UTalca;
-- convocatorias y antecedentes de capacitación.
-
-Uso editorial propuesto:
-
-- calendario de capacitación;
-- recursos de aprendizaje;
-- cápsulas breves;
-- seguimiento de hitos de formación;
-- sección de preguntas y soporte.
-
-### 2.5 Antecedentes normativos y material formativo
-
-Material localizado, entre otros:
-
-- presentación sobre Ley N.º 21.180;
-- documentos asociados a interoperabilidad;
-- materiales de procedimientos digitales;
-- documentación institucional generada durante 2025–2026.
-
-Estos archivos deben ser clasificados antes de exponerlos públicamente, diferenciando:
-
-1. normativa oficial externa;
-2. instrumentos internos aprobados;
-3. documentos de trabajo;
-4. material de capacitación;
-5. antecedentes históricos.
+**Decisión:** mantener la idea de aprendizaje interactivo, pero integrarla de forma más natural dentro de cápsulas y rutas formativas, evitando que el sitio se transforme en un panel de tarjetas.
 
 ---
 
-## 3. Inventario funcional del nuevo sitio
+## 5. Materiales físicos recuperados del Takeout
 
-La nueva versión no replica visualmente Google Sites. Reorganiza el contenido como una experiencia editorial continua.
+### Videos
 
-### Portada
+#### Ruta Digital Constitución
 
-1. **Hero institucional**
-   - mensaje central del proceso;
-   - contexto Constitución 2026;
-   - acceso a contenidos destacados.
+- Archivo: `Ruta_Digital_Constitución.mp4`.
+- Resolución: 1280 × 720.
+- H.264 + AAC.
+- 24 fps.
+- Duración aproximada: 8 min 37 s.
+- Incluye subtítulos en español.
+- Contenido: introducción al equipo municipal, Ley 21.180, hitos de la transformación y beneficios del trabajo municipal digital.
 
-2. **Cinta viva de conceptos**
-   - expediente electrónico;
-   - interoperabilidad;
-   - ciberseguridad;
-   - firma electrónica;
-   - servicios digitales;
-   - gestión del cambio.
+#### Ley 21.719 / Protección de Datos
 
-3. **Qué significa transformarse**
-   - explicación simple del cambio;
-   - énfasis en procesos, personas y servicios.
+- Archivo: `Ley_21.mp4`.
+- Resolución: 1280 × 720.
+- H.264 + AAC.
+- 24 fps.
+- Duración aproximada: 7 min 34 s.
+- Incluye subtítulos en español.
+- Contenido centrado en protección de datos personales, obligaciones municipales y relación con ciberseguridad.
 
-4. **Líneas de transformación**
-   - gestión documental;
-   - interoperabilidad;
-   - ciberseguridad;
-   - procesos simples;
-   - personas y capacidades;
-   - servicios digitales.
+### Presentación institucional
 
-5. **Hoja de ruta 2026–2027**
-   - preparación organizacional;
-   - gestión documental;
-   - interoperabilidad;
-   - consolidación de servicios digitales.
+Archivo: `Municipal_Digital_Transformation.pptx`.
 
-6. **Flujo de cápsulas**
-   - presentación editorial, no en cuadrícula;
-   - fecha, tema, resumen, estado y tiempo de lectura;
-   - contenido alimentado desde archivo JSON.
+Contiene 12 láminas gráficas:
 
-7. **Ecosistema digital del Estado**
-   - DocDigital;
-   - FirmaGob;
-   - CPAT;
-   - ClaveÚnica;
-   - Domicilio Digital Único;
-   - PISEE 2.0.
+1. Ley de Transformación Digital del Estado - Ley 21.180.
+2. El mandato central: Digital por Defecto.
+3. Los 6 principios rectores de la Administración Digital.
+4. Paradigma tradicional vs. paradigma digital.
+5. Anatomía del Expediente Electrónico.
+6. Interoperabilidad: cero trámites innecesarios.
+7. Notificaciones y Domicilio Digital Único.
+8. Validez, digitalización y microformas.
+9. Inclusión digital: el derecho a la excepción.
+10. Caso práctico: modernización del Registro Automotor.
+11. Hoja de ruta de implementación al 2027.
+12. Compromiso: Ruta Digital Constitución.
 
-8. **Principios de implementación**
-   - primero las personas;
-   - simplificar antes de digitalizar;
-   - seguridad desde el diseño;
-   - uso responsable de datos;
-   - medir y mejorar.
+Las 12 diapositivas están compuestas como imágenes 1376 × 768 dentro del PPTX.
 
-9. **Gobernanza**
-   - transformación como responsabilidad transversal;
-   - coordinación institucional;
-   - correo de contacto del equipo.
+### Ficha de capacitación UTalca
+
+Archivo: `Ficha_general_curso_TD_UTalca_reformulada.docx`.
+
+Incluye:
+
+- modalidad online asincrónica;
+- fechas de matrícula y ejecución;
+- datos de contacto;
+- descripción general;
+- explicación de modalidad asincrónica;
+- Gestión del Cambio;
+- Fundamentos de Ciberseguridad;
+- Liderazgo para la Transformación Digital;
+- ruta de participación;
+- canales de apoyo.
+
+### Normativa
+
+- Ley 21.180: PDF de 17 páginas.
+- Ley 21.719: PDF de 56 páginas.
+
+### Logos
+
+- Escudo de Constitución.
+- Logo Ruta Digital Constitución.
+- Isotipo/escudo institucional adicional utilizado en el material gráfico.
 
 ---
 
-## 4. Arquitectura de contenidos objetivo
+## 6. Corpus institucional adicional localizado
 
-Se propone evolucionar hacia la siguiente arquitectura:
+Además del contenido del antiguo Google Sites, se localizaron antecedentes útiles para actualizar el relato 2026:
+
+- Política Institucional de Transformación Digital;
+- diagnóstico y Plan de Intervención 2026;
+- antecedentes del Gestor Documental 2026;
+- capacitación UTalca;
+- interoperabilidad;
+- ciberseguridad;
+- protección de datos;
+- instrumentos y antecedentes institucionales 2025-2026.
+
+Estos contenidos permitirán que la nueva web no sea simplemente una réplica del sitio viejo, sino una versión actualizada al estado real del proceso municipal.
+
+---
+
+## 7. Diagnóstico del diseño antiguo
+
+El contenido es valioso, pero la arquitectura visual presenta problemas que justifican una reconstrucción completa:
+
+- exceso de tarjetas y bloques independientes;
+- numerosas grillas;
+- mucha información acumulada en una sola página;
+- recursos, noticias y actividades compitiendo visualmente;
+- dependencia de Google Drive para imágenes y videos;
+- noticias hardcodeadas;
+- contenido y lógica mezclados dentro del mismo HTML;
+- dificultad para mantener contenidos sin editar código;
+- experiencia más cercana a un tablero de recursos que a una publicación institucional viva.
+
+Por esta razón, **no se replicará visualmente el Google Sites**.
+
+---
+
+## 8. Arquitectura objetivo del nuevo sitio
 
 ```text
 Inicio
 │
 ├── El proceso
 │   ├── ¿Qué es la Transformación Digital?
-│   ├── Ley N.º 21.180
+│   ├── Ley 21.180
 │   ├── Hoja de ruta municipal
 │   └── Gobernanza
 │
@@ -202,7 +335,7 @@ Inicio
 │
 ├── Avances
 │   ├── Hitos 2026
-│   ├── Implementación del gestor documental
+│   ├── Gestor documental
 │   ├── Capacitación
 │   └── Indicadores
 │
@@ -211,8 +344,14 @@ Inicio
 │   ├── FirmaGob
 │   ├── CPAT
 │   ├── ClaveÚnica
-│   ├── Domicilio Digital Único
+│   ├── Domicilio Digital Único / CasillaÚnica
 │   └── PISEE 2.0
+│
+├── Aprende
+│   ├── Videos
+│   ├── Mini-retos
+│   ├── Quiz
+│   └── Materiales de capacitación
 │
 ├── Biblioteca
 │   ├── Normativa
@@ -226,70 +365,46 @@ Inicio
 
 ---
 
-## 5. Matriz de migración
+## 9. Matriz de migración actualizada
 
-| Tipo de contenido | Fuente | Estado | Acción propuesta |
-|---|---|---|---|
-| Textos de portada Google Sites | Google Sites | Pendiente extracción | Revisar, depurar y reescribir |
-| Páginas interiores Google Sites | Google Sites | Pendiente extracción | Levantar estructura completa |
-| Imágenes Google Sites | Google Sites | Pendiente extracción | Inventariar, descargar, optimizar y clasificar |
-| Videos / embeds | Google Sites | Pendiente extracción | Registrar URL, proveedor y función |
-| Botones y enlaces | Google Sites | Pendiente extracción | Validar vigencia y destino |
-| Documentos adjuntos | Google Sites / Drive | Parcialmente localizado | Clasificar antes de publicar |
-| Política TD | Drive | Localizada | Crear sección + cápsulas |
-| Diagnóstico TD 2026 | Drive | Localizado | Convertir en hoja de ruta y avances |
-| Gestor documental | Drive | Localizado | Crear microsubsección y cronología |
-| Capacitación | Drive | Localizada | Crear recursos y seguimiento |
-| Herramientas del Estado | Documentación institucional | Base creada | Completar fichas y enlaces oficiales |
-| Normativa | Varias fuentes | Parcial | Crear biblioteca verificada |
-
----
-
-## 6. Criterios para la migración
-
-Todo material del sitio anterior se clasificará en una de estas categorías:
-
-- **Migrar sin cambios:** contenido vigente y correctamente redactado.
-- **Migrar y actualizar:** contenido válido pero desactualizado.
-- **Reescribir:** información útil cuya presentación debe simplificarse.
-- **Integrar:** contenido duplicado que debe incorporarse en una sola pieza.
-- **Archivar:** contenido histórico que puede mantenerse como antecedente.
-- **Descartar:** contenido obsoleto, duplicado o sin valor para el nuevo sitio.
+| Tipo de contenido | Estado | Acción |
+|---|---|---|
+| HTML original | Recuperado | Conservar como referencia histórica |
+| Textos de portada | Recuperados | Reescribir y actualizar |
+| Estructura de secciones | Recuperada | Reorganizar completamente |
+| Logos | Recuperados | Revisar identidad y optimizar |
+| Videos | Recuperados | Migrar/optimizar y generar fichas |
+| Presentación 12 láminas | Recuperada | Reutilizar visuales/contenido selectivamente |
+| Ley 21.180 | Recuperada | Biblioteca normativa |
+| Ley 21.719 | Recuperada | Biblioteca + cápsula protección de datos |
+| Ficha UTalca | Recuperada | Sección Aprende/Capacitación |
+| Matriz 30 recursos | Recuperada | Pasar a JSON, validar URLs y clasificar |
+| 10 noticias precargadas | Recuperadas | No migrar como fuente estática; reemplazar por mecanismo actualizable |
+| Encuestas | Recuperadas | Reutilizar conceptualmente |
+| Quiz y mini-quizzes | Recuperados | Integrar en rutas de aprendizaje |
+| Generador de dinámicas | Recuperado | Mantener como herramienta formativa opcional |
+| Política TD 2026 | Localizada | Crear sección y cápsulas |
+| Diagnóstico TD 2026 | Localizado | Convertir en hoja de ruta y avances |
+| Gestor documental | Localizado | Crear microsubsección y cronología |
 
 ---
 
-## 7. Principio de diseño
+## 10. Principio de diseño
 
-El nuevo sitio evita deliberadamente una portada basada en mosaicos o una grilla de tarjetas repetitivas.
+El nuevo sitio debe sentirse como Transformación Digital y no como una biblioteca de tarjetas.
 
-La navegación debe sentirse como un recorrido institucional vivo mediante:
+La experiencia se organizará mediante:
 
-- grandes bloques editoriales;
-- jerarquía tipográfica marcada;
-- líneas y secuencias horizontales;
-- cápsulas presentadas como flujo;
+- narrativa editorial continua;
+- grandes cambios de escala y espacio;
+- líneas de tiempo;
+- flujo de cápsulas;
+- rutas de aprendizaje;
+- fotografías e identidad local;
 - movimiento sutil;
-- espacios amplios;
-- contraste institucional azul/celeste;
-- contenidos que puedan crecer sin romper la composición.
+- navegación clara;
+- contenido separado del código;
+- diseño responsive y accesible;
+- recursos que puedan crecer sin romper la composición.
 
----
-
-## 8. Próxima fase de inventario
-
-El levantamiento del Google Sites se considerará terminado únicamente cuando se registre, para cada página:
-
-- nombre y URL;
-- orden dentro de la navegación;
-- títulos y subtítulos;
-- texto completo;
-- imágenes y sus fuentes;
-- videos o elementos embebidos;
-- archivos adjuntos;
-- botones y enlaces externos;
-- formularios;
-- llamados a la acción;
-- fecha o vigencia del contenido;
-- decisión de migración.
-
-Este documento se irá actualizando a medida que cada pieza sea recuperada y migrada.
+El Google Sites queda desde este punto como **fuente histórica y de contenido**, no como plantilla visual.
