@@ -1,0 +1,66 @@
+{
+  "herramientas": [
+    {
+      "name": "DocDigital",
+      "description": "Plataforma para comunicaciones oficiales entre órganos de la Administración del Estado.",
+      "tag": "Comunicaciones"
+    },
+    {
+      "name": "FirmaGob",
+      "description": "Servicios de firma electrónica para documentos y actuaciones administrativas digitales.",
+      "tag": "Firma electrónica"
+    },
+    {
+      "name": "CPAT",
+      "description": "Catálogo de Procedimientos Administrativos y Trámites utilizado para ordenar y reportar procedimientos del Estado.",
+      "tag": "Procedimientos"
+    },
+    {
+      "name": "ClaveÚnica",
+      "description": "Mecanismo de autenticación digital para acceder a servicios del Estado.",
+      "tag": "Identidad digital"
+    },
+    {
+      "name": "Domicilio Digital Único",
+      "description": "Componente del ecosistema digital del Estado asociado a comunicaciones y notificaciones electrónicas.",
+      "tag": "Notificaciones"
+    },
+    {
+      "name": "PISEE 2.0",
+      "description": "Infraestructura de interoperabilidad para el intercambio seguro de información entre organismos públicos.",
+      "tag": "Interoperabilidad"
+    }
+  ],
+  "lineas": [
+    {
+      "number": "01",
+      "title": "Gestión documental",
+      "description": "Expediente electrónico, documentos digitales, firma y trazabilidad administrativa."
+    },
+    {
+      "number": "02",
+      "title": "Interoperabilidad",
+      "description": "Conectar procesos y aprovechar información que ya existe en otros organismos del Estado."
+    },
+    {
+      "number": "03",
+      "title": "Ciberseguridad",
+      "description": "Seguridad de la información, continuidad operacional, accesos y cultura preventiva."
+    },
+    {
+      "number": "04",
+      "title": "Procesos simples",
+      "description": "Revisar procedimientos antes de digitalizarlos para reducir pasos, tiempos y duplicidades."
+    },
+    {
+      "number": "05",
+      "title": "Personas y capacidades",
+      "description": "Capacitación, acompañamiento y gestión del cambio para funcionarios y funcionarias."
+    },
+    {
+      "number": "06",
+      "title": "Servicios digitales",
+      "description": "Mejor atención, accesibilidad y una relación más simple entre la Municipalidad y las personas."
+    }
+  ]
+}
