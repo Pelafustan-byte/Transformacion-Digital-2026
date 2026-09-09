@@ -1,0 +1,42 @@
+[
+  {
+    "slug": "expediente-electronico",
+    "eyebrow": "Gestión documental",
+    "title": "Del papel al expediente electrónico",
+    "summary": "La transformación digital no consiste solamente en escanear documentos. El cambio apunta a procedimientos trazables, expedientes electrónicos y documentos que puedan circular de forma segura durante todo su ciclo de vida.",
+    "date": "2026-09-09",
+    "readingTime": "3 min",
+    "featured": true,
+    "status": "En desarrollo"
+  },
+  {
+    "slug": "interoperabilidad",
+    "eyebrow": "Interoperabilidad",
+    "title": "Cuando el Estado deja de pedirte lo que ya sabe",
+    "summary": "La interoperabilidad permite que los organismos públicos intercambien información de manera controlada y segura, reduciendo certificados, duplicidades y trámites innecesarios.",
+    "date": "2026-09-09",
+    "readingTime": "4 min",
+    "featured": false,
+    "status": "Próximamente"
+  },
+  {
+    "slug": "ciberseguridad",
+    "eyebrow": "Ciberseguridad",
+    "title": "Digitalizar también significa proteger",
+    "summary": "Más servicios digitales implican nuevas responsabilidades: proteger información, gestionar accesos, mantener continuidad operacional y fortalecer una cultura institucional de seguridad.",
+    "date": "2026-09-09",
+    "readingTime": "3 min",
+    "featured": false,
+    "status": "Contenido permanente"
+  },
+  {
+    "slug": "capacidades-digitales",
+    "eyebrow": "Personas",
+    "title": "La transformación empieza por las personas",
+    "summary": "Ninguna plataforma transforma por sí sola una institución. Capacitación, acompañamiento y gestión del cambio son parte central de una Municipalidad más digital y colaborativa.",
+    "date": "2026-09-09",
+    "readingTime": "3 min",
+    "featured": false,
+    "status": "En desarrollo"
+  }
+]
