@@ -1,248 +1,54 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#071d35">
-  <meta name="description" content="Transformación Digital de la Municipalidad de Constitución: avances, cápsulas, herramientas, normativa y hoja de ruta.">
-  <title>Transformación Digital | Municipalidad de Constitución</title>
-  <link rel="stylesheet" href="assets/css/styles.css">
-</head>
-<body>
-  <a class="skip-link" href="#contenido">Saltar al contenido</a>
-
-  <header class="site-header" id="inicio">
-    <div class="shell header-inner">
-      <a class="brand" href="#inicio" aria-label="Transformación Digital - inicio">
-        <span class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 48 48" role="img">
-            <path d="M9 11.5 24 4l15 7.5v25L24 44 9 36.5z" fill="none" stroke="currentColor" stroke-width="2"/>
-            <path d="m16 16 8-4 8 4v8l-8 4-8-4zM16 32l8-4 8 4" fill="none" stroke="currentColor" stroke-width="2"/>
-          </svg>
-        </span>
-        <span>
-          <strong>Transformación Digital</strong>
-          <small>Municipalidad de Constitución</small>
-        </span>
-      </a>
-
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">
-        <span></span><span></span><span></span>
-        <span class="sr-only">Abrir menú</span>
-      </button>
-
-      <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
-        <a href="#cambio">Qué cambia</a>
-        <a href="#ruta">Ruta</a>
-        <a href="#capsulas">Cápsulas</a>
-        <a href="#herramientas">Herramientas</a>
-        <a href="#equipo">Equipo</a>
-      </nav>
-    </div>
-  </header>
-
-  <main id="contenido">
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-orbit orbit-one" aria-hidden="true"></div>
-      <div class="hero-orbit orbit-two" aria-hidden="true"></div>
-      <div class="hero-noise" aria-hidden="true"></div>
-      <div class="shell hero-inner">
-        <div class="hero-copy reveal">
-          <p class="eyebrow"><span></span> Constitución · 2026</p>
-          <h1 id="hero-title">Un municipio más <em>simple</em>, conectado y seguro.</h1>
-          <p class="hero-lead">La Transformación Digital del Estado está cambiando la forma en que trabajamos, nos coordinamos y atendemos a las personas. Este espacio explica el proceso sin tecnicismos innecesarios y muestra cómo avanza nuestra Municipalidad.</p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="#cambio">Explorar el cambio <span aria-hidden="true">↘</span></a>
-            <a class="text-link" href="#capsulas">Ver cápsulas <span aria-hidden="true">→</span></a>
-          </div>
-        </div>
-
-        <div class="hero-signal reveal delay-1" aria-label="Camino de implementación">
-          <div class="signal-topline">
-            <span>Ruta institucional</span>
-            <span>2026 → 2027</span>
-          </div>
-          <div class="signal-core">
-            <span class="signal-pulse"></span>
-            <div>
-              <small>En movimiento</small>
-              <strong>Transformación<br>Digital</strong>
-            </div>
-          </div>
-          <div class="signal-bottom">
-            <span>Procesos</span>
-            <span>Personas</span>
-            <span>Tecnología</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="ticker" aria-label="Ámbitos de transformación">
-        <div class="ticker-track">
-          <span>Expediente electrónico</span><i>•</i>
-          <span>Interoperabilidad</span><i>•</i>
-          <span>Ciberseguridad</span><i>•</i>
-          <span>Firma electrónica</span><i>•</i>
-          <span>Servicios digitales</span><i>•</i>
-          <span>Gestión del cambio</span><i>•</i>
-          <span aria-hidden="true">Expediente electrónico</span><i aria-hidden="true">•</i>
-          <span aria-hidden="true">Interoperabilidad</span><i aria-hidden="true">•</i>
-          <span aria-hidden="true">Ciberseguridad</span><i aria-hidden="true">•</i>
-          <span aria-hidden="true">Firma electrónica</span><i aria-hidden="true">•</i>
-        </div>
-      </div>
-    </section>
-
-    <section class="intro section" id="cambio" aria-labelledby="cambio-title">
-      <div class="shell intro-layout">
-        <div class="section-kicker reveal">01 · Entender el cambio</div>
-        <div class="intro-heading reveal">
-          <h2 id="cambio-title">Digitalizar no es pasar el mismo trámite del papel a la pantalla.</h2>
-        </div>
-        <div class="intro-copy reveal">
-          <p>Es revisar cómo trabajamos, eliminar pasos que no agregan valor, conectar información, proteger los datos y construir procedimientos que puedan seguirse de principio a fin.</p>
-          <p>La tecnología es una herramienta. La transformación ocurre cuando procesos, personas y servicios cambian de verdad.</p>
-        </div>
-      </div>
-
-      <div class="shell flow-lines" id="lineas-transformacion" aria-live="polite">
-        <div class="flow-loading">Cargando líneas de transformación…</div>
-      </div>
-    </section>
-
-    <section class="route section" id="ruta" aria-labelledby="ruta-title">
-      <div class="shell">
-        <div class="route-heading reveal">
-          <div>
-            <p class="section-kicker">02 · Hoja de ruta</p>
-            <h2 id="ruta-title">De la obligación normativa a una nueva forma de trabajar.</h2>
-          </div>
-          <p>La ruta no es una fecha única. Son capacidades que se van instalando, probando, corrigiendo y consolidando.</p>
-        </div>
-      </div>
-
-      <div class="route-rail-wrap">
-        <div class="route-rail shell" tabindex="0" aria-label="Hitos de la hoja de ruta">
-          <article class="route-stop route-stop-active">
-            <span class="route-year">2026</span>
-            <span class="route-dot"></span>
-            <p class="route-state">Ahora</p>
-            <h3>Preparar la organización</h3>
-            <p>Gobernanza, políticas, diagnóstico de brechas, capacitación, seguridad y rediseño de procesos.</p>
-          </article>
-          <article class="route-stop">
-            <span class="route-year">2026</span>
-            <span class="route-dot"></span>
-            <p class="route-state">Implementación</p>
-            <h3>Gestión documental</h3>
-            <p>Expedientes electrónicos, trazabilidad, firmas, flujos y nuevas prácticas documentales.</p>
-          </article>
-          <article class="route-stop">
-            <span class="route-year">2026–27</span>
-            <span class="route-dot"></span>
-            <p class="route-state">Conexión</p>
-            <h3>Interoperar</h3>
-            <p>Evitar pedir antecedentes que el Estado ya posee y conectar sistemas de forma segura.</p>
-          </article>
-          <article class="route-stop">
-            <span class="route-year">2027</span>
-            <span class="route-dot"></span>
-            <p class="route-state">Consolidación</p>
-            <h3>Servicios digitales maduros</h3>
-            <p>Más procedimientos digitales, mejor experiencia y seguimiento continuo de calidad y seguridad.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="capsules section" id="capsulas" aria-labelledby="capsulas-title">
-      <div class="shell">
-        <div class="capsules-heading reveal">
-          <div>
-            <p class="section-kicker">03 · Cápsulas</p>
-            <h2 id="capsulas-title">Entender el cambio, una idea a la vez.</h2>
-          </div>
-          <p>Notas breves para explicar conceptos, herramientas, hitos y nuevas formas de trabajo.</p>
-        </div>
-
-        <div class="capsule-stream" id="capsule-stream" aria-live="polite">
-          <div class="flow-loading">Cargando cápsulas…</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="tools section" id="herramientas" aria-labelledby="tools-title">
-      <div class="shell tools-layout">
-        <div class="tools-sticky reveal">
-          <p class="section-kicker">04 · Ecosistema digital</p>
-          <h2 id="tools-title">No partimos de cero. El Estado ya tiene piezas que deben conversar entre sí.</h2>
-          <p>La transformación municipal se conecta con plataformas y estándares públicos que habilitan identidad, firma, comunicaciones, procedimientos e intercambio de información.</p>
-        </div>
-        <div class="tools-list" id="tools-list" aria-live="polite">
-          <div class="flow-loading">Cargando herramientas…</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="principles section" aria-labelledby="principles-title">
-      <div class="shell principles-layout">
-        <div class="principles-copy reveal">
-          <p class="section-kicker">05 · Nuestra manera de hacerlo</p>
-          <h2 id="principles-title">Tecnología con sentido público.</h2>
-          <p>No queremos digitalizar por moda. Cada cambio debe hacer el trabajo más trazable, el servicio más simple y la información más segura.</p>
-        </div>
-        <div class="principles-phrases" aria-label="Principios">
-          <p class="reveal"><span>01</span> Primero las personas.</p>
-          <p class="reveal"><span>02</span> Simplificar antes de digitalizar.</p>
-          <p class="reveal"><span>03</span> Seguridad desde el diseño.</p>
-          <p class="reveal"><span>04</span> Un dato, múltiples usos responsables.</p>
-          <p class="reveal"><span>05</span> Medir, aprender y mejorar.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="team section" id="equipo" aria-labelledby="team-title">
-      <div class="shell team-layout">
-        <div class="team-copy reveal">
-          <p class="section-kicker">06 · Gobernanza</p>
-          <h2 id="team-title">La transformación es transversal.</h2>
-          <p>No pertenece a una sola oficina. Requiere coordinación institucional, liderazgo, soporte tecnológico y participación de las unidades que ejecutan los procedimientos municipales.</p>
-          <a class="text-link text-link-light" href="mailto:transformaciondigital@mconstitucion.cl">transformaciondigital@mconstitucion.cl <span aria-hidden="true">↗</span></a>
-        </div>
-        <div class="team-visual reveal delay-1" aria-hidden="true">
-          <div class="team-ring ring-a"></div>
-          <div class="team-ring ring-b"></div>
-          <div class="team-ring ring-c"></div>
-          <div class="team-center">TD</div>
-          <span class="team-node node-a">Gestión</span>
-          <span class="team-node node-b">Tecnología</span>
-          <span class="team-node node-c">Personas</span>
-          <span class="team-node node-d">Servicios</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="closing section" aria-labelledby="closing-title">
-      <div class="shell closing-inner reveal">
-        <p class="section-kicker">Seguimos avanzando</p>
-        <h2 id="closing-title">La transformación digital se construye trabajando.</h2>
-        <p>Este sitio crecerá junto con el proceso: nuevos hitos, cápsulas, recursos, instructivos y avances de implementación.</p>
-        <a class="button button-dark" href="#inicio">Volver al inicio <span aria-hidden="true">↑</span></a>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="shell footer-inner">
-      <div>
-        <strong>Transformación Digital</strong>
-        <span>Municipalidad de Constitución</span>
-      </div>
-      <p>Constitución · Región del Maule · Chile</p>
-      <p>Actualización 2026</p>
-    </div>
-  </footer>
-
-  <script src="assets/js/app.js" defer></script>
-</body>
-</html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#062b49">
+<meta name="description" content="Ruta Digital Constitución: Transformación Digital de la Municipalidad de Constitución, con videos, normativa, recursos, noticias y avances locales.">
+<title>Ruta Digital Constitución · Transformación Digital</title>
+<style>
+:root{--navy:#062b49;--navy2:#0b456d;--blue:#087db8;--cyan:#72e2e8;--ink:#153247;--muted:#687d8c;--line:#d9e8ef;--soft:#f3f8fa;--paper:#fff;--shell:min(1220px,calc(100% - 42px));--r:24px;--shadow:0 24px 70px rgba(6,43,73,.11)}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font:16px/1.55 Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:#fff}a{color:inherit}button,input{font:inherit}.shell{width:var(--shell);margin:auto}.sec{padding:78px 0}.ey{margin:0 0 12px;color:var(--blue);font-size:.68rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase}h1,h2,h3,p{margin-top:0}h2{margin:0;font-size:clamp(2.35rem,4.4vw,4.5rem);font-weight:650;line-height:.96;letter-spacing:-.055em}.muted{color:var(--muted)}.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+header{position:sticky;top:0;z-index:80;background:#ffffffef;backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}.head{height:74px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:flex;gap:11px;align-items:center;text-decoration:none}.brandMark{width:41px;height:41px;display:grid;place-items:center;border-radius:13px;background:var(--navy);color:#fff;font-size:.72rem;font-weight:950;letter-spacing:-.02em}.brand strong,.brand small{display:block}.brand strong{font-size:.92rem}.brand small{font-size:.68rem;color:var(--muted)}nav{display:flex;gap:21px}nav a{text-decoration:none;font-size:.77rem;font-weight:800}.menu{display:none;border:0;background:transparent;color:var(--navy);font-size:1.35rem}
+.hero{position:relative;color:#fff;background:radial-gradient(circle at 82% 18%,rgba(58,174,222,.32),transparent 30%),linear-gradient(136deg,#041522,#073553 58%,#08647b);overflow:hidden}.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#ffffff08 1px,transparent 1px);background-size:9vw 100%;mask-image:linear-gradient(to bottom,transparent,#000 25%,#000 75%,transparent)}.heroIn{position:relative;min-height:590px;padding:78px 0 66px;display:grid;grid-template-columns:1.42fr .7fr;gap:75px;align-items:center}.hero h1{max-width:800px;margin:0 0 28px;font-size:clamp(3.7rem,7vw,7rem);font-weight:640;line-height:.89;letter-spacing:-.072em}.hero h1 em{color:var(--cyan);font-family:Georgia,serif;font-weight:400}.lead{max-width:740px;color:#ffffffbd;font-size:1.08rem;line-height:1.7}.actions{display:flex;gap:11px;flex-wrap:wrap;margin-top:28px}.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 17px;border:1px solid #ffffff55;border-radius:999px;text-decoration:none;font-size:.78rem;font-weight:850}.btn.primary{border-color:var(--cyan);background:var(--cyan);color:#06283d}.heroBrief{border:1px solid #ffffff2c;border-radius:30px;padding:27px;background:#ffffff0c;backdrop-filter:blur(10px)}.heroBrief .pulse{display:inline-flex;gap:8px;align-items:center;color:var(--cyan);font-size:.65rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.heroBrief .pulse:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 0 6px #72e2e817}.heroBrief h3{font-size:1.7rem;line-height:1.05;letter-spacing:-.04em;margin:24px 0 10px}.heroBrief p{color:#ffffffaa;font-size:.88rem}.heroBrief strong{display:block;border-top:1px solid #ffffff24;padding-top:16px;color:var(--cyan);font-size:.78rem;letter-spacing:.06em}.stats{position:relative;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #ffffff2a}.stat{padding:19px 23px;border-right:1px solid #ffffff2a}.stat:last-child{border:0}.stat b{display:block;color:var(--cyan);font-size:1.5rem}.stat span{font-size:.64rem;letter-spacing:.09em;text-transform:uppercase;color:#ffffffa5}
+.jump{background:#fff;border-bottom:1px solid var(--line)}.jumpIn{display:grid;grid-template-columns:repeat(4,1fr)}.jump a{padding:19px 20px;text-decoration:none;border-right:1px solid var(--line);transition:.2s}.jump a:last-child{border:0}.jump a:hover{background:var(--soft)}.jump small{display:block;color:var(--blue);font-size:.63rem;font-weight:900;text-transform:uppercase;letter-spacing:.1em}.jump strong{font-size:.9rem}
+.head2{display:grid;grid-template-columns:1.15fr .75fr;gap:60px;align-items:end;margin-bottom:38px}.head2>p{margin:0;color:var(--muted)}
+.media{background:#071f35;color:#fff}.media .ey{color:var(--cyan)}.media .head2>p{color:#ffffff9d}.mediaStage{display:grid;grid-template-columns:1.45fr .55fr;gap:20px}.player{border:1px solid #ffffff20;border-radius:25px;overflow:hidden;background:#000}.player iframe{display:block;width:100%;aspect-ratio:16/9;border:0}.playerInfo{padding:18px 20px;background:#ffffff08}.playerInfo h3{margin:0 0 7px;font-size:1.35rem}.playerInfo p{margin:0;color:#ffffff9c;font-size:.84rem}.playerInfo a{display:inline-block;margin-top:10px;color:var(--cyan);text-decoration:none;font-size:.73rem;font-weight:850}.playlist{display:grid;align-content:start;gap:10px}.videoPick{border:1px solid #ffffff20;border-radius:18px;padding:18px;background:#ffffff08;color:#fff;text-align:left;cursor:pointer}.videoPick.on{border-color:var(--cyan);background:#ffffff12}.videoPick small{display:block;color:var(--cyan);font-size:.61rem;font-weight:900;text-transform:uppercase;letter-spacing:.1em}.videoPick strong{display:block;margin:6px 0;font-size:.95rem}.videoPick span{font-size:.72rem;color:#ffffff8d}
+.base{background:var(--soft)}.baseRail{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.baseCard{min-height:172px;padding:20px;border:1px solid var(--line);border-radius:20px;background:#fff;text-decoration:none;display:flex;flex-direction:column;transition:.2s}.baseCard:hover{transform:translateY(-2px);box-shadow:var(--shadow)}.baseCard small{color:var(--blue);font-size:.62rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase}.baseCard h3{margin:20px 0 8px;font-size:1.08rem;line-height:1.1}.baseCard p{margin:0;color:var(--muted);font-size:.78rem}.baseCard b{margin-top:auto;padding-top:14px;color:var(--blue);font-size:.7rem}
+.localRail{display:grid;grid-template-columns:repeat(5,minmax(210px,1fr));overflow:auto;border-top:1px solid var(--line);scrollbar-width:thin}.mile{min-width:210px;padding:24px 25px 8px 0;border-top:3px solid transparent}.mile.now{border-color:var(--cyan)}.mile small{font-size:.62rem;font-weight:900;color:var(--blue);letter-spacing:.1em;text-transform:uppercase}.mile h3{margin:13px 0 7px;font-size:1.22rem;line-height:1.07}.mile p{font-size:.82rem;color:var(--muted)}
+.library{background:linear-gradient(#fff,#f4f9fb)}.libraryHead{display:grid;grid-template-columns:1.2fr .8fr;gap:60px;align-items:end;margin-bottom:34px}.libraryHead p{margin:0;color:var(--muted)}.libraryStats{display:flex;gap:25px;margin-top:20px}.libraryStats span{font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}.libraryStats b{display:block;color:var(--navy);font-size:1.25rem}.essential{display:flex;gap:8px;overflow:auto;padding:13px 0 22px;scrollbar-width:none}.essential a{white-space:nowrap;border:1px solid var(--line);border-radius:999px;padding:8px 12px;background:#fff;text-decoration:none;font-size:.69rem;font-weight:820}.essential a:hover{border-color:#96c8da;background:#edf9fb}.collections{display:grid;grid-template-columns:repeat(6,1fr);border:1px solid var(--line);border-radius:20px 20px 0 0;overflow:hidden}.ctab{min-height:87px;border:0;border-right:1px solid var(--line);padding:14px;background:#fff;text-align:left;color:var(--ink);cursor:pointer}.ctab:last-child{border:0}.ctab.on{background:var(--navy);color:#fff}.ctab small{display:flex;justify-content:space-between;font-size:.57rem;opacity:.65;text-transform:uppercase;letter-spacing:.08em}.ctab strong{display:block;margin-top:7px;font-size:.79rem;line-height:1.16}.libCanvas{display:grid;grid-template-columns:.37fr .63fr;min-height:505px;border:1px solid var(--line);border-top:0;border-radius:0 0 25px 25px;background:#fff;overflow:hidden;box-shadow:var(--shadow)}.story{position:relative;padding:35px;background:linear-gradient(145deg,var(--navy),#0a4f72);color:#fff}.story .idx{display:block;margin-bottom:34px;color:#72e2e866;font:4.9rem/.85 Georgia,serif;letter-spacing:-.06em}.story h3{margin:0 0 12px;font-size:2rem;line-height:1.02;letter-spacing:-.04em}.story p{color:#ffffffa3;font-size:.84rem}.focus{position:absolute;left:35px;right:35px;bottom:32px}.focus small{display:block;color:var(--cyan);font-size:.58rem;font-weight:900;text-transform:uppercase;letter-spacing:.1em}.focus a{display:block;margin-top:8px;padding-top:11px;border-top:1px solid #ffffff2b;color:#fff;text-decoration:none;font-size:.82rem;font-weight:850}.focus a span{float:right;color:var(--cyan)}.workspace{min-width:0;display:flex;flex-direction:column}.workTop{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:23px 25px 18px;border-bottom:1px solid var(--line)}.workTop small{display:block;color:var(--muted);font-size:.58rem;text-transform:uppercase;letter-spacing:.1em}.workTop strong{font-size:1rem}.searchbox{width:min(320px,48%);display:flex;align-items:center;border:1px solid var(--line);border-radius:12px;padding:0 11px;background:#fbfdfe}.searchbox input{width:100%;height:39px;border:0;outline:0;background:transparent;font-size:.75rem}.searchbox kbd{white-space:nowrap;border:1px solid var(--line);border-radius:5px;padding:2px 5px;background:#fff;color:var(--muted);font-size:.55rem}.resMeta{display:flex;justify-content:space-between;align-items:center;padding:11px 25px 4px;color:var(--muted);font-size:.67rem}.showAll{border:0;background:transparent;color:var(--blue);font-size:.67rem;font-weight:850;cursor:pointer}.resGrid{max-height:405px;overflow:auto;padding:10px 18px 20px;display:grid;grid-template-columns:1fr 1fr;gap:9px;align-content:start}.resCard{min-height:128px;border:1px solid var(--line);border-radius:16px;padding:15px;background:#fff;text-decoration:none;display:flex;flex-direction:column;transition:.2s}.resCard:hover{border-color:#8cc5d7;transform:translateY(-1px);box-shadow:0 10px 24px rgba(6,43,73,.08)}.resTop{display:flex;justify-content:space-between;gap:8px}.resTop small{color:var(--blue);font-size:.56rem;font-weight:900;letter-spacing:.07em}.resTop em{font-style:normal;color:var(--muted);font-size:.55rem}.resCard h3{margin:10px 0 8px;font-size:.88rem;line-height:1.16}.resFoot{margin-top:auto;padding-top:9px;border-top:1px solid #edf3f5;display:flex;justify-content:space-between;color:var(--muted);font-size:.59rem}.resFoot b{color:var(--blue)}
+.news{background:#edf7fa}.newsGrid{display:grid;grid-template-columns:1.25fr .75fr;gap:12px}.newsFeature,.newsSmall{border:1px solid var(--line);border-radius:22px;background:#fff;text-decoration:none}.newsFeature{padding:26px;min-height:260px;display:flex;flex-direction:column}.newsFeature small,.newsSmall small{color:var(--blue);font-size:.61rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em}.newsFeature h3{margin:30px 0 10px;font-size:1.9rem;line-height:1.05;letter-spacing:-.04em}.newsFeature p{color:var(--muted);font-size:.82rem}.newsFeature b{margin-top:auto;color:var(--blue);font-size:.7rem}.newsSide{display:grid;gap:10px}.newsSmall{padding:17px}.newsSmall h3{margin:8px 0 0;font-size:.94rem;line-height:1.16}.newsMore{margin-top:18px;border:0;background:var(--navy);color:#fff;border-radius:999px;padding:10px 14px;font-weight:850;font-size:.72rem;cursor:pointer}dialog{width:min(900px,calc(100% - 30px));max-height:80vh;border:0;border-radius:24px;padding:0;box-shadow:0 30px 90px #00101f55}dialog::backdrop{background:#061827aa;backdrop-filter:blur(5px)}.dlgHead{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;padding:20px 23px;background:#fff;border-bottom:1px solid var(--line);z-index:2}.dlgHead h3{margin:0}.close{width:35px;height:35px;border:1px solid var(--line);border-radius:50%;background:#fff;cursor:pointer}.allNews{padding:5px 23px 24px}.allNews a{display:grid;grid-template-columns:135px 1fr 30px;gap:18px;padding:17px 0;border-bottom:1px solid var(--line);text-decoration:none}.allNews time{color:var(--muted);font-size:.68rem}.allNews strong{font-size:.9rem}
+.lab{background:#082d4c;color:#fff}.lab .ey{color:var(--cyan)}.labGrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.labCard{border:1px solid #ffffff20;border-radius:22px;padding:22px;background:#ffffff08}.labCard h3{margin:0 0 8px}.labCard p{color:#ffffff9c;font-size:.82rem}.labCard button{border:0;background:var(--cyan);color:#05273d;border-radius:999px;padding:10px 14px;font-size:.7rem;font-weight:900;cursor:pointer}.quizBox{display:none;margin-top:18px}.quizBox.open{display:block}.q{padding:12px 0;border-top:1px solid #ffffff20}.q p{margin-bottom:7px;font-weight:800;font-size:.82rem}.opts{display:grid;gap:4px;color:#ffffffb3;font-size:.76rem}.score{margin-top:12px;color:var(--cyan);font-weight:850}.idea{margin-top:14px;min-height:85px;border-radius:14px;padding:14px;background:#ffffff09;color:#ffffffb2;font-size:.8rem}
+footer{padding:30px 0;background:#031420;color:#ffffff9e}.foot{display:flex;justify-content:space-between;gap:20px;font-size:.72rem}.foot a{color:var(--cyan);text-decoration:none}
+@media(max-width:950px){nav{display:none}.menu{display:block}body.open nav{display:flex;position:fixed;top:74px;left:0;right:0;flex-direction:column;background:#fff;padding:22px;color:var(--ink);box-shadow:0 20px 40px #0002}.heroIn,.head2,.libraryHead,.mediaStage,.newsGrid,.labGrid{grid-template-columns:1fr}.heroIn{gap:25px;min-height:0}.baseRail{grid-template-columns:1fr 1fr}.collections{display:flex;overflow:auto}.ctab{min-width:160px}.libCanvas{grid-template-columns:.4fr .6fr}.resGrid{grid-template-columns:1fr}}
+@media(max-width:720px){:root{--shell:calc(100% - 28px)}.sec{padding:62px 0}.stats{grid-template-columns:1fr 1fr}.jumpIn{grid-template-columns:1fr 1fr}.jump a:nth-child(2){border-right:0}.libCanvas{grid-template-columns:1fr}.story{min-height:270px;padding:27px}.story .idx{font-size:3.7rem;margin-bottom:19px}.story h3{font-size:1.65rem}.focus{position:static;margin-top:28px}.workTop{align-items:flex-start;flex-direction:column}.searchbox{width:100%}.resGrid{max-height:420px}.baseRail{grid-template-columns:1fr}.newsFeature h3{font-size:1.45rem}.allNews a{grid-template-columns:1fr 24px}.allNews time{grid-column:1}.foot{display:block}}
+</style>
+</head><body>
+<header><div class="shell head"><a class="brand" href="#inicio"><span class="brandMark">RD</span><span><strong>Ruta Digital Constitución</strong><small>Transformación Digital Municipal</small></span></a><button class="menu" id="menu" aria-label="Abrir menú">☰</button><nav id="nav"><a href="#videos">Videos</a><a href="#base">Material base</a><a href="#recursos">Biblioteca</a><a href="#noticias">Noticias</a><a href="#laboratorio">Laboratorio</a></nav></div></header>
+<main id="inicio">
+<section class="hero"><div class="shell heroIn"><div><p class="ey" style="color:#72e2e8">Constitución · Transformación Digital 2026</p><h1>Contenido para <em>entender</em> y hacer el cambio.</h1><p class="lead">Videos, normativa, manuales y herramientas oficiales del portal original, ahora ordenados para trabajar. Sin una portada convertida en una lista infinita de enlaces.</p><div class="actions"><a class="btn primary" href="#recursos">Entrar a la biblioteca ↓</a><a class="btn" href="#videos">Ver material audiovisual</a><a class="btn" href="https://digital.gob.cl/transformacion-digital/ley-de-transformacion-digital/" target="_blank" rel="noopener">Gobierno Digital ↗</a></div></div><aside class="heroBrief"><span class="pulse">Implementación local</span><h3>Primera prueba presencial de FEDOK y firma electrónica</h3><p>Un hito práctico del cambio: gestor documental, firma y trabajo coordinado entre direcciones municipales.</p><strong>25 SEPTIEMBRE · 11:30 · SALÓN MUNICIPAL</strong></aside></div><div class="shell stats"><div class="stat"><b>30</b><span>recursos oficiales</span></div><div class="stat"><b>6</b><span>colecciones</span></div><div class="stat"><b>2</b><span>videos en Drive</span></div><div class="stat"><b>10</b><span>noticias recuperadas</span></div></div></section>
+<section class="jump"><div class="shell jumpIn"><a href="https://docs.google.com/document/d/1K20Fc2iPZqdGyUDM8XjUDwRIewzwtUhN/edit?usp=sharing&ouid=117581261701006734222&rtpof=true&sd=true" target="_blank" rel="noopener"><small>Documento base</small><strong>Descripción del curso ↗</strong></a><a href="https://drive.google.com/file/d/1L6q2JgLxwU10AhLTqprvp6frQAIhymPC/view?usp=sharing" target="_blank" rel="noopener"><small>Normativa</small><strong>Ley N.º 21.180 ↗</strong></a><a href="https://firma.digital.gob.cl/" target="_blank" rel="noopener"><small>Firma electrónica</small><strong>FirmaGob ↗</strong></a><a href="https://doc.digital.gob.cl/" target="_blank" rel="noopener"><small>Comunicaciones</small><strong>DocDigital ↗</strong></a></div></section>
+<section class="sec media" id="videos"><div class="shell"><div class="head2"><div><p class="ey">01 · Videos</p><h2>Un reproductor, dos cápsulas originales.</h2></div><p>Selecciona el contenido y se reproduce dentro del portal desde Google Drive. Evitamos apilar dos bloques audiovisuales completos.</p></div><div class="mediaStage"><article class="player"><iframe id="videoFrame" src="https://drive.google.com/file/d/1V3aqQd601ehJmqsNH8Oj4B9WjP9GUuV5/preview" title="Ruta Digital Constitución" allow="autoplay; fullscreen" allowfullscreen loading="lazy"></iframe><div class="playerInfo"><h3 id="videoTitle">Transformación digital en el ámbito municipal</h3><p id="videoDesc">Material introductorio del portal para comprender el contexto y el valor de la transformación digital en la gestión local.</p><a id="videoLink" href="https://drive.google.com/file/d/1V3aqQd601ehJmqsNH8Oj4B9WjP9GUuV5/view?usp=sharing" target="_blank" rel="noopener">Abrir archivo original en Drive ↗</a></div></article><div class="playlist"><button class="videoPick on" data-video="0"><small>Video 01</small><strong>Ruta Digital Constitución</strong><span>Contexto municipal y transformación del trabajo.</span></button><button class="videoPick" data-video="1"><small>Video 02</small><strong>Ciberseguridad y resguardo</strong><span>Buenas prácticas, seguridad y protección de información.</span></button></div></div></div></section>
+<section class="sec base" id="base"><div class="shell"><div class="head2"><div><p class="ey">02 · Material base</p><h2>Cuatro puertas de entrada.</h2></div><p>Antes eran filas dentro de otra lista. Ahora son accesos directos a los documentos que estructuran el proceso.</p></div><div class="baseRail"><a class="baseCard" href="https://docs.google.com/document/d/1K20Fc2iPZqdGyUDM8XjUDwRIewzwtUhN/edit?usp=sharing&ouid=117581261701006734222&rtpof=true&sd=true" target="_blank" rel="noopener"><small>DOC · Curso</small><h3>Descripción del curso de Transformación Digital</h3><p>Orientación y base del proceso formativo.</p><b>Abrir documento ↗</b></a><a class="baseCard" href="https://docs.google.com/presentation/d/1n_DPLArahay65RNg1dXX63aZB8Lz7yER/edit?usp=sharing&ouid=117581261701006734222&rtpof=true&sd=true" target="_blank" rel="noopener"><small>PPT · Institucional</small><h3>Presentación de Transformación Digital</h3><p>Ley 21.180, expediente, interoperabilidad y hoja de ruta.</p><b>Abrir presentación ↗</b></a><a class="baseCard" href="https://drive.google.com/file/d/1L6q2JgLxwU10AhLTqprvp6frQAIhymPC/view?usp=sharing" target="_blank" rel="noopener"><small>LEY · Marco</small><h3>Ley N.º 21.180</h3><p>Norma base para el procedimiento administrativo electrónico.</p><b>Consultar ley ↗</b></a><a class="baseCard" href="https://wikiguias.digital.gob.cl/" target="_blank" rel="noopener"><small>WEB · Oficial</small><h3>WikiGuías Gobierno Digital</h3><p>Guías, manuales y referencias técnicas actualizadas.</p><b>Ir a WikiGuías ↗</b></a></div></div></section>
+<section class="sec"><div class="shell"><div class="head2"><div><p class="ey">03 · Constitución 2026</p><h2>La transformación aterriza aquí.</h2></div><p>Una ruta horizontal resume lo que se está instalando en el municipio, sin convertirla en otro bloque vertical.</p></div><div class="localRail"><article class="mile"><small>Base institucional</small><h3>Políticas y diagnóstico</h3><p>Transformación Digital, ciberseguridad, brechas y plan de intervención.</p></article><article class="mile"><small>Personas</small><h3>Capacitación</h3><p>Formación y gestión del cambio para instalar capacidades internas.</p></article><article class="mile now"><small>25 SEP · 11:30</small><h3>Primera prueba FEDOK</h3><p>Gestor documental, firma electrónica y trabajo entre direcciones.</p></article><article class="mile"><small>Gestión documental</small><h3>Flujos y expediente</h3><p>Visaciones, derivaciones, observaciones, firma y trazabilidad.</p></article><article class="mile"><small>2026–2027</small><h3>Interoperabilidad</h3><p>Conectar sistemas y reducir antecedentes repetidos.</p></article></div></div></section>
+<section class="sec library" id="recursos"><div class="shell"><div class="libraryHead"><div><p class="ey">04 · Biblioteca oficial</p><h2>30 recursos. Solo ves lo que necesitas.</h2></div><div><p>La biblioteca completa sigue aquí, pero agrupada en seis recorridos temáticos. Selecciona una colección o busca directamente.</p><div class="libraryStats"><span><b>30</b> recursos</span><span><b>6</b> colecciones</span><span><b>100%</b> fuentes oficiales</span></div></div></div><div class="essential" id="essential"></div><div class="collections" id="collections"></div><div class="libCanvas"><aside class="story"><span class="idx" id="idx">01</span><p class="ey" style="color:#72e2e8">Colección</p><h3 id="storyTitle">Empezar aquí</h3><p id="storyDesc">Marco legal y conceptos base antes de entrar a herramientas y manuales operativos.</p><div class="focus" id="focus"></div></aside><div class="workspace"><div class="workTop"><div><small>Explorar recursos</small><strong id="workTitle">Empezar aquí</strong></div><label class="searchbox"><span class="sr">Buscar recursos</span><input id="search" type="search" placeholder="Buscar en toda la biblioteca…"><kbd>Ctrl K</kbd></label></div><div class="resMeta"><span id="count">Cargando…</span><button class="showAll" id="showAll" type="button">Ver los 30</button></div><div class="resGrid" id="resGrid"></div></div></div></div></section>
+<section class="sec news" id="noticias"><div class="shell"><div class="head2"><div><p class="ey">05 · Actualidad</p><h2>Noticias, sin otra lista eterna.</h2></div><p>Mostramos solo lo más reciente. La selección completa de diez noticias sigue disponible en una ventana aparte.</p></div><div class="newsGrid" id="newsGrid"></div><button class="newsMore" id="openNews">Ver las 10 noticias recuperadas</button></div></section>
+<section class="sec lab" id="laboratorio"><div class="shell"><div class="head2"><div><p class="ey">06 · Laboratorio</p><h2>Aprender haciendo.</h2></div><p style="color:#ffffff9d">Las funciones interactivas del portal anterior quedan compactas: se abren cuando realmente se usan.</p></div><div class="labGrid"><article class="labCard"><h3>Diagnóstico rápido</h3><p>Quiz de cinco preguntas sobre Ley 21.180, FirmaGob, notificaciones e interoperabilidad.</p><button id="toggleQuiz">Abrir quiz</button><div class="quizBox" id="quizBox"><div id="quiz"></div><button id="grade">Corregir</button><div class="score" id="score"></div></div></article><article class="labCard"><h3>Microactividad para equipos</h3><p>Genera una dinámica breve para capacitación o reunión de unidad.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="ideaBtn" data-topic="firma">FirmaGob</button><button class="ideaBtn" data-topic="doc">Gestión documental</button><button class="ideaBtn" data-topic="ciber">Ciberseguridad</button></div><div class="idea" id="idea">Selecciona un tema para generar una actividad.</div></article></div></div></section>
+</main><footer><div class="shell foot"><div><strong>Ruta Digital Constitución</strong><br>Municipalidad de Constitución · Región del Maule</div><div><a href="mailto:transformaciondigital@mconstitucion.cl">transformaciondigital@mconstitucion.cl</a> · 2026</div></div></footer>
+<dialog id="newsDialog"><div class="dlgHead"><h3>Noticias recuperadas del portal</h3><button class="close" id="closeNews" aria-label="Cerrar">×</button></div><div class="allNews" id="allNews"></div></dialog>
+<script>
+const R=[['td-001','Marco normativo','Ley N 21.180 de Transformacion Digital del Estado','https://wikiguias.digital.gob.cl/Leyes/Ley21180'],['td-002','Guias tecnicas','Guia Tecnica de Documentos y Expedientes Electronicos del Estado','https://wikiguias.digital.gob.cl/guias/guia-tecnica-documentosyexpedientes'],['td-003','Guias tecnicas','Metadatos del Expediente Electronico','https://wikiguias.digital.gob.cl/guias/Metadatos_Expediente_Electr%C3%B3nico'],['td-004','Firma electronica','Portal FirmaGob','https://firma.digital.gob.cl/'],['td-005','Firma electronica','7 pasos para firmar documentos con FirmaGob','https://firma.digital.gob.cl/como-utilizarla/'],['td-006','Firma electronica','Biblioteca de Manuales FirmaGob','https://firma.digital.gob.cl/biblioteca/manuales-firmagob/'],['td-007','Firma electronica','Manual de Autoridad o Funcionario FirmaGob','https://firma.digital.gob.cl/biblioteca/manuales-firmagob/manual-autoridad/'],['td-008','Firma electronica','Manual del Operador FirmaGob','https://firma.digital.gob.cl/biblioteca/manuales-firmagob/manual-operador/'],['td-009','Firma electronica','Manual del Ministro de Fe FirmaGob','https://firma.digital.gob.cl/biblioteca/manuales-firmagob/manual-ministro-fe/'],['td-010','Firma electronica','Configuracion Segundo Factor OTP FirmaGob','https://firma.digital.gob.cl/biblioteca/manuales-firmagob/configuracion-2do-factor/'],['td-011','Firma electronica','Manual de Integracion API FirmaGob','https://firma.digital.gob.cl/biblioteca/manuales-firmagob/manual-api-firma/'],['td-012','Firma electronica','Procedimiento de Habilitacion FirmaGob','https://firma.digital.gob.cl/biblioteca/manuales-firmagob/manual-de-habilitacion-firmagob/'],['td-013','Firma electronica','Preguntas Frecuentes FirmaGob','https://firma.digital.gob.cl/ayuda/'],['td-014','Plataformas transversales','Como habilitar plataformas y servicios compartidos de la SGD','https://wikiguias.digital.gob.cl/Manuales/habilitacion-de-plataformas'],['td-015','DocDigital','Portal DocDigital','https://doc.digital.gob.cl/'],['td-016','Autenticacion','Guia Tecnica de Autenticacion','https://wikiguias.digital.gob.cl/guias/guia-tecnica-autenticacion'],['td-017','Autenticacion','Manual de uso boton ClaveUnica','https://wikiguias.digital.gob.cl/Manuales/Bot%C3%B3nCU'],['td-018','Notificaciones electronicas','Guia Tecnica de Notificaciones','https://wikiguias.digital.gob.cl/guias/guia-tecnica-notificaciones'],['td-019','Notificaciones electronicas','Manual de inicio Plataforma de Notificaciones Electronicas del Estado','https://wikiguias.digital.gob.cl/Manuales/manual-de-inicio-notificaciones'],['td-020','Notificaciones electronicas','Manual de usuario institucional Plataforma de Notificaciones Electronicas','https://wikiguias.digital.gob.cl/Manuales/instituciones-plataforma-de-notificaciones'],['td-021','Notificaciones electronicas','Manual de atencion ciudadana Plataforma de Notificaciones','https://wikiguias.digital.gob.cl/Manuales/atencion-ciudadana-notificador'],['td-022','Interoperabilidad','Modelo de Interoperabilidad - Red PISEE','https://wikiguias.digital.gob.cl/Manuales/modelo-de-interoperabilidad'],['td-023','Calidad de plataformas','Guia Tecnica de Calidad y Funcionamiento de plataformas electronicas','https://wikiguias.digital.gob.cl/es/guias/guia-tecnica-calidad'],['td-024','Ciberseguridad','Guia Tecnica Seguridad de la Informacion y Ciberseguridad','https://wikiguias.digital.gob.cl/guias/guia-tecnica-ciberseguridad'],['td-025','Capacitacion','Estrategia de capacitaciones para la Transformacion Digital del Estado','https://wikiguias.digital.gob.cl/Estrategias/estrategia-de-capacitaciones'],['td-026','Capacitacion','Capacitaciones Gobierno Digital','https://gobdigital.cerofilas.gob.cl/tramites/informativo/2785'],['td-027','Gestion del cambio','Manual del Coordinador de Transformacion Digital','https://wikiguias.digital.gob.cl/Manuales/manual-del-coordinador'],['td-028','Gestion del cambio','Guia Metodologica del Sistema de Transformacion Digital 2026','https://wikiguias.digital.gob.cl/guias/guia-metodologica-std'],['td-029','Gobierno Digital','WikiGuias Gobierno Digital','https://wikiguias.digital.gob.cl/'],['td-030','Soporte','Base de conocimientos y soporte Gobierno Digital','https://gobdigitalcl.freshdesk.com/support/home']];
+const C=[{id:'base',n:'01',t:'Empezar aquí',d:'Marco legal y conceptos base para comprender la transformación digital antes de entrar a los manuales operativos.',cats:['Marco normativo','Guias tecnicas'],focus:'td-001'},{id:'firma',n:'02',t:'Firma electrónica',d:'Habilitación, roles, segundo factor, manuales y uso cotidiano de FirmaGob.',cats:['Firma electronica'],focus:'td-005'},{id:'com',n:'03',t:'Comunicaciones digitales',d:'DocDigital, notificaciones electrónicas y canales oficiales para comunicaciones del Estado.',cats:['DocDigital','Notificaciones electronicas'],focus:'td-015'},{id:'interop',n:'04',t:'Identidad e interoperabilidad',d:'Autenticación, ClaveÚnica, servicios compartidos y conexión segura entre organismos.',cats:['Plataformas transversales','Autenticacion','Interoperabilidad'],focus:'td-022'},{id:'seg',n:'05',t:'Seguridad y calidad',d:'Ciberseguridad y estándares de calidad para plataformas electrónicas institucionales.',cats:['Calidad de plataformas','Ciberseguridad'],focus:'td-024'},{id:'impl',n:'06',t:'Implementación y apoyo',d:'Capacitación, gestión del cambio, metodología, WikiGuías y canales de soporte.',cats:['Capacitacion','Gestion del cambio','Gobierno Digital','Soporte'],focus:'td-028'}];
+const N=[['1 de junio de 2026','Municipios y territorios','SGD y SUBDERE realizan la IX Mesa de Transformacion Digital de Gobiernos Regionales 2026','https://digital.gob.cl/media/noticias/sgd-y-subdere-realizan-la-ix-mesa-de-transformacion-digital-de-gobiernos-regionales-2026/'],['16 de febrero de 2026','Ranking y madurez digital','Chile sube 22 puestos y queda decimo en el ranking de Gobierno Digital de la OCDE','https://digital.gob.cl/media/noticias/chile-sube-22-puestos-y-queda-decimo-en-el-ranking-de-gobierno-digital-de-la-ocde/'],['22 de enero de 2026','Notificaciones electronicas','Administracion Central y Fuerzas Armadas se incorporan al sistema de notificaciones electronicas con CasillaUnica','https://digital.gob.cl/media/noticias/gobierno-digital-inicia-fase-de-notificaciones-electronicas-con-casillaunica-en-la-administracion-central/'],['16 de enero de 2026','Ciberseguridad y datos','Gobierno Digital participa en Cyber Policy Summit','https://digital.gob.cl/media/noticias/gobierno-digital-participa-en-cyber-policy-summit/'],['19 de diciembre de 2025','Municipios conectados','Gobierno Digital finaliza cierre de programa Municipios Conectados en Los Lagos y La Araucania','https://digital.gob.cl/media/noticias/gobierno-digital-finaliza-con-exito-cierre-de-programa-municipios-conectados-en-los-lagos-y-la-araucania/'],['18 de diciembre de 2025','Interoperabilidad','Gobierno lanza plataforma Laboral y Previsional para reducir tramites y evitar entrega repetida de datos','https://digital.gob.cl/media/noticias/gobierno-lanza-plataforma-laboral-y-previsional-para-reducir-tramites-y-evitar-que-personas-entreguen-datos-que-ya-posee-el-sistema-publico/'],['12 de diciembre de 2025','CasillaUnica','IPS lidera primera notificacion masiva del Estado a traves de la CasillaUnica','https://digital.gob.cl/media/noticias/ips-lidera-primera-notificacion-masiva-del-estado-a-traves-de-la-casillaunica/'],['3 de diciembre de 2025','Notificador del Estado','Gobierno Digital da un paso clave: IPS implementa el Notificador en sus tramites a la ciudadania','https://digital.gob.cl/media/noticias/gobierno-digital-da-un-paso-clave-ips-implementa-el-notificador-en-sus-tramites-a-la-ciudadania/'],['25 de noviembre de 2025','Municipios conectados','Gobierno Digital cierra con exito programa Municipios Conectados Los Rios','https://digital.gob.cl/media/noticias/gobierno-digital-cierra-con-exito-programa-municipios-conectados-los-rios/'],['Actualización permanente','Seguimiento oficial','Archivo de noticias de Gobierno Digital','https://digital.gob.cl/media/noticias/']];
+const Q=[['Según la Ley 21.180, ¿qué debe existir para cada procedimiento administrativo?',['Un expediente electrónico','Un libro físico obligatorio','Una minuta mensual'],0],['¿Qué plataforma oficial se usa para notificaciones electrónicas del Estado?',['DocDigital','CasillaÚnica','ClaveÚnica'],1],['¿Qué principio exige que los sistemas públicos puedan interactuar entre sí?',['Reserva','Interoperabilidad','Archivo'],1],['¿Qué revisar para habilitar firma institucional?',['FirmaGob y su procedimiento de habilitación','Solo el video','La portada municipal'],0],['¿Cuál es una buena práctica de ciberseguridad?',['Compartir claves','Usar una sola contraseña','Segundo factor y revisión de accesos'],2]];
+const VIDEOS=[{src:'https://drive.google.com/file/d/1V3aqQd601ehJmqsNH8Oj4B9WjP9GUuV5/preview',title:'Transformación digital en el ámbito municipal',desc:'Material introductorio del portal para comprender el contexto y el valor de la transformación digital en la gestión local.',url:'https://drive.google.com/file/d/1V3aqQd601ehJmqsNH8Oj4B9WjP9GUuV5/view?usp=sharing'},{src:'https://drive.google.com/file/d/1k4BeBFgxlaI5SEfq9pJiwHDVjzJzTnBC/preview',title:'Ciberseguridad y resguardo institucional',desc:'Buenas prácticas digitales, protección de información y criterios de seguridad para el trabajo cotidiano.',url:'https://drive.google.com/file/d/1k4BeBFgxlaI5SEfq9pJiwHDVjzJzTnBC/view?usp=sharing'}];
+const IDEAS={firma:['Identifiquen quién firma, quién opera y quién valida en FirmaGob.','Revisen el procedimiento de habilitación y asignen responsables internos.'],doc:['Mapeen un oficio desde su creación hasta su firma, distribución y archivo.','Elijan un procedimiento que pueda migrar a expediente electrónico.'],ciber:['Revisen un correo sospechoso e identifiquen tres señales de phishing.','Hagan un inventario de accesos críticos y verifiquen segundo factor.']};
+let active='base',all=false;const byId=id=>R.find(x=>x[0]===id),esc=s=>String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+function renderTabs(){collections.innerHTML=C.map(c=>{const n=R.filter(r=>c.cats.includes(r[1])).length;return `<button class="ctab ${c.id===active?'on':''}" data-id="${c.id}"><small><span>${c.n}</span><span>${n}</span></small><strong>${c.t}</strong></button>`}).join('');document.querySelectorAll('.ctab').forEach(b=>b.onclick=()=>{active=b.dataset.id;all=false;search.value='';renderTabs();renderLib()})}
+function renderEss(){const ids=['td-001','td-002','td-004','td-015','td-024','td-028'];essential.innerHTML=ids.map(id=>{const r=byId(id);return `<a href="${r[3]}" target="_blank" rel="noopener">${esc(r[2])} ↗</a>`}).join('')}
+function renderLib(){const c=C.find(x=>x.id===active),term=search.value.trim().toLowerCase();idx.textContent=c.n;storyTitle.textContent=c.t;storyDesc.textContent=c.d;workTitle.textContent=term?'Resultados de búsqueda':(all?'Todos los recursos':c.t);const f=byId(c.focus);focus.innerHTML=`<small>Recomendado</small><a href="${f[3]}" target="_blank" rel="noopener">${esc(f[2])}<span>↗</span></a>`;let arr=R;if(term)arr=R.filter(r=>r.join(' ').toLowerCase().includes(term));else if(!all)arr=R.filter(r=>c.cats.includes(r[1]));count.textContent=`${arr.length} recurso${arr.length===1?'':'s'} · ${term?'búsqueda global':all?'biblioteca completa':c.t}`;showAll.textContent=all?'Volver a la colección':'Ver los 30';resGrid.innerHTML=arr.map(r=>`<a class="resCard" href="${r[3]}" target="_blank" rel="noopener"><div class="resTop"><small>${r[0].toUpperCase()}</small><em>${esc(r[1])}</em></div><h3>${esc(r[2])}</h3><div class="resFoot"><span>Fuente oficial</span><b>Abrir ↗</b></div></a>`).join('')}
+search.addEventListener('input',()=>{all=false;renderLib()});showAll.onclick=()=>{all=!all;search.value='';renderLib()};document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();search.focus()}});renderEss();renderTabs();renderLib();
+document.querySelectorAll('.videoPick').forEach(b=>b.onclick=()=>{const i=+b.dataset.video,v=VIDEOS[i];document.querySelectorAll('.videoPick').forEach(x=>x.classList.remove('on'));b.classList.add('on');videoFrame.src=v.src;videoFrame.title=v.title;videoTitle.textContent=v.title;videoDesc.textContent=v.desc;videoLink.href=v.url});
+newsGrid.innerHTML=`<a class="newsFeature" href="${N[0][3]}" target="_blank" rel="noopener"><small>${N[0][1]} · ${N[0][0]}</small><h3>${N[0][2]}</h3><p>Seguimiento de avances de Gobierno Digital con impacto en la implementación territorial y municipal.</p><b>Leer fuente oficial ↗</b></a><div class="newsSide">${N.slice(1,4).map(n=>`<a class="newsSmall" href="${n[3]}" target="_blank" rel="noopener"><small>${n[1]} · ${n[0]}</small><h3>${n[2]}</h3></a>`).join('')}</div>`;allNews.innerHTML=N.map(n=>`<a href="${n[3]}" target="_blank" rel="noopener"><time>${n[0]}<br>${n[1]}</time><strong>${n[2]}</strong><span>↗</span></a>`).join('');openNews.onclick=()=>newsDialog.showModal();closeNews.onclick=()=>newsDialog.close();newsDialog.onclick=e=>{if(e.target===newsDialog)newsDialog.close()};
+quiz.innerHTML=Q.map((q,i)=>`<div class="q"><p>${i+1}. ${q[0]}</p><div class="opts">${q[1].map((o,j)=>`<label><input type="radio" name="q${i}" value="${j}"> ${o}</label>`).join('')}</div></div>`).join('');toggleQuiz.onclick=()=>{quizBox.classList.toggle('open');toggleQuiz.textContent=quizBox.classList.contains('open')?'Cerrar quiz':'Abrir quiz'};grade.onclick=()=>{let n=0;Q.forEach((q,i)=>{const x=document.querySelector(`input[name=q${i}]:checked`);if(x&&+x.value===q[2])n++});score.textContent=`Resultado: ${n}/${Q.length} respuestas correctas.`};document.querySelectorAll('.ideaBtn').forEach(b=>b.onclick=()=>{const a=IDEAS[b.dataset.topic],x=a[Math.floor(Math.random()*a.length)];idea.textContent=x});menu.onclick=()=>document.body.classList.toggle('open');document.querySelectorAll('nav a').forEach(a=>a.onclick=()=>document.body.classList.remove('open'));
+</script>
+</body></html>
