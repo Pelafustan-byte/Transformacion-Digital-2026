@@ -1,0 +1,32 @@
+{
+  "name": "ruta-digital-constitucion",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portal y cockpit editorial portable de Transformación Digital de la Municipalidad de Constitución",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch server.js",
+    "start": "node server.js",
+    "build:admin": "vite build --config vite.config.js",
+    "build": "npm run build:admin",
+    "check": "node scripts/check.mjs"
+  },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "@tiptap/extension-link": "^3.30.6",
+    "@tiptap/react": "^3.30.6",
+    "@tiptap/starter-kit": "^3.30.6",
+    "archiver": "^7.0.1",
+    "cookie-parser": "^1.4.7",
+    "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "multer": "^2.0.2",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "sanitize-html": "^2.17.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.0.4",
+    "vite": "^7.1.7"
+  }
+}
