@@ -14,3 +14,5 @@ body{color:var(--admin-ink);background:#f5f8f9}
 .muted{font-size:.84rem;line-height:1.55}.grow small{text-transform:none;letter-spacing:0}.grow p{font-size:.76rem}
 @media(max-width:800px){.sidebar{position:sticky;top:0;z-index:20;padding:12px}.admin-brand{padding-bottom:12px}.sidebar nav{padding:10px 0}.workspace{padding-top:28px}.page-head h1{font-size:2.2rem}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+button,input,select,.file-button,.upload-btn{min-height:44px}

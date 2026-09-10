@@ -36,7 +36,7 @@ header{background:#fff;border-color:var(--line);backdrop-filter:none}
 .head nav a{font-size:.72rem;font-weight:750;color:#274758;text-underline-offset:8px}
 .head nav a:hover{text-decoration-color:var(--cyan)}
 .head nav .adminLink{margin-left:3px;padding:7px 10px;border:1px solid var(--line);border-radius:7px;color:var(--navy)}
-.menu{width:42px;height:42px;border:1px solid var(--line);border-radius:8px;line-height:1}
+.menu{width:44px;height:44px;border:1px solid var(--line);border-radius:8px;line-height:1}
 .hero{min-height:660px;background-color:var(--navy-strong);background-size:100% 100%,58% 100%!important;background-position:left top,right center!important;background-repeat:no-repeat!important}
 .hero:before{content:"";position:absolute;inset:0 42% 0 0;background:linear-gradient(110deg,#032f4c 0%,#064f74 100%);z-index:0}
 .hero:after{display:none}
@@ -134,8 +134,10 @@ header{background:#fff;border-color:var(--line);backdrop-filter:none}
 .newsFeature small,.newsSmall small{text-transform:none;letter-spacing:0}
 .lab{background:#f7fafb}
 .labDeck{border-radius:14px!important}
+button{min-height:44px}
 dialog{border-radius:14px}
 .dlgHead{position:sticky;top:0;z-index:2}
+.close{width:44px;height:44px}
 .dialogHero{border-radius:10px;aspect-ratio:16/9}
 footer{position:relative;padding:48px 0;background:#03253b;color:#d5e4ea;overflow:hidden}
 footer:after{content:"";position:absolute;right:-8%;bottom:-70%;width:52%;aspect-ratio:2;border:1px solid #a9dbdc25;border-radius:50%}
