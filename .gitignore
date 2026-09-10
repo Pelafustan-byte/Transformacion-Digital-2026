@@ -5,3 +5,7 @@ public/admin/
 data/uploads/*
 !data/uploads/.gitkeep
 data/backups/
+.npm-cache/
+.impeccable/
+assets/plates/
+data/content.json
