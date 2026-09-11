@@ -99,6 +99,25 @@ app.patch('/api/admin/:collection/:id',auth,async(req,res)=>{const col=req.param
 app.delete('/api/admin/:collection/:id',auth,async(req,res)=>{const col=req.params.collection;if(!collections.has(col))return res.sendStatus(404);const c=await readContent();c[col]=(c[col]||[]).filter(x=>x.id!==req.params.id);await saveContent(c);res.json({ok:true})});
 app.post('/api/admin/:collection/reorder',auth,async(req,res)=>{const col=req.params.collection;if(!collections.has(col)||!Array.isArray(req.body.ids))return res.status(400).json({error:'INVALID'});const c=await readContent(),map=new Map(req.body.ids.map((id,i)=>[id,i+1]));c[col]=(c[col]||[]).map((x,i)=>({...x,position:map.get(x.id)||i+1}));await saveContent(c);res.json(sort(c[col]))});
 
+/*
+ * Metadatos editables de la biblioteca visual.
+ *
+ * El manifiesto (public/assets/assets-manifest.json) es material versionado:
+ * describe la procedencia verificada y no se toca desde el panel. Lo que la
+ * edición sí puede ajustar —título mostrado, texto alternativo, descripción y
+ * crédito visible— se guarda aparte, en el contenido, y se superpone al leer.
+ * Así la licencia y la fuente nunca se pueden sobrescribir desde /admin/.
+ */
+app.get('/api/admin/asset-meta',auth,async(_q,res)=>{const c=await readContent();res.json(c.assetMeta||{})});
+app.put('/api/admin/asset-meta/:id',auth,async(req,res)=>{
+ const c=await readContent();c.assetMeta ||= {};
+ const clean={};
+ for(const k of ['title','alt','description','credit']){
+  if(typeof req.body?.[k]==='string')clean[k]=req.body[k].trim().slice(0,700);
+ }
+ c.assetMeta[req.params.id]={...(c.assetMeta[req.params.id]||{}),...clean,updatedAt:new Date().toISOString()};
+ await saveContent(c);res.json(c.assetMeta[req.params.id]);
+});
 app.get('/api/admin/media',auth,async(_q,res)=>{if(pool){const q=await pool.query('select id,name,mime,size,created_at from rd_media order by created_at desc limit 100');return res.json({items:q.rows.map(x=>({...x,url:`/media/${x.id}`}))})}res.json({items:fs.readdirSync(UPLOAD_DIR).map(id=>({id,url:`/media/${id}`}))})});
 app.get('/api/admin/export/content.json',auth,async(_q,res)=>{res.type('json').attachment('ruta-digital-content.json').send(JSON.stringify(await readContent(),null,2))});
 app.get('/api/admin/export/site.zip',auth,async(_q,res)=>{const c=await readContent();res.attachment(`ruta-digital-${new Date().toISOString().slice(0,10)}.zip`);const z=archiver('zip',{zlib:{level:9}});z.pipe(res);z.file(path.join(__dirname,'server.js'),{name:'server.js'});z.file(path.join(__dirname,'package.json'),{name:'package.json'});z.directory(path.join(__dirname,'public'),'public');z.directory(path.join(__dirname,'seed'),'seed');z.append(JSON.stringify(c,null,2),{name:'data/content.json'});z.append('PORT=3000\nADMIN_USER=editor\nADMIN_PASSWORD=CAMBIAR\nSESSION_SECRET=CAMBIAR\nDATA_DIR=./data\n',{name:'.env.example'});z.append('Instalar Node.js 20+, ejecutar npm install --omit=dev y node server.js. El panel está en /admin/. Para servidor municipal sin DATABASE_URL se usa data/content.json y data/uploads/.',{name:'README_INSTALACION.txt'});await z.finalize()});

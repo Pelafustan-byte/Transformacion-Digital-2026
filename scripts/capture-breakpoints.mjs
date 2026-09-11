@@ -27,8 +27,14 @@ export const BREAKPOINTS = [
 
 const ROUTES = [
   { slug: 'portada', url: '/' },
-  { slug: 'admin', url: '/admin/' }
+  { slug: 'admin', url: '/admin/', auth: true },
+  { slug: 'admin-biblioteca-visual', url: '/admin/', auth: true, tab: 'Biblioteca visual' }
 ];
+
+// Credenciales del servidor local de pruebas, no de producción. Se usan para
+// que las capturas del panel muestren el panel y no la pantalla de acceso.
+const ADMIN_USER = process.env.ADMIN_USER || 'editor';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '';
 
 function resolvePlaywright() {
   const require = createRequire(import.meta.url);
@@ -64,9 +70,18 @@ async function waitForContent(page) {
       await new Promise(r => setTimeout(r, 120));
     }
     window.scrollTo(0, 0);
-    await Promise.all([...document.images].filter(i => !i.complete).map(i =>
-      new Promise(r => { i.addEventListener('load', r, { once: true }); i.addEventListener('error', r, { once: true }); })
-    ));
+    // Límite obligatorio: una imagen diferida que nunca entra en el viewport se
+    // queda con complete=false para siempre, y esperarla cuelga la captura.
+    const pending = [...document.images].filter(i => !i.complete).map(i =>
+      new Promise(r => {
+        i.addEventListener('load', r, { once: true });
+        i.addEventListener('error', r, { once: true });
+      })
+    );
+    await Promise.race([
+      Promise.all(pending),
+      new Promise(r => setTimeout(r, 4000))
+    ]);
     await new Promise(r => setTimeout(r, 300));
   });
 }
@@ -74,7 +89,23 @@ async function waitForContent(page) {
 async function main() {
   const { chromium } = resolvePlaywright();
   fs.mkdirSync(OUT, { recursive: true });
-  const browser = await chromium.launch();
+  console.log(`Capturando ${BASE} -> ${OUT}`);
+
+  // Si no hay Chromium descargado por Playwright, se usa el Chrome o Edge ya
+  // instalados: descargar 250 MB solo para tomar capturas no compensa.
+  const launchOptions = {};
+  if (process.env.BROWSER_PATH) launchOptions.executablePath = process.env.BROWSER_PATH;
+  else if (process.env.BROWSER_CHANNEL) launchOptions.channel = process.env.BROWSER_CHANNEL;
+
+  let browser;
+  try {
+    browser = await chromium.launch(launchOptions);
+  } catch (error) {
+    for (const channel of ['chrome', 'msedge']) {
+      try { browser = await chromium.launch({ channel }); break; } catch {}
+    }
+    if (!browser) throw error;
+  }
   const written = [];
 
   for (const bp of BREAKPOINTS) {
@@ -91,12 +122,27 @@ async function main() {
       page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
       page.on('pageerror', e => errors.push(String(e)));
 
-      await page.goto(BASE + route.url, { waitUntil: 'networkidle', timeout: 30000 });
+      if (route.auth && ADMIN_PASSWORD) {
+        const login = await context.request.post(BASE + '/api/auth/login', {
+          data: { user: ADMIN_USER, password: ADMIN_PASSWORD }
+        });
+        if (!login.ok()) console.warn(`  (acceso al panel rechazado: ${login.status()}; se captura la pantalla de acceso)`);
+      }
+
+      // `networkidle` se cuelga en este portal; `domcontentloaded` más esperas
+      // explícitas sobre el contenido real es más fiable y más rápido.
+      await page.goto(BASE + route.url, { waitUntil: 'domcontentloaded', timeout: 30000 });
       if (route.slug === 'portada') await waitForContent(page);
-      else await page.waitForTimeout(1500);
+      else await page.waitForTimeout(1800);
+
+      if (route.tab) {
+        const tab = page.locator(`nav button:has-text("${route.tab}")`).first();
+        if (await tab.count()) { await tab.click(); await page.waitForTimeout(2200); }
+      }
 
       const file = path.join(OUT, `${route.slug}-${bp.name}.png`);
-      await page.screenshot({ path: file, fullPage: FULL && route.slug === 'portada' });
+      process.stdout.write('');
+      await page.screenshot({ path: file, fullPage: FULL && route.slug !== 'admin' });
       written.push({ file, breakpoint: bp.name, route: route.url, consoleErrors: errors });
       console.log(`· ${file}${errors.length ? `  (${errors.length} error/es de consola)` : ''}`);
       await context.close();
