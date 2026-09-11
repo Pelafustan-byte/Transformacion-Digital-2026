@@ -1,18 +1,18 @@
 (()=>{
  const BASE='/assets/photos/constitucion/';
  const defaults={
-  heroPhoto:BASE+'rocas-arco-constitucion.webp',
+  heroPhoto:BASE+'rocas-arco-constitucion.jpg',
   heroPhotoAlt:'Formaciones rocosas del borde costero de Constitución.',
   heroPhotoCaption:'Constitución · Región del Maule',
-  municipalBridgePhoto:BASE+'municipalidad-diurna.webp',
+  municipalBridgePhoto:BASE+'municipalidad-diurna.jpg',
   municipalBridgeAlt:'Edificio consistorial de la Municipalidad de Constitución.',
   territoryGallery:[
-   {src:BASE+'rocas-arco-constitucion.webp',alt:'Formaciones rocosas del borde costero de Constitución.',caption:'Borde costero · identidad territorial',className:'territoryLead'},
-   {src:BASE+'rio-puente-ciudad.webp',alt:'Vista del río Maule, el puente y la ciudad de Constitución.',caption:'Río Maule · territorio y conectividad',className:'territoryWide'},
-   {src:BASE+'iglesia-constitucion.webp',alt:'Iglesia en el centro urbano de Constitución.',caption:'Centro urbano · comunidad e identidad',className:'territoryWide'},
-   {src:BASE+'costa-rocas.webp',alt:'Costa y formaciones rocosas de Constitución.',caption:'Costa · entorno local',className:'territoryThird'},
-   {src:BASE+'municipalidad-nocturna.webp',alt:'Edificio municipal de Constitución durante la tarde y noche.',caption:'Municipalidad · institución y servicio',className:'territoryThird territoryPortrait'},
-   {src:BASE+'vista-aerea-borde-costero.webp',alt:'Vista aérea del borde costero y trama urbana de Constitución.',caption:'Ciudad y borde costero',className:'territoryThird territoryPortrait'}
+   {src:BASE+'rocas-arco-constitucion.jpg',alt:'Formaciones rocosas del borde costero de Constitución.',caption:'Borde costero · identidad territorial',className:'territoryLead'},
+   {src:BASE+'rio-puente-ciudad.jpg',alt:'Vista del río Maule, el puente y la ciudad de Constitución.',caption:'Río Maule · territorio y conectividad',className:'territoryWide'},
+   {src:BASE+'iglesia-constitucion.jpg',alt:'Iglesia en el centro urbano de Constitución.',caption:'Centro urbano · comunidad e identidad',className:'territoryWide'},
+   {src:BASE+'costa-rocas.jpg',alt:'Costa y formaciones rocosas de Constitución.',caption:'Costa · entorno local',className:'territoryThird'},
+   {src:BASE+'municipalidad-nocturna.jpg',alt:'Edificio municipal de Constitución durante la tarde y noche.',caption:'Municipalidad · institución y servicio',className:'territoryThird territoryPortrait'},
+   {src:BASE+'vista-aerea-borde-costero.jpg',alt:'Vista aérea del borde costero y trama urbana de Constitución.',caption:'Ciudad y borde costero',className:'territoryThird territoryPortrait'}
   ]
  };
  const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
@@ -37,6 +37,10 @@
   const items=Array.isArray(s.territoryGallery)&&s.territoryGallery.length?s.territoryGallery:defaults.territoryGallery;
   grid.innerHTML=items.slice(0,6).map((x,i)=>`<figure class="${esc(x.className||(i===0?'territoryLead':'territoryThird'))}"><img src="${esc(x.src)}" alt="${esc(x.alt||'Constitución')}" loading="lazy" decoding="async"><figcaption>${esc(x.caption||'Constitución')}</figcaption></figure>`).join('');
  }
- async function enhance(){const s={...defaults,...await siteData()};addHero(s);addBridge(s);renderTerritory(s)}
+ function replaceFedokNotePhoto(){
+  const lead=document.querySelector('#notesGrid .noteCard.leadNote .noteImage img.photo, #notesGrid .noteCard:first-child .noteImage img.photo');
+  if(lead){lead.src=BASE+'municipalidad-diurna.jpg';lead.alt='Edificio consistorial de la Municipalidad de Constitución.';}
+ }
+ async function enhance(){const s={...defaults,...await siteData()};addHero(s);addBridge(s);renderTerritory(s);replaceFedokNotePhoto()}
  window.addEventListener('load',()=>setTimeout(enhance,180),{once:true});
 })();
