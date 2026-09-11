@@ -3,6 +3,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci --no-audit --no-fund
 COPY admin ./admin
+COPY scripts ./scripts
 COPY vite.config.js ./vite.config.js
 COPY public ./public
 RUN npm run build && npm prune --omit=dev
