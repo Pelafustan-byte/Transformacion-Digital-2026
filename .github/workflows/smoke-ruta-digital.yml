@@ -1,0 +1,32 @@
+name: Smoke Ruta Digital production
+
+on:
+  push:
+    branches: [visual-polish-v1]
+    paths: [.github/workflows/smoke-ruta-digital.yml]
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Railway production
+        run: sleep 8
+      - name: Check health and public routes
+        run: |
+          set -euo pipefail
+          BASE='https://ruta-digital-visual-production.up.railway.app'
+          curl -fsS "$BASE/health" | tee /tmp/health.json
+          grep -q '"persistent":true' /tmp/health.json
+          grep -q '"storage":"postgres"' /tmp/health.json
+          curl -fsS -o /tmp/index.html "$BASE/"
+          grep -q 'constitucion-photos.css' /tmp/index.html
+          grep -q 'constitucion-photos.js' /tmp/index.html
+          curl -fsS -o /dev/null "$BASE/admin/"
+          for f in rocas-arco-constitucion.jpg municipalidad-diurna.jpg costa-rocas.jpg rio-puente-ciudad.jpg vista-aerea-borde-costero.jpg iglesia-constitucion.jpg municipalidad-nocturna.jpg; do
+            code=$(curl -sS -o "/tmp/$f" -w '%{http_code}' "$BASE/assets/photos/constitucion/$f")
+            test "$code" = 200
+            test -s "/tmp/$f"
+            echo "OK 200 $f ($(stat -c%s "/tmp/$f") bytes)"
+          done
+          curl -fsS "$BASE/api/public/content" -o /tmp/content.json
+          grep -q '/assets/photos/constitucion/municipalidad-diurna.jpg' /tmp/content.json
