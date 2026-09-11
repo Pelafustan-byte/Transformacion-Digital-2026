@@ -1,0 +1,119 @@
+{
+  "generatedAt": "2026-09-11T00:36:22.977Z",
+  "width": 1200,
+  "height": 750,
+  "items": [
+    {
+      "slug": "gestion-documental",
+      "title": "Gestión documental",
+      "desc": "Documentos en papel que ingresan a un repositorio digital ordenado.",
+      "file": "/assets/illustrations/transformacion-digital/gestion-documental.svg",
+      "bytes": 3454
+    },
+    {
+      "slug": "expediente-electronico",
+      "title": "Expediente electrónico",
+      "desc": "Carpeta con pestañas indexadas y la trazabilidad de sus actuaciones.",
+      "file": "/assets/illustrations/transformacion-digital/expediente-electronico.svg",
+      "bytes": 2848
+    },
+    {
+      "slug": "docdigital",
+      "title": "DocDigital",
+      "desc": "Plataforma de documentos con derivación entre unidades municipales.",
+      "file": "/assets/illustrations/transformacion-digital/docdigital.svg",
+      "bytes": 2990
+    },
+    {
+      "slug": "firma-electronica",
+      "title": "Firma electrónica",
+      "desc": "Documento validado mediante firma electrónica avanzada y su sello de verificación.",
+      "file": "/assets/illustrations/transformacion-digital/firma-electronica.svg",
+      "bytes": 2587
+    },
+    {
+      "slug": "identidad-digital-claveunica",
+      "title": "Identidad digital y ClaveÚnica",
+      "desc": "Credencial de identidad digital con la que una persona accede a los servicios del Estado.",
+      "file": "/assets/illustrations/transformacion-digital/identidad-digital-claveunica.svg",
+      "bytes": 2449
+    },
+    {
+      "slug": "interoperabilidad",
+      "title": "Interoperabilidad",
+      "desc": "Dos instituciones del Estado intercambian datos para no volver a pedirlos a la ciudadanía.",
+      "file": "/assets/illustrations/transformacion-digital/interoperabilidad.svg",
+      "bytes": 2734
+    },
+    {
+      "slug": "ciberseguridad",
+      "title": "Ciberseguridad institucional",
+      "desc": "Infraestructura municipal protegida: resguardo de los sistemas que sostienen el servicio.",
+      "file": "/assets/illustrations/transformacion-digital/ciberseguridad.svg",
+      "bytes": 2386
+    },
+    {
+      "slug": "proteccion-datos",
+      "title": "Protección de datos personales",
+      "desc": "Datos personales bajo resguardo: se accede solo a lo que corresponde y queda registrado.",
+      "file": "/assets/illustrations/transformacion-digital/proteccion-datos.svg",
+      "bytes": 2371
+    },
+    {
+      "slug": "atencion-ciudadana-digital",
+      "title": "Atención ciudadana digital",
+      "desc": "Módulo de atención municipal donde el trámite se resuelve en pantalla, con la persona presente.",
+      "file": "/assets/illustrations/transformacion-digital/atencion-ciudadana-digital.svg",
+      "bytes": 2927
+    },
+    {
+      "slug": "capacitacion",
+      "title": "Capacitación municipal",
+      "desc": "Sesión de formación para equipos municipales en torno a una pantalla compartida.",
+      "file": "/assets/illustrations/transformacion-digital/capacitacion.svg",
+      "bytes": 2398
+    },
+    {
+      "slug": "gestion-del-cambio",
+      "title": "Gestión del cambio",
+      "desc": "El paso del trámite en papel al procedimiento digital, acompañando a quienes lo ejecutan.",
+      "file": "/assets/illustrations/transformacion-digital/gestion-del-cambio.svg",
+      "bytes": 3542
+    },
+    {
+      "slug": "transformacion-digital-estado",
+      "title": "Transformación digital del Estado",
+      "desc": "Servicios del Estado sostenidos por una capa digital común.",
+      "file": "/assets/illustrations/transformacion-digital/transformacion-digital-estado.svg",
+      "bytes": 2198
+    },
+    {
+      "slug": "identidad-municipal",
+      "title": "Identidad municipal de Constitución",
+      "desc": "El edificio municipal sobre el territorio: la institución que sostiene el proceso.",
+      "file": "/assets/illustrations/transformacion-digital/identidad-municipal.svg",
+      "bytes": 2212
+    },
+    {
+      "slug": "implementacion-municipal",
+      "title": "Implementación municipal",
+      "desc": "La ruta de implementación por etapas, con los hitos ya cumplidos y los que siguen.",
+      "file": "/assets/illustrations/transformacion-digital/implementacion-municipal.svg",
+      "bytes": 3304
+    },
+    {
+      "slug": "validacion-documental",
+      "title": "Validación documental",
+      "desc": "Comprobación de que un documento electrónico es auténtico, íntegro y verificable.",
+      "file": "/assets/illustrations/transformacion-digital/validacion-documental.svg",
+      "bytes": 2950
+    },
+    {
+      "slug": "notificaciones-electronicas",
+      "title": "Notificaciones electrónicas",
+      "desc": "Comunicación oficial enviada por vía electrónica, con constancia de su recepción.",
+      "file": "/assets/illustrations/transformacion-digital/notificaciones-electronicas.svg",
+      "bytes": 2131
+    }
+  ]
+}

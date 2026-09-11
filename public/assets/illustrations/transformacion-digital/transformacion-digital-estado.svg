@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750" role="img" aria-labelledby="t-transformacion-digital-estado d-transformacion-digital-estado">
+<title id="t-transformacion-digital-estado">Transformación digital del Estado</title>
+<desc id="d-transformacion-digital-estado">Servicios del Estado sostenidos por una capa digital común.</desc>
+<rect width="1200" height="750" fill="#063b5c"/>
+<g stroke="#ffffff14" stroke-width="1" fill="none"><path d="M50 0V750"/><path d="M100 0V750"/><path d="M150 0V750"/><path d="M200 0V750"/><path d="M250 0V750"/><path d="M300 0V750"/><path d="M350 0V750"/><path d="M400 0V750"/><path d="M450 0V750"/><path d="M500 0V750"/><path d="M550 0V750"/><path d="M600 0V750"/><path d="M650 0V750"/><path d="M700 0V750"/><path d="M750 0V750"/><path d="M800 0V750"/><path d="M850 0V750"/><path d="M900 0V750"/><path d="M950 0V750"/><path d="M1000 0V750"/><path d="M1050 0V750"/><path d="M1100 0V750"/><path d="M1150 0V750"/><path d="M0 50H1200"/><path d="M0 100H1200"/><path d="M0 150H1200"/><path d="M0 200H1200"/><path d="M0 250H1200"/><path d="M0 300H1200"/><path d="M0 350H1200"/><path d="M0 400H1200"/><path d="M0 450H1200"/><path d="M0 500H1200"/><path d="M0 550H1200"/><path d="M0 600H1200"/><path d="M0 650H1200"/><path d="M0 700H1200"/></g>
+<path d="M0 656 C 200 622, 360 686, 560 650 S 940 604, 1200 636 L1200 750 L0 750Z" fill="#032f4c"/>
+<path d="M0 656 C 200 622, 360 686, 560 650 S 940 604, 1200 636" fill="none" stroke="#0a6fa4" stroke-width="3" opacity=".85"/>
+<path d="M600 128l290 100H310z" fill="#f7fafb"/>
+<rect x="340" y="228" width="520" height="24" rx="8" fill="#f7fafb"/>
+<path d="M406 268 V450 M520 268 V450 M680 268 V450 M794 268 V450" fill="none" stroke="#f7fafb" stroke-width="30" stroke-linecap="butt" stroke-linejoin="round"/>
+<rect x="330" y="450" width="540" height="26" rx="8" fill="#f7fafb"/>
+<rect x="300" y="512" width="600" height="46" rx="12" fill="#13a6a6" opacity=".28"/>
+<rect x="340" y="522" width="140" height="26" rx="13" fill="#13a6a6"/>
+<rect x="500" y="522" width="200" height="26" rx="13" fill="#39c9c4"/>
+<rect x="720" y="522" width="140" height="26" rx="13" fill="#13a6a6"/>
+</svg>
