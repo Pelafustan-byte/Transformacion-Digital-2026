@@ -1,2 +1,3 @@
-Redeploy visual CMS after forcing Dockerfile runtime on Railway.
-2026-09-10T16:18:00Z
+# Deploy trigger
+
+Constitución photography integration ready for production.
