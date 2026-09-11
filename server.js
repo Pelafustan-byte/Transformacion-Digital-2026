@@ -19,12 +19,37 @@ const SESSION_SECRET = process.env.SESSION_SECRET || 'change-me-in-production';
 const DATABASE_URL = process.env.DATABASE_URL || '';
 const IS_PROD = process.env.NODE_ENV === 'production';
 const SEED_FILE = path.join(__dirname, 'seed', 'content.seed.json');
-const DATA_DIR = path.resolve(process.env.DATA_DIR || path.join(__dirname,'data'));
+// Si Railway monta un volumen, se usa por defecto: basta adjuntarlo en el panel,
+// sin tener que recordar además la variable DATA_DIR.
+const VOLUME_MOUNT = process.env.RAILWAY_VOLUME_MOUNT_PATH || process.env.PERSISTENT_DATA_PATH || '';
+const DATA_DIR = path.resolve(process.env.DATA_DIR || VOLUME_MOUNT || path.join(__dirname,'data'));
 const CONTENT_FILE = path.join(DATA_DIR,'content.json');
 const UPLOAD_DIR = path.join(DATA_DIR,'uploads');
 const pool = DATABASE_URL ? new Pool({ connectionString:DATABASE_URL, ssl:{rejectUnauthorized:false} }) : null;
 
 fs.mkdirSync(DATA_DIR,{recursive:true}); fs.mkdirSync(UPLOAD_DIR,{recursive:true});
+
+/**
+ * Modo de almacenamiento.
+ *
+ * Sin DATABASE_URL el CMS escribe en DATA_DIR. Eso solo persiste si DATA_DIR
+ * apunta a un volumen montado: en un contenedor sin volumen, cada redespliegue
+ * borra las ediciones y los archivos subidos desde /admin/. Railway expone
+ * RAILWAY_VOLUME_MOUNT_PATH cuando hay un volumen adjunto.
+ */
+function detectStorage(){
+ if(pool) return {mode:'postgres',persistent:true,detail:'Contenido y medios en PostgreSQL.'};
+ const mount=VOLUME_MOUNT;
+ const onVolume=!!mount&&(DATA_DIR===path.resolve(mount)||DATA_DIR.startsWith(path.resolve(mount)+path.sep));
+ if(onVolume) return {mode:'volume',persistent:true,detail:`Contenido y medios en el volumen montado en ${mount}.`};
+ if(!IS_PROD) return {mode:'local',persistent:true,detail:`Desarrollo local: ${DATA_DIR}`};
+ return {mode:'ephemeral',persistent:false,detail:`Sin DATABASE_URL ni volumen: ${DATA_DIR} vive dentro del contenedor y se pierde en cada redespliegue.`};
+}
+const STORAGE=detectStorage();
+if(!STORAGE.persistent){
+ console.warn('[ALMACENAMIENTO EFÍMERO] '+STORAGE.detail);
+ console.warn('[ALMACENAMIENTO EFÍMERO] Adjunta PostgreSQL (DATABASE_URL) o un volumen y apunta DATA_DIR a él. Ver docs/OPERACION.md.');
+}
 const seed = JSON.parse(fs.readFileSync(SEED_FILE,'utf8'));
 if (!pool && !fs.existsSync(CONTENT_FILE)) fs.writeFileSync(CONTENT_FILE,JSON.stringify(seed,null,2));
 
@@ -58,7 +83,8 @@ function auth(req,res,next){const raw=req.signedCookies.rd_session;if(!raw)retur
 const upload=multer({storage:multer.memoryStorage(),limits:{fileSize:80*1024*1024},fileFilter:(_r,f,cb)=>cb(null,/^(image\/(png|jpeg|webp|gif)|video\/(mp4|webm)|application\/pdf)$/.test(f.mimetype))});
 
 const app=express();app.set('trust proxy',1);app.disable('x-powered-by');app.use(helmet({contentSecurityPolicy:false,crossOriginEmbedderPolicy:false}));app.use(express.json({limit:'8mb'}));app.use(cookieParser(SESSION_SECRET));
-app.get('/health',(_q,r)=>r.json({ok:true,db:!!pool,service:'ruta-digital-cms'}));
+app.get('/health',(_q,r)=>r.json({ok:true,db:!!pool,service:'ruta-digital-cms',storage:STORAGE.mode,persistent:STORAGE.persistent}));
+app.get('/api/admin/storage',auth,(_q,r)=>r.json(STORAGE));
 app.get('/api/public/content',async(_q,r)=>{r.set('Cache-Control','no-store');r.json(await publicContent())});
 app.get('/media/:id',async(req,res)=>{try{if(pool){const q=await pool.query('select name,mime,bytes,size from rd_media where id=$1',[req.params.id]);if(!q.rowCount)return res.sendStatus(404);const m=q.rows[0];res.set({'Content-Type':m.mime,'Content-Length':m.size,'Cache-Control':'public,max-age=31536000,immutable'});return res.end(m.bytes)}const p=path.join(UPLOAD_DIR,path.basename(req.params.id));if(!fs.existsSync(p))return res.sendStatus(404);return res.sendFile(p)}catch{res.sendStatus(404)}});
 

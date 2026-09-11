@@ -16,3 +16,23 @@ body{color:var(--admin-ink);background:#f5f8f9}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 
 button,input,select,.file-button,.upload-btn{min-height:44px}
+
+/* Aviso de almacenamiento efímero: el editor debe saber antes de escribir
+   que su trabajo no sobrevivirá al próximo despliegue. */
+.storage-warning{
+  margin:0 0 24px;
+  padding:16px 20px;
+  border:1px solid #b4541f;
+  border-left-width:4px;
+  border-radius:8px;
+  background:#fdf3ec;
+  color:#5c2a0c;
+}
+.storage-warning strong{display:block;margin-bottom:6px;font-size:15px}
+.storage-warning p{margin:4px 0 0;font-size:14px;line-height:1.5}
+.storage-warning code{
+  padding:1px 5px;
+  border-radius:4px;
+  background:#f2ded1;
+  font-size:13px;
+}
