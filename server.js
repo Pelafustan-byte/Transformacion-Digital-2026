@@ -19,12 +19,37 @@ const SESSION_SECRET = process.env.SESSION_SECRET || 'change-me-in-production';
 const DATABASE_URL = process.env.DATABASE_URL || '';
 const IS_PROD = process.env.NODE_ENV === 'production';
 const SEED_FILE = path.join(__dirname, 'seed', 'content.seed.json');
-const DATA_DIR = path.resolve(process.env.DATA_DIR || path.join(__dirname,'data'));
+// Si Railway monta un volumen, se usa por defecto: basta adjuntarlo en el panel,
+// sin tener que recordar además la variable DATA_DIR.
+const VOLUME_MOUNT = process.env.RAILWAY_VOLUME_MOUNT_PATH || process.env.PERSISTENT_DATA_PATH || '';
+const DATA_DIR = path.resolve(process.env.DATA_DIR || VOLUME_MOUNT || path.join(__dirname,'data'));
 const CONTENT_FILE = path.join(DATA_DIR,'content.json');
 const UPLOAD_DIR = path.join(DATA_DIR,'uploads');
 const pool = DATABASE_URL ? new Pool({ connectionString:DATABASE_URL, ssl:{rejectUnauthorized:false} }) : null;
 
 fs.mkdirSync(DATA_DIR,{recursive:true}); fs.mkdirSync(UPLOAD_DIR,{recursive:true});
+
+/**
+ * Modo de almacenamiento.
+ *
+ * Sin DATABASE_URL el CMS escribe en DATA_DIR. Eso solo persiste si DATA_DIR
+ * apunta a un volumen montado: en un contenedor sin volumen, cada redespliegue
+ * borra las ediciones y los archivos subidos desde /admin/. Railway expone
+ * RAILWAY_VOLUME_MOUNT_PATH cuando hay un volumen adjunto.
+ */
+function detectStorage(){
+ if(pool) return {mode:'postgres',persistent:true,detail:'Contenido y medios en PostgreSQL.'};
+ const mount=VOLUME_MOUNT;
+ const onVolume=!!mount&&(DATA_DIR===path.resolve(mount)||DATA_DIR.startsWith(path.resolve(mount)+path.sep));
+ if(onVolume) return {mode:'volume',persistent:true,detail:`Contenido y medios en el volumen montado en ${mount}.`};
+ if(!IS_PROD) return {mode:'local',persistent:true,detail:`Desarrollo local: ${DATA_DIR}`};
+ return {mode:'ephemeral',persistent:false,detail:`Sin DATABASE_URL ni volumen: ${DATA_DIR} vive dentro del contenedor y se pierde en cada redespliegue.`};
+}
+const STORAGE=detectStorage();
+if(!STORAGE.persistent){
+ console.warn('[ALMACENAMIENTO EFÍMERO] '+STORAGE.detail);
+ console.warn('[ALMACENAMIENTO EFÍMERO] Adjunta PostgreSQL (DATABASE_URL) o un volumen y apunta DATA_DIR a él. Ver docs/OPERACION.md.');
+}
 const seed = JSON.parse(fs.readFileSync(SEED_FILE,'utf8'));
 if (!pool && !fs.existsSync(CONTENT_FILE)) fs.writeFileSync(CONTENT_FILE,JSON.stringify(seed,null,2));
 
@@ -58,7 +83,8 @@ function auth(req,res,next){const raw=req.signedCookies.rd_session;if(!raw)retur
 const upload=multer({storage:multer.memoryStorage(),limits:{fileSize:80*1024*1024},fileFilter:(_r,f,cb)=>cb(null,/^(image\/(png|jpeg|webp|gif)|video\/(mp4|webm)|application\/pdf)$/.test(f.mimetype))});
 
 const app=express();app.set('trust proxy',1);app.disable('x-powered-by');app.use(helmet({contentSecurityPolicy:false,crossOriginEmbedderPolicy:false}));app.use(express.json({limit:'8mb'}));app.use(cookieParser(SESSION_SECRET));
-app.get('/health',(_q,r)=>r.json({ok:true,db:!!pool,service:'ruta-digital-cms'}));
+app.get('/health',(_q,r)=>r.json({ok:true,db:!!pool,service:'ruta-digital-cms',storage:STORAGE.mode,persistent:STORAGE.persistent}));
+app.get('/api/admin/storage',auth,(_q,r)=>r.json(STORAGE));
 app.get('/api/public/content',async(_q,r)=>{r.set('Cache-Control','no-store');r.json(await publicContent())});
 app.get('/media/:id',async(req,res)=>{try{if(pool){const q=await pool.query('select name,mime,bytes,size from rd_media where id=$1',[req.params.id]);if(!q.rowCount)return res.sendStatus(404);const m=q.rows[0];res.set({'Content-Type':m.mime,'Content-Length':m.size,'Cache-Control':'public,max-age=31536000,immutable'});return res.end(m.bytes)}const p=path.join(UPLOAD_DIR,path.basename(req.params.id));if(!fs.existsSync(p))return res.sendStatus(404);return res.sendFile(p)}catch{res.sendStatus(404)}});
 
@@ -73,9 +99,78 @@ app.patch('/api/admin/:collection/:id',auth,async(req,res)=>{const col=req.param
 app.delete('/api/admin/:collection/:id',auth,async(req,res)=>{const col=req.params.collection;if(!collections.has(col))return res.sendStatus(404);const c=await readContent();c[col]=(c[col]||[]).filter(x=>x.id!==req.params.id);await saveContent(c);res.json({ok:true})});
 app.post('/api/admin/:collection/reorder',auth,async(req,res)=>{const col=req.params.collection;if(!collections.has(col)||!Array.isArray(req.body.ids))return res.status(400).json({error:'INVALID'});const c=await readContent(),map=new Map(req.body.ids.map((id,i)=>[id,i+1]));c[col]=(c[col]||[]).map((x,i)=>({...x,position:map.get(x.id)||i+1}));await saveContent(c);res.json(sort(c[col]))});
 
+/*
+ * Metadatos editables de la biblioteca visual.
+ *
+ * El manifiesto (public/assets/assets-manifest.json) es material versionado:
+ * describe la procedencia verificada y no se toca desde el panel. Lo que la
+ * edición sí puede ajustar —título mostrado, texto alternativo, descripción y
+ * crédito visible— se guarda aparte, en el contenido, y se superpone al leer.
+ * Así la licencia y la fuente nunca se pueden sobrescribir desde /admin/.
+ */
+app.get('/api/admin/asset-meta',auth,async(_q,res)=>{const c=await readContent();res.json(c.assetMeta||{})});
+app.put('/api/admin/asset-meta/:id',auth,async(req,res)=>{
+ const c=await readContent();c.assetMeta ||= {};
+ const clean={};
+ for(const k of ['title','alt','description','credit']){
+  if(typeof req.body?.[k]==='string')clean[k]=req.body[k].trim().slice(0,700);
+ }
+ c.assetMeta[req.params.id]={...(c.assetMeta[req.params.id]||{}),...clean,updatedAt:new Date().toISOString()};
+ await saveContent(c);res.json(c.assetMeta[req.params.id]);
+});
 app.get('/api/admin/media',auth,async(_q,res)=>{if(pool){const q=await pool.query('select id,name,mime,size,created_at from rd_media order by created_at desc limit 100');return res.json({items:q.rows.map(x=>({...x,url:`/media/${x.id}`}))})}res.json({items:fs.readdirSync(UPLOAD_DIR).map(id=>({id,url:`/media/${id}`}))})});
 app.get('/api/admin/export/content.json',auth,async(_q,res)=>{res.type('json').attachment('ruta-digital-content.json').send(JSON.stringify(await readContent(),null,2))});
 app.get('/api/admin/export/site.zip',auth,async(_q,res)=>{const c=await readContent();res.attachment(`ruta-digital-${new Date().toISOString().slice(0,10)}.zip`);const z=archiver('zip',{zlib:{level:9}});z.pipe(res);z.file(path.join(__dirname,'server.js'),{name:'server.js'});z.file(path.join(__dirname,'package.json'),{name:'package.json'});z.directory(path.join(__dirname,'public'),'public');z.directory(path.join(__dirname,'seed'),'seed');z.append(JSON.stringify(c,null,2),{name:'data/content.json'});z.append('PORT=3000\nADMIN_USER=editor\nADMIN_PASSWORD=CAMBIAR\nSESSION_SECRET=CAMBIAR\nDATA_DIR=./data\n',{name:'.env.example'});z.append('Instalar Node.js 20+, ejecutar npm install --omit=dev y node server.js. El panel está en /admin/. Para servidor municipal sin DATABASE_URL se usa data/content.json y data/uploads/.',{name:'README_INSTALACION.txt'});await z.finalize()});
+/*
+ * Portada con el texto ya escrito en el HTML.
+ *
+ * El portal se pintaba entero en el navegador desde /api/public/content: el
+ * HTML llegaba sin titular y con las cifras en 0, de modo que durante el primer
+ * segundo el portal comunicaba que no había nada, y al llegar los datos el hero
+ * crecía y empujaba el resto de la página (CLS medido: 0,236 en 768×1024).
+ *
+ * Aquí se rellenan los mismos nodos que rellenaría app.js. No sustituye al
+ * render de cliente —que sigue siendo la fuente de verdad y reescribe los
+ * mismos valores—, solo evita que la primera pintura esté vacía.
+ */
+const INDEX_FILE=path.join(__dirname,'public','index.html');
+const escHtml=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+async function renderIndex(){
+ let html=fs.readFileSync(INDEX_FILE,'utf8');
+ let content;
+ try{content=await publicContent()}catch{return html}
+ const site=content.site||{};
+ const fill={
+  brandName:site.name,brandSubtitle:site.subtitle,
+  heroEyebrow:site.heroEyebrow,heroTitle:site.heroTitle,heroEmphasis:site.heroEmphasis,heroText:site.heroText,
+  eventLabel:site.eventLabel,eventTitle:site.eventTitle,eventText:site.eventText,eventDate:site.eventDate,
+  videosTitle:site.videosTitle,videosText:site.videosText,
+  materialsTitle:site.materialsTitle,materialsText:site.materialsText,
+  capsulesTitle:site.capsulesTitle,capsulesText:site.capsulesText,
+  localTitle:site.localTitle,localText:site.localText,
+  territoryTitle:site.territoryTitle,territoryText:site.territoryText,
+  resourcesTitle:site.resourcesTitle,resourcesText:site.resourcesText,
+  notesTitle:site.notesTitle,notesText:site.notesText,
+  newsTitle:site.newsTitle,newsText:site.newsText,
+  labTitle:site.labTitle,labText:site.labText,
+  footerName:site.name,footerText:site.footerText,
+  statResources:content.resources.length,statCapsules:content.capsules.length,
+  statVideos:content.videos.length,statNotes:content.notes.length
+ };
+ for(const [id,value] of Object.entries(fill)){
+  if(value===undefined||value===null||value==='')continue;
+  const pattern=new RegExp('(<([a-z0-9]+)([^>]*\\bid="'+id+'"[^>]*)>)([^<]*)(</\\2>)','i');
+  html=html.replace(pattern,(m,open,tag,attrs,prev,close)=>open+escHtml(value)+close);
+ }
+ return html;
+}
+
+app.get(['/','/index.html'],async(_q,res)=>{
+ try{res.type('html').set('Cache-Control','no-store').send(await renderIndex())}
+ catch{res.sendFile(INDEX_FILE)}
+});
+
 app.use(express.static(path.join(__dirname,'public'),{maxAge:IS_PROD?'5m':0,extensions:['html']}));
 app.use((err,_q,res,_n)=>{console.error(err);if(err?.code==='LIMIT_FILE_SIZE')return res.status(413).json({message:'Máximo 80 MB por archivo.'});res.status(500).json({message:'Error interno.'})});
 await initDb();app.listen(PORT,()=>console.log(`Ruta Digital CMS :${PORT} | db=${!!pool}`));

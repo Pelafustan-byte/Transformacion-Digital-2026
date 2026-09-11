@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750" role="img" aria-labelledby="t-expediente-electronico d-expediente-electronico">
+<title id="t-expediente-electronico">Expediente electrónico</title>
+<desc id="d-expediente-electronico">Carpeta con pestañas indexadas y la trazabilidad de sus actuaciones.</desc>
+<rect width="1200" height="750" fill="#063b5c"/>
+<g stroke="#ffffff14" stroke-width="1" fill="none"><path d="M50 0V750"/><path d="M100 0V750"/><path d="M150 0V750"/><path d="M200 0V750"/><path d="M250 0V750"/><path d="M300 0V750"/><path d="M350 0V750"/><path d="M400 0V750"/><path d="M450 0V750"/><path d="M500 0V750"/><path d="M550 0V750"/><path d="M600 0V750"/><path d="M650 0V750"/><path d="M700 0V750"/><path d="M750 0V750"/><path d="M800 0V750"/><path d="M850 0V750"/><path d="M900 0V750"/><path d="M950 0V750"/><path d="M1000 0V750"/><path d="M1050 0V750"/><path d="M1100 0V750"/><path d="M1150 0V750"/><path d="M0 50H1200"/><path d="M0 100H1200"/><path d="M0 150H1200"/><path d="M0 200H1200"/><path d="M0 250H1200"/><path d="M0 300H1200"/><path d="M0 350H1200"/><path d="M0 400H1200"/><path d="M0 450H1200"/><path d="M0 500H1200"/><path d="M0 550H1200"/><path d="M0 600H1200"/><path d="M0 650H1200"/><path d="M0 700H1200"/></g>
+<path d="M0 648 C 200 614, 360 678, 560 642 S 940 596, 1200 628 L1200 750 L0 750Z" fill="#032f4c"/>
+<path d="M0 648 C 200 614, 360 678, 560 642 S 940 596, 1200 628" fill="none" stroke="#0a6fa4" stroke-width="3" opacity=".85"/>
+<rect x="470" y="168" width="86" height="40" rx="8" fill="#cddde4"/>
+<rect x="572" y="168" width="86" height="40" rx="8" fill="#cddde4"/>
+<rect x="674" y="168" width="86" height="40" rx="8" fill="#13a6a6"/>
+<path d="M250 200h180l40 52h330a18 18 0 0 1 18 18v230a18 18 0 0 1-18 18H250a18 18 0 0 1-18-18V218a18 18 0 0 1 18-18z" fill="#f7fafb"/>
+<path d="M290 330 H700" fill="none" stroke="#cddde4" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M290 386 H620" fill="none" stroke="#cddde4" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M290 442 H660" fill="none" stroke="#cddde4" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M880 230 V500" fill="none" stroke="#8fb4c8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="880" cy="262" r="17" fill="#13a6a6"/>
+<circle cx="880" cy="352" r="17" fill="#13a6a6"/>
+<circle cx="880" cy="442" r="17" fill="#cddde4"/>
+<path d="M918 262 H1030" fill="none" stroke="#cddde4" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M918 352 H1002" fill="none" stroke="#cddde4" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M918 442 H1040" fill="none" stroke="#cddde4" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

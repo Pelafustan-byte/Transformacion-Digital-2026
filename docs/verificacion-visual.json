@@ -1,0 +1,155 @@
+{
+  "generatedAt": "2026-09-11T01:53:22.406Z",
+  "base": "http://127.0.0.1:3210",
+  "breakpoints": {
+    "1920x1080": {
+      "cls": 0.0102,
+      "overflow": {
+        "scrollWidth": 1920,
+        "viewport": 1920,
+        "overflows": false
+      },
+      "contrastFailures": [],
+      "contrastManualReview": 36,
+      "smallTargets": [],
+      "focus": {
+        "checked": 1,
+        "withoutVisibleIndicator": []
+      },
+      "images": {
+        "count": 10,
+        "withoutDeclaredSize": 0,
+        "missingAltAttribute": 0,
+        "downloadedButHidden": [],
+        "requestCount": 9,
+        "transferKB": 59,
+        "decodedKB": 57
+      }
+    },
+    "1440x900": {
+      "cls": 0,
+      "overflow": {
+        "scrollWidth": 1440,
+        "viewport": 1440,
+        "overflows": false
+      },
+      "contrastFailures": [],
+      "contrastManualReview": 36,
+      "smallTargets": [],
+      "focus": {
+        "checked": 1,
+        "withoutVisibleIndicator": []
+      },
+      "images": {
+        "count": 10,
+        "withoutDeclaredSize": 0,
+        "missingAltAttribute": 0,
+        "downloadedButHidden": [],
+        "requestCount": 9,
+        "transferKB": 59,
+        "decodedKB": 57
+      }
+    },
+    "1366x768": {
+      "cls": 0.0027,
+      "overflow": {
+        "scrollWidth": 1366,
+        "viewport": 1366,
+        "overflows": false
+      },
+      "contrastFailures": [],
+      "contrastManualReview": 36,
+      "smallTargets": [],
+      "focus": {
+        "checked": 1,
+        "withoutVisibleIndicator": []
+      },
+      "images": {
+        "count": 10,
+        "withoutDeclaredSize": 0,
+        "missingAltAttribute": 0,
+        "downloadedButHidden": [],
+        "requestCount": 9,
+        "transferKB": 59,
+        "decodedKB": 57
+      }
+    },
+    "1024x768": {
+      "cls": 0.0068,
+      "overflow": {
+        "scrollWidth": 1024,
+        "viewport": 1024,
+        "overflows": false
+      },
+      "contrastFailures": [],
+      "contrastManualReview": 36,
+      "smallTargets": [],
+      "focus": {
+        "checked": 1,
+        "withoutVisibleIndicator": []
+      },
+      "images": {
+        "count": 10,
+        "withoutDeclaredSize": 0,
+        "missingAltAttribute": 0,
+        "downloadedButHidden": [],
+        "requestCount": 10,
+        "transferKB": 62,
+        "decodedKB": 59
+      }
+    },
+    "768x1024": {
+      "cls": 0,
+      "overflow": {
+        "scrollWidth": 768,
+        "viewport": 768,
+        "overflows": false
+      },
+      "contrastFailures": [],
+      "contrastManualReview": 36,
+      "smallTargets": [],
+      "focus": {
+        "checked": 1,
+        "withoutVisibleIndicator": []
+      },
+      "images": {
+        "count": 10,
+        "withoutDeclaredSize": 0,
+        "missingAltAttribute": 0,
+        "downloadedButHidden": [],
+        "requestCount": 9,
+        "transferKB": 59,
+        "decodedKB": 57
+      }
+    },
+    "390x844": {
+      "cls": 0,
+      "overflow": {
+        "scrollWidth": 390,
+        "viewport": 390,
+        "overflows": false
+      },
+      "contrastFailures": [],
+      "contrastManualReview": 36,
+      "smallTargets": [],
+      "focus": {
+        "checked": 1,
+        "withoutVisibleIndicator": []
+      },
+      "images": {
+        "count": 10,
+        "withoutDeclaredSize": 0,
+        "missingAltAttribute": 0,
+        "downloadedButHidden": [],
+        "requestCount": 9,
+        "transferKB": 59,
+        "decodedKB": 57
+      }
+    }
+  },
+  "reducedMotion": {
+    "scrollBehavior": "auto",
+    "elementsChecked": 12,
+    "stillTransitioning": []
+  }
+}

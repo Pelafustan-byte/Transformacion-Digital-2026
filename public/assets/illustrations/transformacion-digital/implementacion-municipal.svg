@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750" role="img" aria-labelledby="t-implementacion-municipal d-implementacion-municipal">
+<title id="t-implementacion-municipal">Implementación municipal</title>
+<desc id="d-implementacion-municipal">La ruta de implementación por etapas, con los hitos ya cumplidos y los que siguen.</desc>
+<rect width="1200" height="750" fill="#063b5c"/>
+<g stroke="#ffffff14" stroke-width="1" fill="none"><path d="M50 0V750"/><path d="M100 0V750"/><path d="M150 0V750"/><path d="M200 0V750"/><path d="M250 0V750"/><path d="M300 0V750"/><path d="M350 0V750"/><path d="M400 0V750"/><path d="M450 0V750"/><path d="M500 0V750"/><path d="M550 0V750"/><path d="M600 0V750"/><path d="M650 0V750"/><path d="M700 0V750"/><path d="M750 0V750"/><path d="M800 0V750"/><path d="M850 0V750"/><path d="M900 0V750"/><path d="M950 0V750"/><path d="M1000 0V750"/><path d="M1050 0V750"/><path d="M1100 0V750"/><path d="M1150 0V750"/><path d="M0 50H1200"/><path d="M0 100H1200"/><path d="M0 150H1200"/><path d="M0 200H1200"/><path d="M0 250H1200"/><path d="M0 300H1200"/><path d="M0 350H1200"/><path d="M0 400H1200"/><path d="M0 450H1200"/><path d="M0 500H1200"/><path d="M0 550H1200"/><path d="M0 600H1200"/><path d="M0 650H1200"/><path d="M0 700H1200"/></g>
+<path d="M0 648 C 200 614, 360 678, 560 642 S 940 596, 1200 628 L1200 750 L0 750Z" fill="#032f4c"/>
+<path d="M0 648 C 200 614, 360 678, 560 642 S 940 596, 1200 628" fill="none" stroke="#0a6fa4" stroke-width="3" opacity=".85"/>
+<path d="M180 400 H1020" fill="none" stroke="#8fb4c8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="250" cy="400" r="26" fill="#13a6a6"/>
+<circle cx="450" cy="400" r="26" fill="#13a6a6"/>
+<circle cx="650" cy="400" r="30" fill="#39c9c4"/>
+<circle cx="650" cy="400" r="48" fill="none" stroke="#39c9c4" stroke-width="4" stroke-dasharray="10 8"/>
+<circle cx="850" cy="400" r="26" fill="none" stroke="#cddde4" stroke-width="6"/>
+<circle cx="1010" cy="400" r="26" fill="none" stroke="#cddde4" stroke-width="6"/>
+<path d="M238 400 l9 10 18 -21" fill="none" stroke="#032f4c" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M438 400 l9 10 18 -21" fill="none" stroke="#032f4c" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="196" y="190" width="216" height="150" rx="10" fill="#f7fafb"/><rect x="221.92" y="244.504" width="164.16" height="9" rx="4.5" fill="#cddde4"/><rect x="221.92" y="280.68" width="90.28800000000001" height="9" rx="4.5" fill="#cddde4"/>
+<rect x="560" y="190" width="216" height="150" rx="10" fill="#f7fafb"/><rect x="585.92" y="244.504" width="164.16" height="9" rx="4.5" fill="#cddde4"/><rect x="585.92" y="280.68" width="90.28800000000001" height="9" rx="4.5" fill="#cddde4"/>
+<rect x="378" y="462" width="216" height="150" rx="10" fill="#e3edf2"/><rect x="403.92" y="516.504" width="164.16" height="9" rx="4.5" fill="#cddde4"/><rect x="403.92" y="552.68" width="90.28800000000001" height="9" rx="4.5" fill="#cddde4"/>
+<rect x="760" y="462" width="216" height="150" rx="10" fill="#e3edf2"/><rect x="785.92" y="516.504" width="164.16" height="9" rx="4.5" fill="#cddde4"/><rect x="785.92" y="552.68" width="90.28800000000001" height="9" rx="4.5" fill="#cddde4"/>
+</svg>

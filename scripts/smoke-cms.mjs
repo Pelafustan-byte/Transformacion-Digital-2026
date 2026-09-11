@@ -44,7 +44,38 @@ try{
   const media=await fetch(base+upload.url);
   if(!media.ok)throw new Error('El archivo subido no se puede leer');
 
-  console.log(JSON.stringify({ok:true,health,capsule:'create/edit/public/delete',note:'create/edit/delete',upload:'upload/read/cleanup',collections:admin.libraryCollections.length},null,2));
+  // --- Biblioteca visual -------------------------------------------------
+  const manifestResponse=await fetch(base+'/assets/assets-manifest.json');
+  if(!manifestResponse.ok)throw new Error('El manifiesto de activos no se sirve');
+  const manifest=await manifestResponse.json();
+  if(!Array.isArray(manifest.assets)||!manifest.assets.length)throw new Error('El manifiesto no declara activos');
+
+  // Cada activo declarado debe existir de verdad y responder.
+  const missing=[];
+  for(const asset of manifest.assets){
+    const head=await fetch(base+asset.file,{method:'HEAD'});
+    if(!head.ok)missing.push(`${asset.id} -> ${asset.file} (${head.status})`);
+    if(!asset.thumbnail)missing.push(`${asset.id}: sin miniatura`);
+    else{
+      const thumb=await fetch(base+asset.thumbnail,{method:'HEAD'});
+      if(!thumb.ok)missing.push(`${asset.id}: miniatura ausente (${thumb.status})`);
+    }
+    for(const field of ['license','sourcePage','retrievedAt','alt']){
+      if(!asset[field])missing.push(`${asset.id}: falta ${field}`);
+    }
+    if(!asset.width||!asset.height)missing.push(`${asset.id}: sin dimensiones`);
+  }
+  if(missing.length)throw new Error('Activos con problemas:\n  '+missing.join('\n  '));
+
+  // Metadatos editables: se superponen al manifiesto sin tocar la procedencia.
+  const sample=manifest.assets[0];
+  const savedMeta=await request('/api/admin/asset-meta/'+encodeURIComponent(sample.id),{method:'PUT',body:JSON.stringify({alt:'Texto alternativo de verificación',license:'LICENCIA FALSIFICADA'})});
+  if(savedMeta.alt!=='Texto alternativo de verificación')throw new Error('El alt editable no se guardó');
+  if('license' in savedMeta)throw new Error('La licencia NO debe poder editarse desde el panel');
+  const allMeta=await request('/api/admin/asset-meta');
+  if(!allMeta[sample.id])throw new Error('Los metadatos no se leen de vuelta');
+
+  console.log(JSON.stringify({ok:true,health,capsule:'create/edit/public/delete',note:'create/edit/delete',upload:'upload/read/cleanup',collections:admin.libraryCollections.length,assets:{declared:manifest.assets.length,allPresent:true,metaOverlay:'ok',licenseImmutable:true}},null,2));
 }finally{
   for(const [collection,id] of created.reverse()){
     try{await request(`/api/admin/${collection}/${id}`,{method:'DELETE',body:'{}'})}catch(error){console.error('Cleanup item failed',collection,id,error.message)}

@@ -1,0 +1,395 @@
+{
+  "generatedAt": "2026-09-11T01:50:27.919Z",
+  "branch": "visual-polish-v1",
+  "localAssets": [
+    {
+      "url": "/assets/app.js",
+      "exists": true
+    },
+    {
+      "url": "/assets/illustrations/transformacion-digital/",
+      "exists": true
+    },
+    {
+      "url": "/assets/illustrations/transformacion-digital/ciberseguridad.svg",
+      "exists": true
+    },
+    {
+      "url": "/assets/illustrations/transformacion-digital/expediente-electronico.svg",
+      "exists": true
+    },
+    {
+      "url": "/assets/illustrations/transformacion-digital/firma-electronica.svg",
+      "exists": true
+    },
+    {
+      "url": "/assets/illustrations/transformacion-digital/identidad-digital-claveunica.svg",
+      "exists": true
+    },
+    {
+      "url": "/assets/illustrations/transformacion-digital/identidad-municipal.svg",
+      "exists": true
+    },
+    {
+      "url": "/assets/illustrations/transformacion-digital/implementacion-municipal.svg",
+      "exists": true
+    },
+    {
+      "url": "/assets/illustrations/transformacion-digital/interoperabilidad.svg",
+      "exists": true
+    },
+    {
+      "url": "/assets/illustrations/transformacion-digital/notificaciones-electronicas.svg",
+      "exists": true
+    },
+    {
+      "url": "/assets/illustrations/transformacion-digital/transformacion-digital-estado.svg",
+      "exists": true
+    },
+    {
+      "url": "/assets/illustrations/transformacion-digital/validacion-documental.svg",
+      "exists": true
+    },
+    {
+      "url": "/assets/images/atardecer-sol.webp",
+      "exists": true
+    },
+    {
+      "url": "/assets/images/constitucion-aerea.webp",
+      "exists": true
+    },
+    {
+      "url": "/assets/images/escudo-constitucion.svg",
+      "exists": true
+    },
+    {
+      "url": "/assets/images/logo-ruta-digital.svg",
+      "exists": true
+    },
+    {
+      "url": "/assets/images/municipalidad.webp",
+      "exists": true
+    },
+    {
+      "url": "/assets/lab.css",
+      "exists": true
+    },
+    {
+      "url": "/assets/lab.js",
+      "exists": true
+    },
+    {
+      "url": "/assets/styles.css",
+      "exists": true
+    },
+    {
+      "url": "/assets/visual-polish.css",
+      "exists": true
+    },
+    {
+      "url": "/assets/visual-polish.js",
+      "exists": true
+    }
+  ],
+  "missingAssets": [],
+  "duplicates": [],
+  "rasters": [
+    {
+      "file": "public/assets/brand/contraloria-municipal.png",
+      "width": 160,
+      "height": 160,
+      "bytes": 5770,
+      "alpha": true
+    },
+    {
+      "file": "public/assets/brand/contraloria-municipal@2x.png",
+      "width": 320,
+      "height": 320,
+      "bytes": 11316,
+      "alpha": true
+    },
+    {
+      "file": "public/assets/brand/escudo-constitucion.png",
+      "width": 212,
+      "height": 238,
+      "bytes": 73553,
+      "alpha": true
+    },
+    {
+      "file": "public/assets/brand/escudo-constitucion@2x.png",
+      "width": 424,
+      "height": 476,
+      "bytes": 255882,
+      "alpha": true
+    },
+    {
+      "file": "public/assets/brand/logo-ruta-digital.png",
+      "width": 110,
+      "height": 110,
+      "bytes": 3529,
+      "alpha": true
+    },
+    {
+      "file": "public/assets/brand/logo-ruta-digital@2x.png",
+      "width": 220,
+      "height": 220,
+      "bytes": 6996,
+      "alpha": true
+    },
+    {
+      "file": "public/assets/images/atardecer-sol.webp",
+      "width": 360,
+      "height": 270,
+      "bytes": 7276,
+      "alpha": false
+    },
+    {
+      "file": "public/assets/images/constitucion-aerea.webp",
+      "width": 640,
+      "height": 360,
+      "bytes": 14180,
+      "alpha": false
+    },
+    {
+      "file": "public/assets/images/contraloria-municipal.webp",
+      "width": 420,
+      "height": 420,
+      "bytes": 4504,
+      "alpha": false
+    },
+    {
+      "file": "public/assets/images/escudo-constitucion.webp",
+      "width": 212,
+      "height": 238,
+      "bytes": 12334,
+      "alpha": true
+    },
+    {
+      "file": "public/assets/images/municipalidad.webp",
+      "width": 480,
+      "height": 270,
+      "bytes": 6056,
+      "alpha": false
+    },
+    {
+      "file": "public/assets/images/ruta-digital.webp",
+      "width": 413,
+      "height": 420,
+      "bytes": 5556,
+      "alpha": false
+    },
+    {
+      "file": "public/assets/photos/constitucion/atardecer-costa-360.webp",
+      "width": 360,
+      "height": 270,
+      "bytes": 6762,
+      "alpha": false
+    },
+    {
+      "file": "public/assets/thumbnails/atardecer-costa.webp",
+      "width": 320,
+      "height": 240,
+      "bytes": 4700,
+      "alpha": false
+    },
+    {
+      "file": "public/assets/thumbnails/constitucion-aerea.webp",
+      "width": 320,
+      "height": 180,
+      "bytes": 14738,
+      "alpha": false
+    },
+    {
+      "file": "public/assets/thumbnails/emblema-contraloria.webp",
+      "width": 320,
+      "height": 320,
+      "bytes": 8700,
+      "alpha": true
+    },
+    {
+      "file": "public/assets/thumbnails/escudo-constitucion.webp",
+      "width": 320,
+      "height": 359,
+      "bytes": 12512,
+      "alpha": true
+    },
+    {
+      "file": "public/assets/thumbnails/lamina-atencion-ciudadana-digital.webp",
+      "width": 320,
+      "height": 200,
+      "bytes": 1436,
+      "alpha": false
+    },
+    {
+      "file": "public/assets/thumbnails/lamina-capacitacion.webp",
+      "width": 320,
+      "height": 200,
+      "bytes": 1540,
+      "alpha": false
+    },
+    {
+      "file": "public/assets/thumbnails/lamina-ciberseguridad.webp",
+      "width": 320,
+      "height": 200,
+      "bytes": 2092,
+      "alpha": false
+    },
+    {
+      "file": "public/assets/thumbnails/lamina-docdigital.webp",
+      "width": 320,
+      "height": 200,
+      "bytes": 1308,
+      "alpha": false
+    },
+    {
+      "file": "public/assets/thumbnails/lamina-expediente-electronico.webp",
+      "width": 320,
+      "height": 200,
+      "bytes": 1492,
+      "alpha": false
+    },
+    {
+      "file": "public/assets/thumbnails/lamina-firma-electronica.webp",
+      "width": 320,
+      "height": 200,
+      "bytes": 1976,
+      "alpha": false
+    },
+    {
+      "file": "public/assets/thumbnails/lamina-gestion-del-cambio.webp",
+      "width": 320,
+      "height": 200,
+      "bytes": 1840,
+      "alpha": false
+    },
+    {
+      "file": "public/assets/thumbnails/lamina-gestion-documental.webp",
+      "width": 320,
+      "height": 200,
+      "bytes": 1700,
+      "alpha": false
+    },
+    {
+      "file": "public/assets/thumbnails/lamina-identidad-digital-claveunica.webp",
+      "width": 320,
+      "height": 200,
+      "bytes": 1450,
+      "alpha": false
+    },
+    {
+      "file": "public/assets/thumbnails/lamina-identidad-municipal.webp",
+      "width": 320,
+      "height": 200,
+      "bytes": 1732,
+      "alpha": false
+    },
+    {
+      "file": "public/assets/thumbnails/lamina-implementacion-municipal.webp",
+      "width": 320,
+      "height": 200,
+      "bytes": 2114,
+      "alpha": false
+    },
+    {
+      "file": "public/assets/thumbnails/lamina-interoperabilidad.webp",
+      "width": 320,
+      "height": 200,
+      "bytes": 1752,
+      "alpha": false
+    },
+    {
+      "file": "public/assets/thumbnails/lamina-notificaciones-electronicas.webp",
+      "width": 320,
+      "height": 200,
+      "bytes": 1530,
+      "alpha": false
+    },
+    {
+      "file": "public/assets/thumbnails/lamina-proteccion-datos.webp",
+      "width": 320,
+      "height": 200,
+      "bytes": 1664,
+      "alpha": false
+    },
+    {
+      "file": "public/assets/thumbnails/lamina-transformacion-digital-estado.webp",
+      "width": 320,
+      "height": 200,
+      "bytes": 1658,
+      "alpha": false
+    },
+    {
+      "file": "public/assets/thumbnails/lamina-validacion-documental.webp",
+      "width": 320,
+      "height": 200,
+      "bytes": 1776,
+      "alpha": false
+    },
+    {
+      "file": "public/assets/thumbnails/logo-ruta-digital.webp",
+      "width": 320,
+      "height": 320,
+      "bytes": 8902,
+      "alpha": true
+    },
+    {
+      "file": "public/assets/thumbnails/municipalidad-edificio.webp",
+      "width": 320,
+      "height": 180,
+      "bytes": 8656,
+      "alpha": false
+    }
+  ],
+  "routes": [
+    {
+      "route": "/",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/admin/",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/health",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/api/public/content",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/assets/visual-polish.css",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/assets/visual-polish.js",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/assets/images/escudo-constitucion.svg",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/assets/images/logo-ruta-digital.svg",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "route": "/assets/illustrations/document.svg",
+      "status": 200,
+      "ok": true
+    }
+  ],
+  "criticalHotlinks": false,
+  "notes": [
+    "Remote URLs are editorial links or video embeds, not critical layout assets.",
+    "Existing territorial photos are intentionally retained as owner-supplied resources despite limited source resolution."
+  ]
+}

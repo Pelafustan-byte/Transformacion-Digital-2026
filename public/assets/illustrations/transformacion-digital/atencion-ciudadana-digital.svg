@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750" role="img" aria-labelledby="t-atencion-ciudadana-digital d-atencion-ciudadana-digital">
+<title id="t-atencion-ciudadana-digital">Atención ciudadana digital</title>
+<desc id="d-atencion-ciudadana-digital">Módulo de atención municipal donde el trámite se resuelve en pantalla, con la persona presente.</desc>
+<rect width="1200" height="750" fill="#063b5c"/>
+<g stroke="#ffffff14" stroke-width="1" fill="none"><path d="M50 0V750"/><path d="M100 0V750"/><path d="M150 0V750"/><path d="M200 0V750"/><path d="M250 0V750"/><path d="M300 0V750"/><path d="M350 0V750"/><path d="M400 0V750"/><path d="M450 0V750"/><path d="M500 0V750"/><path d="M550 0V750"/><path d="M600 0V750"/><path d="M650 0V750"/><path d="M700 0V750"/><path d="M750 0V750"/><path d="M800 0V750"/><path d="M850 0V750"/><path d="M900 0V750"/><path d="M950 0V750"/><path d="M1000 0V750"/><path d="M1050 0V750"/><path d="M1100 0V750"/><path d="M1150 0V750"/><path d="M0 50H1200"/><path d="M0 100H1200"/><path d="M0 150H1200"/><path d="M0 200H1200"/><path d="M0 250H1200"/><path d="M0 300H1200"/><path d="M0 350H1200"/><path d="M0 400H1200"/><path d="M0 450H1200"/><path d="M0 500H1200"/><path d="M0 550H1200"/><path d="M0 600H1200"/><path d="M0 650H1200"/><path d="M0 700H1200"/></g>
+<path d="M0 656 C 200 622, 360 686, 560 650 S 940 604, 1200 636 L1200 750 L0 750Z" fill="#032f4c"/>
+<path d="M0 656 C 200 622, 360 686, 560 650 S 940 604, 1200 636" fill="none" stroke="#0a6fa4" stroke-width="3" opacity=".85"/>
+<rect x="210" y="150" width="560" height="330" rx="16" fill="#f7fafb"/><path d="M210 196h560" stroke="#cddde4" stroke-width="2"/><circle cx="236" cy="173" r="6" fill="#cddde4"/><circle cx="258" cy="173" r="6" fill="#cddde4"/><circle cx="280" cy="173" r="6" fill="#cddde4"/>
+<rect x="250" y="230" width="200" height="210" rx="10" fill="#eef5f8"/><rect x="274" y="289.5" width="152" height="9" rx="4.5" fill="#cddde4"/><rect x="274" y="332.4" width="124.63999999999999" height="9" rx="4.5" fill="#cddde4"/><rect x="274" y="375.29999999999995" width="83.60000000000001" height="9" rx="4.5" fill="#cddde4"/>
+<rect x="480" y="230" width="250" height="52" rx="10" fill="#13a6a6"/>
+<rect x="480" y="306" width="250" height="60" rx="10" fill="#eef5f8"/><rect x="510" y="334" width="104.50000000000001" height="9" rx="4.5" fill="#cddde4"/>
+<rect x="480" y="384" width="250" height="56" rx="10" fill="#eef5f8"/><rect x="510" y="410" width="104.50000000000001" height="9" rx="4.5" fill="#cddde4"/>
+<rect x="180" y="512" width="620" height="18" rx="9" fill="#cddde4"/>
+<g fill="#13a6a6"><circle cx="920" cy="259" r="28.5"/><path d="M872 373a48 51 0 0 1 96 0z"/></g>
+<rect x="836" y="424" width="168" height="86" rx="14" fill="#f7fafb"/>
+<path d="M868 456 H972 M868 486 H940" fill="none" stroke="#cddde4" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750" role="img" aria-labelledby="t-ciberseguridad d-ciberseguridad">
+<title id="t-ciberseguridad">Ciberseguridad institucional</title>
+<desc id="d-ciberseguridad">Infraestructura municipal protegida: resguardo de los sistemas que sostienen el servicio.</desc>
+<rect width="1200" height="750" fill="#063b5c"/>
+<g stroke="#ffffff14" stroke-width="1" fill="none"><path d="M50 0V750"/><path d="M100 0V750"/><path d="M150 0V750"/><path d="M200 0V750"/><path d="M250 0V750"/><path d="M300 0V750"/><path d="M350 0V750"/><path d="M400 0V750"/><path d="M450 0V750"/><path d="M500 0V750"/><path d="M550 0V750"/><path d="M600 0V750"/><path d="M650 0V750"/><path d="M700 0V750"/><path d="M750 0V750"/><path d="M800 0V750"/><path d="M850 0V750"/><path d="M900 0V750"/><path d="M950 0V750"/><path d="M1000 0V750"/><path d="M1050 0V750"/><path d="M1100 0V750"/><path d="M1150 0V750"/><path d="M0 50H1200"/><path d="M0 100H1200"/><path d="M0 150H1200"/><path d="M0 200H1200"/><path d="M0 250H1200"/><path d="M0 300H1200"/><path d="M0 350H1200"/><path d="M0 400H1200"/><path d="M0 450H1200"/><path d="M0 500H1200"/><path d="M0 550H1200"/><path d="M0 600H1200"/><path d="M0 650H1200"/><path d="M0 700H1200"/></g>
+<path d="M0 640 C 200 606, 360 670, 560 634 S 940 588, 1200 620 L1200 750 L0 750Z" fill="#032f4c"/>
+<path d="M0 640 C 200 606, 360 670, 560 634 S 940 588, 1200 620" fill="none" stroke="#0a6fa4" stroke-width="3" opacity=".85"/>
+<rect x="200" y="250" width="300" height="80" rx="12" fill="#f7fafb"/>
+<rect x="200" y="352" width="300" height="80" rx="12" fill="#f7fafb"/>
+<rect x="200" y="454" width="300" height="80" rx="12" fill="#f7fafb"/>
+<circle cx="246" cy="290" r="12" fill="#13a6a6"/>
+<circle cx="246" cy="392" r="12" fill="#13a6a6"/>
+<circle cx="246" cy="494" r="12" fill="#cddde4"/>
+<path d="M290 290 H452 M290 392 H420 M290 494 H452" fill="none" stroke="#cddde4" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M790 210l142 50v150c0 88-70 134-142 158-72-24-142-70-142-158V260z" fill="#13a6a6" opacity=".16"/>
+<path d="M790 160l190 66v186c0 116-94 176-190 206-96-30-190-90-190-206V226z" fill="none" stroke="#13a6a6" stroke-width="8"/>
+<path d="M716 400 l52 54 108 -122" fill="none" stroke="#39c9c4" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

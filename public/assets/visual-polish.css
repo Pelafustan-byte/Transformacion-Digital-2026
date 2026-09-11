@@ -6,7 +6,7 @@
   --soft:#e8f3f7;
   --paper:#f7fafb;
   --ink:#173042;
-  --muted:#667c88;
+  --muted:#5a6d7a;      /* 4,76:1 sobre #e8f3f7, el fondo más claro en uso (antes #667c88: 3,87:1) */
   --line:#cddde4;
   --shell:min(1240px,calc(100% - 48px));
   --shadow:0 18px 48px rgba(3,47,76,.1);
@@ -97,7 +97,10 @@ header{background:#fff;border-color:var(--line);backdrop-filter:none}
 .mile small{text-transform:none;font-size:.7rem}
 .territory{padding:82px 0;background:#052f4b}
 .territoryGrid{grid-template-columns:1fr}
-.territoryGrid figure:not(:first-child){display:none}
+/* Regla retirada: ocultaba con display:none toda figura territorial salvo la
+   primera, de modo que el campo "Fotografía territorial" del CMS podía editarse
+   sin que el cambio apareciera nunca en el portal, y las imágenes ocultas se
+   descargaban igual. Ver .territoryGrid más abajo. */
 .territoryGrid .territoryLead{height:min(52vw,520px);border-radius:14px}
 .territoryGrid img{object-position:center 52%;transition:none}
 .territoryGrid figure:hover img{transform:none}
@@ -132,7 +135,13 @@ header{background:#fff;border-color:var(--line);backdrop-filter:none}
 .newsSmall{border:0;border-bottom:1px solid #b9cfd8;border-radius:0;background:transparent;padding:19px 0 19px 28px}
 .newsSmall:last-child{border-bottom:0}
 .newsFeature small,.newsSmall small{text-transform:none;letter-spacing:0}
-.lab{background:#f7fafb}
+/* La sección de aprendizaje está construida en lab.css sobre fondo oscuro:
+   todo su texto es #fff y sus bordes #ffffffXX. Aclarar solo el fondo dejaba
+   blanco sobre #f7fafb —contraste 1.07:1— e inutilizaba la sección entera.
+   Se devuelve un fondo oscuro, alineado con el resto del sistema. */
+.lab{background:
+  radial-gradient(circle at 12% 14%, #13a6a61f, transparent 30%),
+  linear-gradient(150deg, #032f4c, #063b5c 62%, #0a5b7e)}
 .labDeck{border-radius:14px!important}
 button{min-height:44px}
 dialog{border-radius:14px}
@@ -206,3 +215,224 @@ footer:after{content:"";position:absolute;right:-8%;bottom:-70%;width:52%;aspect
   .footLinks{justify-self:start;text-align:left}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.baseCard,.territoryGrid img{transition:none!important}.baseCard:hover{transform:none}}
+
+/* ------------------------------------------------------------------
+   Láminas ilustradas vs. fotografías
+
+   Las ilustraciones del sistema son láminas completas de 1200×750 sobre
+   fondo navy, con la curva del Maule al pie. Recortarlas con `cover`
+   amputaba justamente esa firma territorial y decapitaba a las figuras,
+   así que se muestran enteras y el contenedor lleva el mismo navy: la
+   lámina llega al borde sin que se note el encaje.
+
+   Las fotografías sí se recortan: ahí el encuadre es el contenido.
+   ------------------------------------------------------------------ */
+.capImage.hasPlate,
+.noteImage.hasPlate,
+.capImage.fallbackArt,
+.noteImage.fallbackArt{background:#063b5c}
+
+.capImage img.plate,
+.noteImage img.plate{width:100%;height:100%;object-fit:contain;object-position:center}
+
+.capImage img.photo,
+.noteImage img.photo{width:100%;height:100%;object-fit:cover}
+
+.dialogHero.plate{
+  width:100%;
+  max-height:none;
+  aspect-ratio:1200/750;
+  object-fit:contain;
+  background:#063b5c;
+  border-radius:18px;
+}
+
+/* Reservar la proporción evita que la tarjeta salte cuando la imagen llega. */
+.capImage,.noteImage{position:relative}
+.capImage img,.noteImage img{display:block}
+
+/* ------------------------------------------------------------------
+   Sección territorial
+
+   Pasa de tres fotografías —que la hacían leerse como galería turística—
+   a dos piezas con función distinta: una fotografía territorial a su
+   proporción natural y una lámina institucional. El degradado inferior
+   solo se aplica sobre fotografía, donde sirve para legibilidad del pie;
+   sobre las láminas tapaba el dibujo sin ganar nada.
+   ------------------------------------------------------------------ */
+.territoryGrid{grid-template-columns:1.45fr 1fr}
+.territoryGrid figure,
+.territoryGrid .territoryLead,
+.territoryGrid figure:nth-child(2),
+.territoryGrid figure:nth-child(3){height:auto;align-self:stretch}
+
+/* La proporción la fija SOLO la pieza principal, que es la que define la altura
+   de la fila. Aplicar `aspect-ratio` a una figura que además se estira hace que
+   el ancho se derive de la altura heredada (455 × 1.6 = 728 px) y desborde su
+   columna de 501 px. */
+.territoryGrid .territoryLead{aspect-ratio:16/10}
+.territoryGrid figure{min-height:280px}
+/* Sin min-width:0 el SVG impone su ancho intrínseco (1200 px) como tamaño
+   mínimo de la columna y la retícula desborda la caja del contenido. */
+.territoryGrid figure,
+.capImage,
+.noteImage{min-width:0}
+.territoryGrid img,
+.capImage img,
+.noteImage img{min-width:0;max-width:100%}
+.territoryGrid img.photo{width:100%;height:100%;object-fit:cover}
+.territoryGrid figure.hasPlate{background:#063b5c}
+.territoryGrid figure.hasPlate img{width:100%;height:100%;object-fit:contain}
+.territoryGrid figure.hasPlate:after{display:none}
+.territoryGrid figure.hasPlate figcaption{
+  left:22px;right:22px;bottom:16px;
+  padding:8px 12px;
+  border-radius:8px;
+  background:#032f4ccc;
+}
+
+@media(max-width:950px){
+  .territoryGrid{grid-template-columns:1fr}
+  .territoryGrid figure{min-height:0}
+  .territoryGrid .territoryLead,
+  .territoryGrid figure{aspect-ratio:16/9}
+}
+
+/* ------------------------------------------------------------------
+   Hero sin fotografía
+
+   La única aérea disponible mide 640×360. Usada a sangre en 1920 px exigía
+   un degradado de tres paradas para disimular su falta de resolución, que
+   es justamente el recurso que el encargo prohíbe. Sin una fotografía que
+   aguante ese tamaño, el hero se sostiene en tipografía y color
+   institucional.
+
+   El hero original es una composición dividida: panel oscuro a la izquierda
+   (`.hero:before`, inset 0 42% 0 0) y fotografía ocupando el 58% derecho,
+   con `background-size` forzado por `!important`. Ese panel se conserva; lo
+   que cambia es el plano derecho, que pasa de fotografía a superficie
+   institucional con la misma retícula de plano de las láminas. `.hero:after`
+   está anulado en la hoja base, así que queda libre para la retícula.
+
+   Si la municipalidad entrega una aérea de 1800 px o más, definir
+   `heroImage` y `heroImageMinWidth` desde /admin/ devuelve el fondo
+   fotográfico sin tocar código.
+   ------------------------------------------------------------------ */
+.hero:not(.hasPhoto){
+  background-color:var(--navy-strong);
+  background-image:linear-gradient(158deg,#064f74 0%,#053f60 42%,#032f4c 100%);
+  background-size:100% 100%!important;
+  background-position:left top!important;
+  background-repeat:no-repeat!important;
+}
+.hero:not(.hasPhoto):after{
+  content:"";
+  display:block;
+  position:absolute;
+  inset:0 0 0 42%;
+  background-image:
+    linear-gradient(#ffffff10 1px, transparent 1px),
+    linear-gradient(90deg,#ffffff10 1px, transparent 1px);
+  background-size:64px 64px;
+  z-index:0;
+  pointer-events:none;
+}
+.hero:not(.hasPhoto) .heroIn,
+.hero:not(.hasPhoto) .stats{position:relative;z-index:1}
+
+.hero.hasPhoto{background-size:100% 100%,58% 100%!important}
+
+@media(max-width:950px){
+  .hero:not(.hasPhoto):after{inset:34% 0 0}
+}
+@media(max-width:720px){
+  /* Sin fotografía no hay banda superior que reservar: el texto sube. */
+  .hero:not(.hasPhoto):before{inset:0 0 0 0;background:linear-gradient(165deg,#053f60,#032f4c 62%)}
+  .hero:not(.hasPhoto):after{inset:0}
+  .hero:not(.hasPhoto) .heroIn{padding:56px 0 28px}
+}
+
+
+/* ------------------------------------------------------------------
+   Contraste de texto pequeño sobre fondo oscuro
+
+   El cian de marca (#13a6a6) da 3,93:1 sobre el navy institucional y el
+   azul (#0a6fa4) apenas 2,14:1: por debajo del mínimo AA de 4,5:1 para
+   texto normal. Se reservan variantes aclaradas para ese uso concreto.
+   El color de marca no cambia donde sí cumple.
+   ------------------------------------------------------------------ */
+:root{
+  --cyan-on-dark:#2bbdb8;   /* 5,08:1 sobre #063b5c */
+  --blue-on-dark:#68bde6;   /* 5,60:1 sobre #063b5c */
+}
+.notes .capBody small,
+.notes .noteCard small,
+.noteCard small,
+.media .playerInfo a,
+.notes .readBtn,
+.territory .ey,
+.media .ey,
+.notes .ey,
+.lab .ey,
+.hero .ey{color:var(--cyan-on-dark)}
+
+.noteCard small,
+.videoPick small,
+.story .focus small,
+.ctab.on small{color:var(--blue-on-dark)}
+
+/* ------------------------------------------------------------------
+   Objetivos táctiles
+
+   Las píldoras de filtro y los enlaces de "recursos esenciales" medían
+   entre 18 y 35 px de alto. El mínimo del encargo es 44 × 44.
+   ------------------------------------------------------------------ */
+.capFilter,
+.essential a,
+.showAll,
+.readBtn,
+.adminLink,
+.footLinks a{min-height:44px;display:inline-flex;align-items:center}
+.capFilter,
+.essential a{padding-top:0;padding-bottom:0}
+.showAll,
+.readBtn{padding:0 4px}
+.foot a{min-height:44px;display:inline-flex;align-items:center}
+.head nav a{min-height:44px;display:inline-flex;align-items:center}
+.searchbox input{min-height:44px}
+
+/* Las marcas declaran ahora su proporción real (el logo del pie declaraba
+   120×42 y se pintaba 42×42, una proporción falsa que garantizaba el salto).
+   El tamaño de presentación lo fija el CSS. */
+.footerMarks img{width:auto;height:48px;object-fit:contain}
+.brandLogo img{width:100%;height:100%;object-fit:contain}
+.municipalCrest{width:34px;height:42px;object-fit:contain}
+
+/* Últimos objetivos táctiles y contraste pendientes tras la primera pasada. */
+.focus a span{color:var(--cyan-on-dark)}
+.focus a,
+.playerInfo a,
+.essential a,
+.newsSmall,
+.resCard{min-height:44px}
+.playerInfo a{display:inline-flex;align-items:center;padding:0 2px}
+.head nav a{padding-inline:6px;min-width:44px;justify-content:center}
+
+/* En 390 px "Abrir fuente ↗" queda en 41 px de ancho al partirse en dos líneas.
+   Se le da ancho mínimo para cumplir el objetivo táctil de 44 × 44. */
+.playerInfo a{min-width:44px;justify-content:flex-start}
+
+/* ------------------------------------------------------------------
+   Reproductor de video en pantallas estrechas
+
+   `.mediaStage` se redeclara en esta hoja DESPUÉS de la consulta de medios
+   de styles.css que apila la sección en ≤950 px, así que el apilado dejaba
+   de aplicarse: el `minmax(300px,.55fr)` de la lista fijaba 300 px y el
+   reproductor se quedaba con 36 px de ancho. En un teléfono el video
+   principal era, literalmente, una franja negra.
+   ------------------------------------------------------------------ */
+@media(max-width:950px){
+  .mediaStage{grid-template-columns:minmax(0,1fr)}
+  .player{min-width:0}
+  .playlist{min-width:0}
+}
