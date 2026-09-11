@@ -8,3 +8,6 @@ data/backups/
 .impeccable/
 assets/plates/
 data/content.json
+
+# Recortes temporales de inspección visual
+.tmp-crops/
