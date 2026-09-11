@@ -38,7 +38,7 @@ jobs:
         if: steps.check.outputs.done != 'true'
         run: |
           ROOT="/tmp/constitucion-src/FOTOS PARA PAGINA TRANS DIGITAL"
-          cp "$ROOT/itinerario-Rocas-de-constituci#U00f3n.jpg" public/assets/photos/constitucion/rocas-arco-constitucion.jpg
+          cp "$ROOT/itinerario-Rocas-de-constitución.jpg" public/assets/photos/constitucion/rocas-arco-constitucion.jpg
           cp "$ROOT/3ee8475f-whatsapp-image-2021-01-20-at-3.58.35-pm.jpeg" public/assets/photos/constitucion/municipalidad-diurna.jpg
           cp "$ROOT/images (2).jpg" public/assets/photos/constitucion/costa-rocas.jpg
           cp "$ROOT/images (4).jpg" public/assets/photos/constitucion/rio-puente-ciudad.jpg
