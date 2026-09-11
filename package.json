@@ -7,7 +7,8 @@
     "start": "node server.js",
     "check": "node --check server.js && node --check public/assets/app.js && node --check public/assets/visual-polish.js && node --check public/assets/ux-overhaul.js && node scripts/check.mjs",
     "build:admin": "vite build",
-    "build": "npm run build:admin"
+    "upscale:assets": "node scripts/upscale-assets.mjs",
+    "build": "npm run upscale:assets && npm run build:admin"
   },
   "engines": {
     "node": ">=20"
