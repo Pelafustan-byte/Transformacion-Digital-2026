@@ -250,6 +250,22 @@ equivalente que ya estaba en el repositorio.
 SVG, el escudo no escala como un vector. Si existe el original vectorial,
 conviene incorporarlo.
 
+### P1-10 · El reproductor de video medía 36 px de ancho en un teléfono
+
+**Medido** en 390 × 844: el reproductor ocupaba **36 × 593 px** y la lista de
+videos 300 px. El video principal era una franja negra vertical.
+
+**Causa.** `visual-polish.css` vuelve a declarar `.mediaStage` *después* de la
+consulta de medios de `styles.css` que apila la sección en ≤950 px. El apilado
+dejaba de aplicarse y el `minmax(300px,.55fr)` de la lista se quedaba con casi
+todo el ancho disponible.
+
+**Tarea que bloquea.** Un funcionario quiere ver desde el teléfono el video de
+ciberseguridad que le indicaron en la capacitación. No puede: no hay imagen.
+
+**Corregido.** Reproductor a 360 px en 390, 720 px en 768, y el escritorio sin
+cambios (882 px en 1440).
+
 ---
 
 ## P2 — Fricción y deuda

@@ -421,3 +421,18 @@ footer:after{content:"";position:absolute;right:-8%;bottom:-70%;width:52%;aspect
 /* En 390 px "Abrir fuente ↗" queda en 41 px de ancho al partirse en dos líneas.
    Se le da ancho mínimo para cumplir el objetivo táctil de 44 × 44. */
 .playerInfo a{min-width:44px;justify-content:flex-start}
+
+/* ------------------------------------------------------------------
+   Reproductor de video en pantallas estrechas
+
+   `.mediaStage` se redeclara en esta hoja DESPUÉS de la consulta de medios
+   de styles.css que apila la sección en ≤950 px, así que el apilado dejaba
+   de aplicarse: el `minmax(300px,.55fr)` de la lista fijaba 300 px y el
+   reproductor se quedaba con 36 px de ancho. En un teléfono el video
+   principal era, literalmente, una franja negra.
+   ------------------------------------------------------------------ */
+@media(max-width:950px){
+  .mediaStage{grid-template-columns:minmax(0,1fr)}
+  .player{min-width:0}
+  .playlist{min-width:0}
+}

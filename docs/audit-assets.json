@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-11T01:35:59.665Z",
+  "generatedAt": "2026-09-11T01:50:27.919Z",
   "branch": "visual-polish-v1",
   "localAssets": [
     {
@@ -209,8 +209,8 @@
     {
       "file": "public/assets/thumbnails/escudo-constitucion.webp",
       "width": 320,
-      "height": 360,
-      "bytes": 316,
+      "height": 359,
+      "bytes": 12512,
       "alpha": true
     },
     {

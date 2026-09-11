@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-11T01:35:12.209Z",
+  "generatedAt": "2026-09-11T01:53:22.406Z",
   "base": "http://127.0.0.1:3210",
   "breakpoints": {
     "1920x1080": {
-      "cls": 0.0111,
+      "cls": 0.0102,
       "overflow": {
         "scrollWidth": 1920,
         "viewport": 1920,
@@ -27,7 +27,7 @@
       }
     },
     "1440x900": {
-      "cls": 0.0021,
+      "cls": 0,
       "overflow": {
         "scrollWidth": 1440,
         "viewport": 1440,
