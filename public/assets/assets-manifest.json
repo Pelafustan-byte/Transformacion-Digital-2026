@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-11T00:41:47.376Z",
+  "generatedAt": "2026-09-11T01:49:09.578Z",
   "branch": "visual-assets-constitucion-v1",
   "policy": {
     "accepted": [
@@ -212,7 +212,8 @@
         "Pie de página"
       ],
       "status": "approved",
-      "sha256": "d3123d4cb66ea58f0a398f0d918b6d52c2ce69c97f2b492d132638bf3e7b2e4f"
+      "sha256": "d3123d4cb66ea58f0a398f0d918b6d52c2ce69c97f2b492d132638bf3e7b2e4f",
+      "thumbnailSource": "/assets/brand/escudo-constitucion@2x.png"
     },
     {
       "id": "logo-ruta-digital",

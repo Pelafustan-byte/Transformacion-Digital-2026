@@ -121,6 +121,56 @@ app.put('/api/admin/asset-meta/:id',auth,async(req,res)=>{
 app.get('/api/admin/media',auth,async(_q,res)=>{if(pool){const q=await pool.query('select id,name,mime,size,created_at from rd_media order by created_at desc limit 100');return res.json({items:q.rows.map(x=>({...x,url:`/media/${x.id}`}))})}res.json({items:fs.readdirSync(UPLOAD_DIR).map(id=>({id,url:`/media/${id}`}))})});
 app.get('/api/admin/export/content.json',auth,async(_q,res)=>{res.type('json').attachment('ruta-digital-content.json').send(JSON.stringify(await readContent(),null,2))});
 app.get('/api/admin/export/site.zip',auth,async(_q,res)=>{const c=await readContent();res.attachment(`ruta-digital-${new Date().toISOString().slice(0,10)}.zip`);const z=archiver('zip',{zlib:{level:9}});z.pipe(res);z.file(path.join(__dirname,'server.js'),{name:'server.js'});z.file(path.join(__dirname,'package.json'),{name:'package.json'});z.directory(path.join(__dirname,'public'),'public');z.directory(path.join(__dirname,'seed'),'seed');z.append(JSON.stringify(c,null,2),{name:'data/content.json'});z.append('PORT=3000\nADMIN_USER=editor\nADMIN_PASSWORD=CAMBIAR\nSESSION_SECRET=CAMBIAR\nDATA_DIR=./data\n',{name:'.env.example'});z.append('Instalar Node.js 20+, ejecutar npm install --omit=dev y node server.js. El panel está en /admin/. Para servidor municipal sin DATABASE_URL se usa data/content.json y data/uploads/.',{name:'README_INSTALACION.txt'});await z.finalize()});
+/*
+ * Portada con el texto ya escrito en el HTML.
+ *
+ * El portal se pintaba entero en el navegador desde /api/public/content: el
+ * HTML llegaba sin titular y con las cifras en 0, de modo que durante el primer
+ * segundo el portal comunicaba que no había nada, y al llegar los datos el hero
+ * crecía y empujaba el resto de la página (CLS medido: 0,236 en 768×1024).
+ *
+ * Aquí se rellenan los mismos nodos que rellenaría app.js. No sustituye al
+ * render de cliente —que sigue siendo la fuente de verdad y reescribe los
+ * mismos valores—, solo evita que la primera pintura esté vacía.
+ */
+const INDEX_FILE=path.join(__dirname,'public','index.html');
+const escHtml=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+async function renderIndex(){
+ let html=fs.readFileSync(INDEX_FILE,'utf8');
+ let content;
+ try{content=await publicContent()}catch{return html}
+ const site=content.site||{};
+ const fill={
+  brandName:site.name,brandSubtitle:site.subtitle,
+  heroEyebrow:site.heroEyebrow,heroTitle:site.heroTitle,heroEmphasis:site.heroEmphasis,heroText:site.heroText,
+  eventLabel:site.eventLabel,eventTitle:site.eventTitle,eventText:site.eventText,eventDate:site.eventDate,
+  videosTitle:site.videosTitle,videosText:site.videosText,
+  materialsTitle:site.materialsTitle,materialsText:site.materialsText,
+  capsulesTitle:site.capsulesTitle,capsulesText:site.capsulesText,
+  localTitle:site.localTitle,localText:site.localText,
+  territoryTitle:site.territoryTitle,territoryText:site.territoryText,
+  resourcesTitle:site.resourcesTitle,resourcesText:site.resourcesText,
+  notesTitle:site.notesTitle,notesText:site.notesText,
+  newsTitle:site.newsTitle,newsText:site.newsText,
+  labTitle:site.labTitle,labText:site.labText,
+  footerName:site.name,footerText:site.footerText,
+  statResources:content.resources.length,statCapsules:content.capsules.length,
+  statVideos:content.videos.length,statNotes:content.notes.length
+ };
+ for(const [id,value] of Object.entries(fill)){
+  if(value===undefined||value===null||value==='')continue;
+  const pattern=new RegExp('(<([a-z0-9]+)([^>]*\\bid="'+id+'"[^>]*)>)([^<]*)(</\\2>)','i');
+  html=html.replace(pattern,(m,open,tag,attrs,prev,close)=>open+escHtml(value)+close);
+ }
+ return html;
+}
+
+app.get(['/','/index.html'],async(_q,res)=>{
+ try{res.type('html').set('Cache-Control','no-store').send(await renderIndex())}
+ catch{res.sendFile(INDEX_FILE)}
+});
+
 app.use(express.static(path.join(__dirname,'public'),{maxAge:IS_PROD?'5m':0,extensions:['html']}));
 app.use((err,_q,res,_n)=>{console.error(err);if(err?.code==='LIMIT_FILE_SIZE')return res.status(413).json({message:'Máximo 80 MB por archivo.'});res.status(500).json({message:'Error interno.'})});
 await initDb();app.listen(PORT,()=>console.log(`Ruta Digital CMS :${PORT} | db=${!!pool}`));

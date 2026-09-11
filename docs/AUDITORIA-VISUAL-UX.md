@@ -209,6 +209,47 @@ descargaban con caja de `0 × 0` px. Bytes que nunca se ven.
 
 **Corregido** por la reestructuración de la sección territorial.
 
+### P1-8 · El panel `/admin/` no se podía usar desde un teléfono
+
+**Medido.** Con un viewport de 390 px, el panel se dibujaba a **1107 px**. El
+navegador ampliaba entonces el viewport de composición para encajarlo, con lo
+que las reglas responsive del propio panel —que existen, a partir de 800 px—
+dejaban de aplicarse. La pestaña «Biblioteca visual» quedaba en x = 897: fuera
+de la pantalla y sin forma de alcanzarla.
+
+**Causa.** En pantallas estrechas la barra lateral pasa a horizontal con
+`overflow:auto`, pero sin restricción de ancho el contenedor flex crecía hasta
+su contenido (1082 px) en vez de desplazarse. Es el mismo patrón que en P1-6:
+un contenedor sin `min-width:0` adopta el ancho de lo que lleva dentro.
+
+**Tarea que bloquea.** Una funcionaria en terreno quiere publicar una nota desde
+el teléfono. Puede ver las primeras pestañas y nada más; la mitad del panel está
+fuera de la pantalla.
+
+**Corregido.** Barra lateral y área de trabajo con ancho contenido, navegación
+con desplazamiento horizontal real y anclaje por pestaña. Verificado en
+390 × 844, 768 × 1024 y 1440 × 900: el documento mide exactamente el ancho del
+viewport en los tres.
+
+### P1-9 · Miniatura en blanco sin que nada fallara
+
+**Qué ocurre.** `escudo-constitucion.svg` no es un vector: es un WebP en base64
+envuelto en un `<image>` dentro de un SVG. La biblioteca de rasterizado no
+decodifica WebP incrustado, así que la miniatura se generaba **sin error** y
+completamente transparente.
+
+**Por qué importa.** Un fallo silencioso es peor que uno ruidoso: el catálogo
+del CMS mostraba un hueco y nada indicaba por qué.
+
+**Corregido.** El generador comprueba que la miniatura tenga contenido visible
+—no que la conversión no lanzara excepción— y la descarta informando si sale en
+blanco. Para este símbolo se declara una fuente alternativa rasterizable, el PNG
+equivalente que ya estaba en el repositorio.
+
+**Nota para la municipalidad:** al ser un raster de 212 × 238 px envuelto en
+SVG, el escudo no escala como un vector. Si existe el original vectorial,
+conviene incorporarlo.
+
 ---
 
 ## P2 — Fricción y deuda
@@ -275,6 +316,23 @@ de este encargo visual. Recomendado abordarlo como trabajo propio.
 | P0-1 persistencia | Código listo, **falta configurar Railway** | Adjuntar PostgreSQL o un volumen es una acción sobre la infraestructura del municipio |
 | P2-4 CSP | Documentado | Exige revisar los `iframe` de video; fuera del alcance visual |
 | Fotografía contemporánea | **No existe bajo el criterio acordado** | Ver [ASSET-SOURCES.md](ASSET-SOURCES.md) y [SOLICITUD-MATERIAL-MUNICIPAL.md](SOLICITUD-MATERIAL-MUNICIPAL.md) |
+
+## Resultado verificado
+
+Tras las correcciones, medido en los seis breakpoints con
+`scripts/verify-visual.mjs`:
+
+| Comprobación | Antes | Después |
+|---|---|---|
+| Fallos de contraste AA | 30 por breakpoint | **0** |
+| Objetivos táctiles < 44 × 44 | 19 por breakpoint | **0** |
+| CLS peor caso (768 × 1024) | 0,2362 | **0** |
+| Desplazamiento horizontal | 1566 px en viewport de 1440 | **ninguno** |
+| Imágenes sin dimensiones | 9 de 11 | **0** |
+| Focos sin indicador visible | 0 | **0** |
+| `prefers-reduced-motion` | respetado | respetado |
+
+El detalle está en [INFORME-RENDIMIENTO-VISUAL.md](INFORME-RENDIMIENTO-VISUAL.md).
 
 ## Nota de método sobre las capturas
 

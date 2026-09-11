@@ -102,3 +102,42 @@ button,input,select,.file-button,.upload-btn{min-height:44px}
 @media(max-width:900px){
   .asset-detail-grid{grid-template-columns:1fr}
 }
+
+/* ------------------------------------------------------------------
+   Panel en pantallas estrechas
+
+   La barra lateral pasa a horizontal en ≤800 px con `overflow:auto`, pero
+   sin restricción de ancho el contenedor flex crecía hasta su contenido
+   (1082 px) en vez de desplazarse. El resultado: en un viewport de 390 px
+   el panel se dibujaba a 1107 px y el navegador expandía el viewport de
+   composición, de modo que las reglas responsive dejaban de aplicarse.
+   Un editor no podía publicar desde el teléfono: la mitad de las pestañas
+   quedaba fuera de la pantalla y sin forma de alcanzarlas.
+   ------------------------------------------------------------------ */
+@media(max-width:800px){
+  .admin{min-width:0;max-width:100%;overflow-x:hidden}
+  .sidebar{min-width:0;max-width:100%;overflow-x:hidden}
+  .admin-brand{min-width:0;max-width:100%}
+  .admin-brand span{min-width:0;overflow:hidden;text-overflow:ellipsis}
+  .sidebar nav{
+    min-width:0;max-width:100%;
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:thin;
+    scroll-snap-type:x proximity;
+  }
+  .sidebar nav button{flex:0 0 auto;scroll-snap-align:start;min-height:44px}
+  .workspace{min-width:0;max-width:100%;overflow-x:hidden}
+  .panel-card{overflow-x:auto}
+  .asset-filters label{flex:1 1 100%}
+  .asset-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+}
+
+/* Objetivos táctiles del panel: los botones de fila medían 42 px de alto. */
+.sidebar nav button,
+.sidebar-foot button,
+.sidebar-foot a,
+.row-actions button,
+.toolbar button{min-height:44px}
+.row-actions button{min-width:44px}

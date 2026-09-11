@@ -6,7 +6,7 @@
   --soft:#e8f3f7;
   --paper:#f7fafb;
   --ink:#173042;
-  --muted:#667c88;
+  --muted:#5a6d7a;      /* 4,76:1 sobre #e8f3f7, el fondo más claro en uso (antes #667c88: 3,87:1) */
   --line:#cddde4;
   --shell:min(1240px,calc(100% - 48px));
   --shadow:0 18px 48px rgba(3,47,76,.1);
@@ -351,3 +351,73 @@ footer:after{content:"";position:absolute;right:-8%;bottom:-70%;width:52%;aspect
   .hero:not(.hasPhoto):after{inset:0}
   .hero:not(.hasPhoto) .heroIn{padding:56px 0 28px}
 }
+
+
+/* ------------------------------------------------------------------
+   Contraste de texto pequeño sobre fondo oscuro
+
+   El cian de marca (#13a6a6) da 3,93:1 sobre el navy institucional y el
+   azul (#0a6fa4) apenas 2,14:1: por debajo del mínimo AA de 4,5:1 para
+   texto normal. Se reservan variantes aclaradas para ese uso concreto.
+   El color de marca no cambia donde sí cumple.
+   ------------------------------------------------------------------ */
+:root{
+  --cyan-on-dark:#2bbdb8;   /* 5,08:1 sobre #063b5c */
+  --blue-on-dark:#68bde6;   /* 5,60:1 sobre #063b5c */
+}
+.notes .capBody small,
+.notes .noteCard small,
+.noteCard small,
+.media .playerInfo a,
+.notes .readBtn,
+.territory .ey,
+.media .ey,
+.notes .ey,
+.lab .ey,
+.hero .ey{color:var(--cyan-on-dark)}
+
+.noteCard small,
+.videoPick small,
+.story .focus small,
+.ctab.on small{color:var(--blue-on-dark)}
+
+/* ------------------------------------------------------------------
+   Objetivos táctiles
+
+   Las píldoras de filtro y los enlaces de "recursos esenciales" medían
+   entre 18 y 35 px de alto. El mínimo del encargo es 44 × 44.
+   ------------------------------------------------------------------ */
+.capFilter,
+.essential a,
+.showAll,
+.readBtn,
+.adminLink,
+.footLinks a{min-height:44px;display:inline-flex;align-items:center}
+.capFilter,
+.essential a{padding-top:0;padding-bottom:0}
+.showAll,
+.readBtn{padding:0 4px}
+.foot a{min-height:44px;display:inline-flex;align-items:center}
+.head nav a{min-height:44px;display:inline-flex;align-items:center}
+.searchbox input{min-height:44px}
+
+/* Las marcas declaran ahora su proporción real (el logo del pie declaraba
+   120×42 y se pintaba 42×42, una proporción falsa que garantizaba el salto).
+   El tamaño de presentación lo fija el CSS. */
+.footerMarks img{width:auto;height:48px;object-fit:contain}
+.brandLogo img{width:100%;height:100%;object-fit:contain}
+.municipalCrest{width:34px;height:42px;object-fit:contain}
+
+/* Últimos objetivos táctiles y contraste pendientes tras la primera pasada. */
+.focus a span{color:var(--cyan-on-dark)}
+.focus a,
+.playerInfo a,
+.essential a,
+.newsSmall,
+.resCard{min-height:44px}
+.playerInfo a{display:inline-flex;align-items:center;padding:0 2px}
+.head nav a{padding-inline:6px;min-width:44px;justify-content:center}
+
+/* En 390 px "Abrir fuente ↗" queda en 41 px de ancho al partirse en dos líneas.
+   Se le da ancho mínimo para cumplir el objetivo táctil de 44 × 44. */
+.playerInfo a{min-width:44px;justify-content:flex-start}

@@ -1,0 +1,127 @@
+{
+  "generatedAt": "2026-09-11T01:48:39.334Z",
+  "base": "http://127.0.0.1:3210",
+  "shots": [
+    {
+      "file": "docs\\screenshots\\despues\\portada-1920x1080.png",
+      "breakpoint": "1920x1080",
+      "route": "/",
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "Failed to load resource: the server responded with a status of 401 ()"
+      ]
+    },
+    {
+      "file": "docs\\screenshots\\despues\\admin-1920x1080.png",
+      "breakpoint": "1920x1080",
+      "route": "/admin/",
+      "consoleErrors": []
+    },
+    {
+      "file": "docs\\screenshots\\despues\\admin-biblioteca-visual-1920x1080.png",
+      "breakpoint": "1920x1080",
+      "route": "/admin/",
+      "consoleErrors": []
+    },
+    {
+      "file": "docs\\screenshots\\despues\\portada-1440x900.png",
+      "breakpoint": "1440x900",
+      "route": "/",
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 401 ()"
+      ]
+    },
+    {
+      "file": "docs\\screenshots\\despues\\admin-1440x900.png",
+      "breakpoint": "1440x900",
+      "route": "/admin/",
+      "consoleErrors": []
+    },
+    {
+      "file": "docs\\screenshots\\despues\\admin-biblioteca-visual-1440x900.png",
+      "breakpoint": "1440x900",
+      "route": "/admin/",
+      "consoleErrors": []
+    },
+    {
+      "file": "docs\\screenshots\\despues\\portada-1366x768.png",
+      "breakpoint": "1366x768",
+      "route": "/",
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 401 ()"
+      ]
+    },
+    {
+      "file": "docs\\screenshots\\despues\\admin-1366x768.png",
+      "breakpoint": "1366x768",
+      "route": "/admin/",
+      "consoleErrors": []
+    },
+    {
+      "file": "docs\\screenshots\\despues\\admin-biblioteca-visual-1366x768.png",
+      "breakpoint": "1366x768",
+      "route": "/admin/",
+      "consoleErrors": []
+    },
+    {
+      "file": "docs\\screenshots\\despues\\portada-1024x768.png",
+      "breakpoint": "1024x768",
+      "route": "/",
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 401 ()"
+      ]
+    },
+    {
+      "file": "docs\\screenshots\\despues\\admin-1024x768.png",
+      "breakpoint": "1024x768",
+      "route": "/admin/",
+      "consoleErrors": []
+    },
+    {
+      "file": "docs\\screenshots\\despues\\admin-biblioteca-visual-1024x768.png",
+      "breakpoint": "1024x768",
+      "route": "/admin/",
+      "consoleErrors": []
+    },
+    {
+      "file": "docs\\screenshots\\despues\\portada-768x1024.png",
+      "breakpoint": "768x1024",
+      "route": "/",
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 401 ()"
+      ]
+    },
+    {
+      "file": "docs\\screenshots\\despues\\admin-768x1024.png",
+      "breakpoint": "768x1024",
+      "route": "/admin/",
+      "consoleErrors": []
+    },
+    {
+      "file": "docs\\screenshots\\despues\\admin-biblioteca-visual-768x1024.png",
+      "breakpoint": "768x1024",
+      "route": "/admin/",
+      "consoleErrors": []
+    },
+    {
+      "file": "docs\\screenshots\\despues\\portada-390x844.png",
+      "breakpoint": "390x844",
+      "route": "/",
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 401 ()"
+      ]
+    },
+    {
+      "file": "docs\\screenshots\\despues\\admin-390x844.png",
+      "breakpoint": "390x844",
+      "route": "/admin/",
+      "consoleErrors": []
+    },
+    {
+      "file": "docs\\screenshots\\despues\\admin-biblioteca-visual-390x844.png",
+      "breakpoint": "390x844",
+      "route": "/admin/",
+      "consoleErrors": []
+    }
+  ]
+}

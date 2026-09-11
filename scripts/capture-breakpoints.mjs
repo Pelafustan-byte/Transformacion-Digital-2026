@@ -11,6 +11,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { createRequire } from 'node:module';
+import { pathToFileURL } from 'node:url';
 
 const BASE = process.env.BASE_URL || 'http://127.0.0.1:3210';
 const OUT = process.env.OUT || 'docs/screenshots/antes';
@@ -153,4 +154,7 @@ async function main() {
   fs.writeFileSync(path.join(OUT, 'capturas.json'), JSON.stringify({ generatedAt: new Date().toISOString(), base: BASE, shots: written }, null, 2) + '\n');
 }
 
-main().catch(e => { console.error(e.message); process.exitCode = 1; });
+// Solo se ejecuta al invocarlo directamente: verify-visual.mjs importa
+// BREAKPOINTS de este módulo y no debe disparar una tanda de capturas.
+const invokedDirectly = process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href;
+if (invokedDirectly) main().catch(e => { console.error(e.message); process.exitCode = 1; });

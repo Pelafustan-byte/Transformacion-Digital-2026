@@ -119,6 +119,10 @@ const REGISTRY = [
     institution: 'Municipalidad de Constitución',
     sourcePage: 'No aplica: material institucional entregado con el proyecto',
     license: 'Uso institucional. Símbolo oficial: no se modifica, no se recolorea, no se recorta.',
+    // El .svg es en realidad un WebP incrustado en un <image>: librsvg no lo
+    // decodifica y la miniatura salía transparente. Se genera desde el PNG
+    // equivalente del mismo símbolo, ya presente en el repositorio.
+    thumbnailSource: 'assets/brand/escudo-constitucion@2x.png',
     attribution: 'Municipalidad de Constitución',
     retrievedAt: '2026-09-10',
     usage: ['Cabecera', 'Pie de página'],
@@ -399,14 +403,31 @@ for (const entry of REGISTRY) {
   const thumbDir = path.join(PUBLIC, THUMBS);
   fs.mkdirSync(thumbDir, { recursive: true });
   const thumbName = `${entry.id}.webp`;
+  const thumbPath = path.join(thumbDir, thumbName);
+  const thumbSourceRel = entry.thumbnailSource || entry.file;
+  const thumbSource = path.join(PUBLIC, thumbSourceRel);
   try {
-    await sharp(absolute, isSvg ? { density: 120 } : {})
-      .resize({ width: THUMB_W, withoutEnlargement: !isSvg })
+    const sourceIsSvg = /\.svg$/i.test(thumbSourceRel);
+    await sharp(thumbSource, sourceIsSvg ? { density: 120 } : {})
+      .resize({ width: THUMB_W, withoutEnlargement: !sourceIsSvg })
       .webp({ quality: 78 })
-      .toFile(path.join(thumbDir, thumbName));
-    record.thumbnail = `/${THUMBS}/${thumbName}`;
+      .toFile(thumbPath);
+
+    // Una miniatura puede escribirse sin error y salir completamente vacía:
+    // ocurre con los SVG que solo envuelven un WebP incrustado, que librsvg no
+    // decodifica. Se comprueba que tenga contenido real en vez de confiar en
+    // que la conversión no lanzó excepción.
+    const stats = await sharp(thumbPath).stats();
+    const blank = stats.channels.every(c => c.max === 0);
+    if (blank) {
+      fs.unlinkSync(thumbPath);
+      problems.push(`MINIATURA EN BLANCO  ${thumbSourceRel}: se generó sin contenido visible. Declara "thumbnailSource" con un archivo rasterizable.`);
+    } else {
+      record.thumbnail = `/${THUMBS}/${thumbName}`;
+      if (entry.thumbnailSource) record.thumbnailSource = '/' + thumbSourceRel;
+    }
   } catch (error) {
-    problems.push(`MINIATURA  ${entry.file}: ${error.message}`);
+    problems.push(`MINIATURA  ${thumbSourceRel}: ${error.message}`);
   }
 
   manifest.push(record);
