@@ -1,0 +1,150 @@
+{
+  "site": {
+    "materialsTitle": "Insumos esenciales para trabajar",
+    "materialsText": "Una selección rápida de normativa, guías y referencias que conviene tener a mano antes de trabajar con expedientes, firma electrónica, interoperabilidad, datos personales y ciberseguridad.",
+    "newsTitle": "Radar Digital: lo que está cambiando",
+    "newsText": "Noticias, agenda y señales oficiales que pueden afectar el trabajo municipal. Priorizamos cambios normativos, experiencias de otros municipios, ciberseguridad, plataformas del Estado y actividades útiles para los equipos."
+  },
+  "materials": [
+    {
+      "id": "mat-curso",
+      "type": "Documento",
+      "title": "Descripción del curso de Transformación Digital",
+      "description": "Punto de partida para comprender el proceso formativo, sus objetivos y los conceptos que se trabajarán durante la implementación municipal.",
+      "url": "https://docs.google.com/document/d/1K20Fc2iPZqdGyUDM8XjUDwRIewzwtUhN/edit?usp=sharing&ouid=117581261701006734222&rtpof=true&sd=true",
+      "position": 1,
+      "status": "published"
+    },
+    {
+      "id": "mat-ppt",
+      "type": "Presentación",
+      "title": "Presentación institucional de Transformación Digital",
+      "description": "Síntesis del marco de trabajo: Ley 21.180, expediente electrónico, firma, interoperabilidad, plataformas transversales y hoja de ruta institucional.",
+      "url": "https://docs.google.com/presentation/d/1n_DPLArahay65RNg1dXX63aZB8Lz7yER/edit?usp=sharing&ouid=117581261701006734222&rtpof=true&sd=true",
+      "position": 2,
+      "status": "published"
+    },
+    {
+      "id": "mat-ley",
+      "type": "Normativa",
+      "title": "Ley N.º 21.180 de Transformación Digital del Estado",
+      "description": "Texto legal base del procedimiento administrativo electrónico. Conviene revisarlo para entender expediente, comunicaciones, notificaciones e interoperabilidad.",
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=1138479",
+      "position": 3,
+      "status": "published"
+    },
+    {
+      "id": "mat-wiki",
+      "type": "Guías oficiales",
+      "title": "WikiGuías de Gobierno Digital",
+      "description": "Repositorio práctico de Gobierno Digital con guías, manuales y referencias para implementar plataformas, estándares y procesos asociados a la transformación digital.",
+      "url": "https://wikiguias.digital.gob.cl/",
+      "position": 4,
+      "status": "published"
+    },
+    {
+      "id": "mat-datos",
+      "type": "Normativa",
+      "title": "Ley N.º 21.719 de Protección de Datos Personales",
+      "description": "Nueva regulación de protección y tratamiento de datos personales. Entra en vigencia el 1 de diciembre de 2026 y exige preparar procesos, responsabilidades y resguardos.",
+      "url": "https://www.bcn.cl/leychile/navegar?f=2026-12-01&i=1209272",
+      "position": 5,
+      "status": "published"
+    },
+    {
+      "id": "mat-ciberley",
+      "type": "Normativa",
+      "title": "Ley N.º 21.663 Marco de Ciberseguridad",
+      "description": "Marco general de ciberseguridad aplicable a organismos del Estado, incluidas las municipalidades, con deberes de prevención, coordinación y respuesta ante incidentes.",
+      "url": "https://www.bcn.cl/leychile/Navegar?idNorma=1202434&idVersion=2025-03-01",
+      "position": 6,
+      "status": "published"
+    },
+    {
+      "id": "mat-9basicos",
+      "type": "Ciberseguridad",
+      "title": "Los 9 básicos de la ciberseguridad · ANCI",
+      "description": "Guía práctica para reducir riesgos: actualizar, capacitar, minimizar privilegios, respaldar, asegurar redes y equipos, monitorear, usar MFA y gestor de contraseñas.",
+      "url": "https://anci.gob.cl/9basicos/",
+      "position": 7,
+      "status": "published"
+    },
+    {
+      "id": "mat-seguimiento",
+      "type": "Seguimiento",
+      "title": "Avance de plataformas de la Ley 21.180",
+      "description": "Panel oficial de seguimiento de Gobierno Digital sobre habilitación y cobertura de ClaveÚnica, DocDigital, FirmaGob, PISEE y otras capacidades transversales del Estado.",
+      "url": "https://portaldatos.digital.gob.cl/dashboards/dash_ltd",
+      "position": 8,
+      "status": "published"
+    }
+  ],
+  "news": [
+    {
+      "id": "news-anci-monitoreo",
+      "publishedAt": "2026-09-23",
+      "tag": "Agenda · Ciberseguridad",
+      "title": "ANCI realizará charla abierta sobre monitoreo en tiempo real",
+      "description": "La sesión del 23 de septiembre revisará cómo detectar actividad maliciosa, evaluar su impacto y activar una respuesta temprana. Es un insumo útil para equipos municipales que trabajan continuidad operacional y respuesta a incidentes.",
+      "source": "ANCI",
+      "url": "https://anci.gob.cl/eventos/charla-basica-monitorear-en-tiempo-real/",
+      "status": "published",
+      "position": 1
+    },
+    {
+      "id": "news-magallanes-municipios",
+      "publishedAt": "2026-09-17",
+      "tag": "Transformación digital municipal",
+      "title": "Magallanes instala mesa regional de transformación digital con sus municipios",
+      "description": "La instancia reúne al Gobierno Regional, los diez municipios, Gobierno Digital y Subdere para coordinar implementación, compartir capacidades e identificar brechas. El modelo muestra cómo la transformación digital se está articulando territorialmente.",
+      "source": "SUBDERE",
+      "url": "https://www.subdere.gov.cl/sala-de-prensa/la-regi%C3%B3n-de-magallanes-avanza-en-la-trasformaci%C3%B3n-digital-con-coordinaci%C3%B3n-entre-el",
+      "status": "published",
+      "position": 2
+    },
+    {
+      "id": "news-anci-simulacro",
+      "publishedAt": "2026-09-11",
+      "tag": "Continuidad operacional",
+      "title": "Sector público pone a prueba planes de gestión de crisis ante ransomware",
+      "description": "Una submesa del Gobierno Central realizó un ejercicio de simulación para revisar decisiones, coordinación y etapas de respuesta frente a un incidente de ransomware. Refuerza la importancia de contar con planes practicados y roles claros.",
+      "source": "ANCI",
+      "url": "https://anci.gob.cl/noticias/tercera-submesa-ciberseguridad-gobierno-central/",
+      "status": "published",
+      "position": 3
+    },
+    {
+      "id": "news-anci-reporte",
+      "publishedAt": "2026-09-11",
+      "tag": "Reporte de incidentes",
+      "title": "ANCI destaca el valor de reportar incidentes y aplicar controles básicos",
+      "description": "La Agencia señaló que la información de los reportes permite investigar amenazas, detectar vulnerabilidades y generar alertas preventivas, y vinculó estos aprendizajes con los controles de sus 9 básicos de ciberseguridad.",
+      "source": "ANCI",
+      "url": "https://anci.gob.cl/noticias/anci-reporte-comite-ciberseguridad-ccs/",
+      "status": "published",
+      "position": 4
+    },
+    {
+      "id": "news-anci-fraude",
+      "publishedAt": "2026-09-10",
+      "tag": "Ciberconsejo",
+      "title": "ANCI alerta sobre fraude que busca obtener códigos de segundo factor",
+      "description": "La modalidad simula un bloqueo bancario y luego intenta convencer a la víctima de entregar códigos o aprobar solicitudes. La recomendación es no compartir códigos ni autorizar operaciones que no fueron iniciadas por el propio usuario.",
+      "source": "ANCI",
+      "url": "https://anci.gob.cl/ciberconsejos/ciberconsejos-el-fraude-de-la-cuenta-bancaria-bloqueada/",
+      "status": "published",
+      "position": 5
+    },
+    {
+      "id": "news-anci-basicos",
+      "publishedAt": "2026-08-20",
+      "tag": "Estándares de ciberseguridad",
+      "title": "ANCI publica resultados de consulta sobre estándares básicos de ciberseguridad",
+      "description": "El resumen ejecutivo recoge observaciones a seis controles propuestos como parte de los estándares básicos. Es relevante para anticipar medidas que pueden transformarse en exigencias formales para sujetos obligados.",
+      "source": "ANCI",
+      "url": "https://anci.gob.cl/noticias/anci-resumen-ejecutivo-consulta-publica-normativa-basicos/",
+      "status": "published",
+      "position": 6
+    }
+  ]
+}
