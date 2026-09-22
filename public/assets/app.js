@@ -22,11 +22,18 @@ if(s.heroImage&&Number(s.heroImageMinWidth||0)>=1800){$('hero').classList.add('h
 function renderVideos(){
  const a=D.videos||[],host=$('videoHost'),playlist=$('videoPlaylist');
  if(!a.length){host.innerHTML='<div class="mediaEmpty">Sin videos publicados.</div>';playlist.innerHTML='';return}
- let currentIndex=0,slowTimer=null;
- const embedUrl=value=>{
+ let currentIndex=0,slowTimer=null,playerSeq=0;
+ const driveId=value=>{
   const raw=String(value||'').trim();
-  const m=raw.match(/drive\.google\.com\/file\/d\/([^/]+)/i);
-  return m?`https://drive.google.com/file/d/${m[1]}/preview`:raw;
+  return raw.match(/drive\.google\.com\/file\/d\/([^/]+)/i)?.[1]||raw.match(/[?&]id=([^&]+)/i)?.[1]||'';
+ };
+ const embedUrl=value=>{
+  const raw=String(value||'').trim(),id=driveId(raw);
+  return id?`https://drive.google.com/file/d/${id}/preview`:raw;
+ };
+ const formatTime=value=>{
+  const sec=Number.isFinite(value)?Math.max(0,Math.floor(value)):0;
+  return `${Math.floor(sec/60)}:${String(sec%60).padStart(2,'0')}`;
  };
  const ensureRetry=()=>{
   let button=$('videoRetry');
@@ -44,24 +51,132 @@ function renderVideos(){
    b.setAttribute('aria-pressed',active?'true':'false');
   });
  };
- const show=(v,i)=>{
-  currentIndex=i;clearTimeout(slowTimer);
-  const raw=v.embedUrl||v.sourceUrl||'',u=embedUrl(raw);
-  const direct=/^\/media\//.test(u)||/\.(mp4|webm)(\?|$)/i.test(u);
-  host.dataset.playerManaged='true';
-  host.innerHTML=direct
-   ?`<video class="directVideo" src="${esc(u)}" controls playsinline preload="metadata"></video>`
-   :`<div class="videoEmbed"><iframe src="${esc(u)}" title="${esc(v.title)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="eager" referrerpolicy="strict-origin-when-cross-origin"></iframe><div class="videoLoading" role="status" aria-live="polite"><span></span>Cargando reproductor…</div><div class="videoSlow">Si el reproductor no responde, usa “Recargar reproductor” o abre el archivo en Drive.</div></div>`;
-  text('videoTitle',v.title);text('videoDesc',v.description);
-  const link=$('videoLink');link.href=v.sourceUrl||raw||u;link.textContent='Abrir en Drive ↗';
-  setActive(i);
-  const retry=ensureRetry();retry.onclick=()=>show(a[currentIndex],currentIndex);
+ const mountIframe=(v,raw,seq)=>{
+  if(seq!==playerSeq)return;
+  clearTimeout(slowTimer);
+  const u=embedUrl(raw);
+  host.innerHTML=`<div class="videoEmbed videoEmbedFallback"><iframe src="${esc(u)}" title="${esc(v.title)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="eager" referrerpolicy="strict-origin-when-cross-origin"></iframe><div class="videoLoading" role="status" aria-live="polite"><span></span>Cargando reproductor alternativo…</div><div class="videoSlow">Si el reproductor no responde, usa “Recargar reproductor” o abre el archivo en Drive.</div></div>`;
   const frame=host.querySelector('iframe'),wrap=host.querySelector('.videoEmbed');
   if(frame&&wrap){
    const ready=()=>{clearTimeout(slowTimer);wrap.classList.add('is-ready');wrap.classList.remove('is-slow')};
    frame.addEventListener('load',ready,{once:true});
    slowTimer=setTimeout(()=>wrap.classList.add('is-slow'),7000);
   }
+ };
+ const mountNativeDrive=(v,id,raw,seq)=>{
+  const urls=[
+   `https://drive.usercontent.google.com/download?id=${encodeURIComponent(id)}&export=download&confirm=t`,
+   `https://drive.google.com/uc?export=download&id=${encodeURIComponent(id)}`
+  ];
+  let sourceIndex=0,settled=false,loadTimer=null,controlsTimer=null;
+  host.innerHTML=`<div class="nativeVideoShell is-loading">
+    <video class="nativeDriveVideo" playsinline preload="metadata"></video>
+    <button class="videoCenterPlay" type="button" aria-label="Reproducir ${esc(v.title)}"><span aria-hidden="true">▶</span></button>
+    <div class="nativeVideoLoading" role="status" aria-live="polite"><span></span>Preparando video…</div>
+    <div class="nativeVideoControls" aria-label="Controles de video">
+      <button class="videoCtl videoToggle" type="button" aria-label="Reproducir"><span aria-hidden="true">▶</span></button>
+      <input class="videoProgress" type="range" min="0" max="1000" value="0" step="1" aria-label="Posición del video">
+      <span class="videoTime">0:00 / --:--</span>
+      <button class="videoCtl videoFullscreen" type="button" aria-label="Pantalla completa"><span aria-hidden="true">⛶</span></button>
+    </div>
+  </div>`;
+  const shell=host.querySelector('.nativeVideoShell'),video=host.querySelector('.nativeDriveVideo'),
+        center=host.querySelector('.videoCenterPlay'),toggle=host.querySelector('.videoToggle'),
+        progress=host.querySelector('.videoProgress'),time=host.querySelector('.videoTime'),
+        fullscreen=host.querySelector('.videoFullscreen');
+  const hideControls=()=>{
+   clearTimeout(controlsTimer);
+   if(!video.paused&&!video.ended)controlsTimer=setTimeout(()=>shell.classList.remove('show-controls'),850);
+  };
+  const showControls=()=>{
+   shell.classList.add('show-controls');
+   hideControls();
+  };
+  const updateUi=()=>{
+   const duration=Number.isFinite(video.duration)?video.duration:0;
+   const current=Number.isFinite(video.currentTime)?video.currentTime:0;
+   if(duration)progress.value=String(Math.round(current/duration*1000));
+   time.textContent=`${formatTime(current)} / ${duration?formatTime(duration):'--:--'}`;
+   const paused=video.paused||video.ended;
+   toggle.querySelector('span').textContent=paused?'▶':'Ⅱ';
+   toggle.setAttribute('aria-label',paused?'Reproducir':'Pausar');
+   center.querySelector('span').textContent=paused?'▶':'Ⅱ';
+   center.setAttribute('aria-label',paused?`Reproducir ${v.title}`:`Pausar ${v.title}`);
+   shell.classList.toggle('is-playing',!paused);
+  };
+  const useSource=index=>{
+   if(seq!==playerSeq)return;
+   sourceIndex=index;settled=false;
+   clearTimeout(loadTimer);
+   shell.classList.add('is-loading');
+   video.src=urls[index];
+   video.load();
+   loadTimer=setTimeout(()=>{
+    if(settled||seq!==playerSeq)return;
+    if(index+1<urls.length)useSource(index+1);
+    else mountIframe(v,raw,seq);
+   },8000);
+  };
+  const fail=()=>{
+   if(settled||seq!==playerSeq)return;
+   clearTimeout(loadTimer);
+   if(sourceIndex+1<urls.length)useSource(sourceIndex+1);
+   else mountIframe(v,raw,seq);
+  };
+  video.addEventListener('loadedmetadata',()=>{
+   if(seq!==playerSeq)return;
+   settled=true;clearTimeout(loadTimer);shell.classList.remove('is-loading');updateUi();
+  },{once:false});
+  video.addEventListener('canplay',()=>{
+   if(seq!==playerSeq)return;
+   settled=true;clearTimeout(loadTimer);shell.classList.remove('is-loading');
+  });
+  video.addEventListener('error',fail);
+  video.addEventListener('timeupdate',updateUi);
+  video.addEventListener('durationchange',updateUi);
+  video.addEventListener('play',()=>{updateUi();shell.classList.remove('show-controls');hideControls()});
+  video.addEventListener('pause',()=>{updateUi();shell.classList.add('show-controls')});
+  video.addEventListener('ended',()=>{updateUi();shell.classList.add('show-controls')});
+  const togglePlay=()=>{
+   if(video.paused||video.ended)video.play().catch(()=>showControls());
+   else video.pause();
+  };
+  center.addEventListener('click',togglePlay);
+  toggle.addEventListener('click',e=>{e.stopPropagation();togglePlay()});
+  video.addEventListener('click',()=>{if(video.paused)togglePlay();else if(shell.classList.contains('show-controls'))shell.classList.remove('show-controls');else showControls()});
+  shell.addEventListener('mousemove',()=>{if(!video.paused)showControls()},{passive:true});
+  shell.addEventListener('touchstart',()=>{if(!video.paused)showControls()},{passive:true});
+  shell.addEventListener('focusin',()=>shell.classList.add('show-controls'));
+  progress.addEventListener('input',()=>{
+   if(Number.isFinite(video.duration)&&video.duration>0)video.currentTime=(+progress.value/1000)*video.duration;
+   showControls();
+  });
+  fullscreen.addEventListener('click',async e=>{
+   e.stopPropagation();
+   try{
+    if(document.fullscreenElement)await document.exitFullscreen();
+    else if(shell.requestFullscreen)await shell.requestFullscreen();
+    else if(video.webkitEnterFullscreen)video.webkitEnterFullscreen();
+   }catch{}
+   showControls();
+  });
+  useSource(0);
+ };
+ const show=(v,i)=>{
+  currentIndex=i;playerSeq++;const seq=playerSeq;clearTimeout(slowTimer);
+  const raw=v.embedUrl||v.sourceUrl||'',id=driveId(raw),u=embedUrl(raw);
+  const direct=/^\/media\//.test(u)||/\.(mp4|webm)(\?|$)/i.test(u);
+  host.dataset.playerManaged='true';
+  text('videoTitle',v.title);text('videoDesc',v.description);
+  const link=$('videoLink');link.href=v.sourceUrl||raw||u;link.textContent='Abrir en Drive ↗';
+  setActive(i);
+  const retry=ensureRetry();retry.onclick=()=>show(a[currentIndex],currentIndex);
+  if(id){mountNativeDrive(v,id,raw,seq);return}
+  if(direct){
+   host.innerHTML=`<video class="directVideo" src="${esc(u)}" controls playsinline preload="metadata"></video>`;
+   return;
+  }
+  mountIframe(v,raw,seq);
  };
  playlist.innerHTML=a.map((v,i)=>`<button class="videoPick ${i===0?'on':''}" type="button" data-i="${i}" aria-pressed="${i===0?'true':'false'}"><small>Cápsula ${String(i+1).padStart(2,'0')}</small><strong>${esc(v.title)}</strong><span>${esc(v.description||'')}</span></button>`).join('');
  playlist.onclick=e=>{const b=e.target.closest('button[data-i]');if(b)show(a[+b.dataset.i],+b.dataset.i)};
