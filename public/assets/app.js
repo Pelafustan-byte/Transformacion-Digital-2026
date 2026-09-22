@@ -143,7 +143,7 @@ function renderVideos(){
   };
   center.addEventListener('click',togglePlay);
   toggle.addEventListener('click',e=>{e.stopPropagation();togglePlay()});
-  video.addEventListener('click',()=>{if(video.paused)togglePlay();else if(shell.classList.contains('show-controls'))shell.classList.remove('show-controls');else showControls()});
+  video.addEventListener('click',()=>{if(video.paused)togglePlay();else showControls()});
   shell.addEventListener('mousemove',()=>{if(!video.paused)showControls()},{passive:true});
   shell.addEventListener('touchstart',()=>{if(!video.paused)showControls()},{passive:true});
   shell.addEventListener('focusin',()=>shell.classList.add('show-controls'));
