@@ -183,7 +183,14 @@ function renderMaterials(){$('materialsGrid').innerHTML=(D.materials||[]).map(m=
 
 let legalPolicyId='',legalArticleNumber=1,legalSearchTerm='';
 const legalNormalize=value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/([a-z])6(?=[a-z])/g,'$1o').replace(/[^a-z0-9ñ]+/g,' ').trim();
-const legalHighlight=(value,term)=>esc(value);
+function legalHighlight(value,term){
+ const safe=esc(value),q=esc(String(term||'').trim());
+ if(q.length<2)return safe;
+ const lower=safe.toLocaleLowerCase('es'),needle=q.toLocaleLowerCase('es');
+ let out='',from=0,at=lower.indexOf(needle);
+ while(at>=0){out+=safe.slice(from,at)+'<mark>'+safe.slice(at,at+q.length)+'</mark>';from=at+q.length;at=lower.indexOf(needle,from)}
+ return out+safe.slice(from);
+}
 function legalBodyMarkup(value,term){return String(value||'').split(/\n{2,}/).filter(Boolean).map(block=>{const t=block.trim();if(t.startsWith('•'))return '<p class="legalBullet">'+legalHighlight(t.replace(/^•\s*/,''),term)+'</p>';if(/^\d+(?:[.,]\d+)+/.test(t))return '<h4>'+legalHighlight(t,term)+'</h4>';return '<p>'+legalHighlight(t,term).replace(/\n/g,'<br>')+'</p>'}).join('')}
 function renderPolicies(){
  const policies=D.policies||[],select=$('policySelect');
