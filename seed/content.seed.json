@@ -13,8 +13,8 @@
     "eventTitle": "Primera prueba presencial de FEDOK y firma electrónica",
     "eventText": "Gestor documental, firma electrónica y trabajo coordinado entre direcciones municipales.",
     "eventDate": "25 septiembre · 11:30 · Salón Municipal",
-    "videosTitle": "Material audiovisual",
-    "videosText": "Cápsulas y registros audiovisuales organizados para consulta y capacitación interna.",
+    "videosTitle": "Minutos Digitales",
+    "videosText": "Serie de 10 cápsulas breves de ciberseguridad y buenas prácticas digitales, disponibles para reproducción directa desde Google Drive.",
     "materialsTitle": "Documentos esenciales",
     "materialsText": "Normativa, presentaciones, guías y material de apoyo utilizado en el proceso institucional.",
     "capsulesTitle": "Cápsulas del equipo",
@@ -42,22 +42,94 @@
   },
   "videos": [
     {
-      "id": "video-ruta",
-      "title": "Transformación digital en el ámbito municipal",
-      "description": "Introducción al proceso de transformación digital y su aplicación en la gestión municipal.",
-      "embedUrl": "https://drive.google.com/file/d/1V3aqQd601ehJmqsNH8Oj4B9WjP9GUuV5/preview",
-      "sourceUrl": "https://drive.google.com/file/d/1V3aqQd601ehJmqsNH8Oj4B9WjP9GUuV5/view?usp=sharing",
+      "id": "minutos-digitales-01",
+      "title": "Contraseñas seguras",
+      "description": "Consejos para crear, usar y proteger contraseñas robustas en las cuentas y sistemas de trabajo.",
+      "embedUrl": "https://drive.google.com/file/d/1yNK-JJzPa0UeqWRXMOgCVxxLQixumTJ9/preview",
+      "sourceUrl": "https://drive.google.com/file/d/1yNK-JJzPa0UeqWRXMOgCVxxLQixumTJ9/view?usp=sharing",
       "status": "published",
       "position": 1
     },
     {
-      "id": "video-seguridad",
-      "title": "Ciberseguridad y resguardo institucional",
-      "description": "Buenas prácticas para proteger información, accesos y dispositivos en el trabajo cotidiano.",
-      "embedUrl": "https://drive.google.com/file/d/1k4BeBFgxlaI5SEfq9pJiwHDVjzJzTnBC/preview",
-      "sourceUrl": "https://drive.google.com/file/d/1k4BeBFgxlaI5SEfq9pJiwHDVjzJzTnBC/view?usp=sharing",
+      "id": "minutos-digitales-02",
+      "title": "Cuidado con los correos sospechosos",
+      "description": "Claves para reconocer correos potencialmente maliciosos y evitar enlaces, archivos o solicitudes de datos riesgosas.",
+      "embedUrl": "https://drive.google.com/file/d/1YXQ6vj4X7fe0Fd9SR9gmp1GBOzLXcod-/preview",
+      "sourceUrl": "https://drive.google.com/file/d/1YXQ6vj4X7fe0Fd9SR9gmp1GBOzLXcod-/view?usp=sharing",
       "status": "published",
       "position": 2
+    },
+    {
+      "id": "minutos-digitales-03",
+      "title": "Bloquea tu equipo",
+      "description": "Buenas prácticas para bloquear la sesión al ausentarse y evitar accesos no autorizados a información municipal.",
+      "embedUrl": "https://drive.google.com/file/d/1Sxic9S6lH1Eym3HLDIqGQCoGdxLWOl0e/preview",
+      "sourceUrl": "https://drive.google.com/file/d/1Sxic9S6lH1Eym3HLDIqGQCoGdxLWOl0e/view?usp=sharing",
+      "status": "published",
+      "position": 3
+    },
+    {
+      "id": "minutos-digitales-04",
+      "title": "Evita USB desconocidos",
+      "description": "Riesgos de conectar dispositivos USB de origen desconocido y recomendaciones para proteger los equipos institucionales.",
+      "embedUrl": "https://drive.google.com/file/d/1kXodV2c5PHZrNAzlbX4KczsRXLWGu0oV/preview",
+      "sourceUrl": "https://drive.google.com/file/d/1kXodV2c5PHZrNAzlbX4KczsRXLWGu0oV/view?usp=sharing",
+      "status": "published",
+      "position": 4
+    },
+    {
+      "id": "minutos-digitales-05",
+      "title": "Utiliza sistemas y apps autorizados",
+      "description": "Importancia de trabajar con aplicaciones y sistemas institucionalmente autorizados para resguardar datos, soporte y continuidad.",
+      "embedUrl": "https://drive.google.com/file/d/1v1VKge6mQnt8HUxUKmpD61yPKn6B-HCs/preview",
+      "sourceUrl": "https://drive.google.com/file/d/1v1VKge6mQnt8HUxUKmpD61yPKn6B-HCs/view?usp=sharing",
+      "status": "published",
+      "position": 5
+    },
+    {
+      "id": "minutos-digitales-06",
+      "title": "Protege la red municipal",
+      "description": "Medidas básicas para cuidar la conectividad y reducir riesgos sobre la red institucional y los servicios municipales.",
+      "embedUrl": "https://drive.google.com/file/d/1J13ZE2HaaA705_NornQMxDGuxcPRlG-I/preview",
+      "sourceUrl": "https://drive.google.com/file/d/1J13ZE2HaaA705_NornQMxDGuxcPRlG-I/view?usp=sharing",
+      "status": "published",
+      "position": 6
+    },
+    {
+      "id": "minutos-digitales-07",
+      "title": "¿Algo extraño en tu equipo?",
+      "description": "Qué hacer ante comportamientos inusuales, alertas o señales que podrían indicar un incidente de seguridad.",
+      "embedUrl": "https://drive.google.com/file/d/14KJ49ZAnlv-qvn3nsFwPlQdooL3QOIiq/preview",
+      "sourceUrl": "https://drive.google.com/file/d/14KJ49ZAnlv-qvn3nsFwPlQdooL3QOIiq/view?usp=sharing",
+      "status": "published",
+      "position": 7
+    },
+    {
+      "id": "minutos-digitales-08",
+      "title": "Mantén tu equipo actualizado",
+      "description": "Por qué instalar actualizaciones y parches ayuda a corregir vulnerabilidades y mantener los equipos protegidos.",
+      "embedUrl": "https://drive.google.com/file/d/1RmtrcibiW7sljw4SEUWFwfaRM5kczY3D/preview",
+      "sourceUrl": "https://drive.google.com/file/d/1RmtrcibiW7sljw4SEUWFwfaRM5kczY3D/view?usp=sharing",
+      "status": "published",
+      "position": 8
+    },
+    {
+      "id": "minutos-digitales-09",
+      "title": "Trabaja de forma segura desde casa",
+      "description": "Recomendaciones para proteger información, accesos y dispositivos cuando se trabaja fuera de la red municipal.",
+      "embedUrl": "https://drive.google.com/file/d/1faVAUgBCmlNauu4Ws42mOh0PiAloZejH/preview",
+      "sourceUrl": "https://drive.google.com/file/d/1faVAUgBCmlNauu4Ws42mOh0PiAloZejH/view?usp=sharing",
+      "status": "published",
+      "position": 9
+    },
+    {
+      "id": "minutos-digitales-10",
+      "title": "Minutos Digitales · Cápsula 10",
+      "description": "Décima cápsula de la serie Minutos Digitales, orientada a reforzar hábitos y buenas prácticas para un trabajo digital seguro.",
+      "embedUrl": "https://drive.google.com/file/d/1Q1sOaLQq2A6o5iufGsHuzlh62DryTHP2/preview",
+      "sourceUrl": "https://drive.google.com/file/d/1Q1sOaLQq2A6o5iufGsHuzlh62DryTHP2/view?usp=sharing",
+      "status": "published",
+      "position": 10
     }
   ],
   "materials": [
