@@ -29,6 +29,10 @@
     add(data.videos,'Video','Videos',{official:true});
     add(data.news,'Actualidad oficial','Actualidad',{official:true});
     add(data.timeline,'Hito de implementación','Implementación',{anchor:'#implementacion'});
+    (data.policies||[]).forEach(policy=>{
+      items.push({id:policy.id,type:'Política institucional',section:'Normativa',title:policy.title||'',description:policy.summary||'',category:'Decreto Exento '+(policy.decreeNumber||''),source:'Municipalidad de Constitución',url:'',kind:'',anchor:'#normativa',official:true});
+      (policy.articles||[]).forEach(article=>items.push({id:policy.id+'-art-'+article.number,type:'Artículo normativo',section:'Normativa',title:(policy.shortName||policy.title)+' · Artículo '+article.number+' · '+article.title,description:article.text||'',category:'Decreto Exento '+(policy.decreeNumber||''),source:'Municipalidad de Constitución',url:'',kind:'',anchor:'#normativa',official:true}));
+    });
     return items;
   }
 
