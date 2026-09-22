@@ -64,10 +64,7 @@ function renderVideos(){
   }
  };
  const mountNativeDrive=(v,id,raw,seq)=>{
-  const urls=[
-   `https://drive.usercontent.google.com/download?id=${encodeURIComponent(id)}&export=download&confirm=t`,
-   `https://drive.google.com/uc?export=download&id=${encodeURIComponent(id)}`
-  ];
+  const urls=[`/api/public/video/${encodeURIComponent(id)}`];
   let sourceIndex=0,settled=false,loadTimer=null,controlsTimer=null;
   host.innerHTML=`<div class="nativeVideoShell is-loading">
     <video class="nativeDriveVideo" playsinline preload="metadata"></video>
@@ -115,7 +112,7 @@ function renderVideos(){
     if(settled||seq!==playerSeq)return;
     if(index+1<urls.length)useSource(index+1);
     else mountIframe(v,raw,seq);
-   },8000);
+   },5000);
   };
   const fail=()=>{
    if(settled||seq!==playerSeq)return;
