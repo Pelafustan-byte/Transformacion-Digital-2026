@@ -5,6 +5,7 @@ import multer from 'multer';
 import sanitizeHtml from 'sanitize-html';
 import archiver from 'archiver';
 import crypto from 'node:crypto';
+import { Readable } from 'node:stream';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -86,6 +87,44 @@ const app=express();app.set('trust proxy',1);app.disable('x-powered-by');app.use
 app.get('/health',(_q,r)=>r.json({ok:true,db:!!pool,service:'ruta-digital-cms',storage:STORAGE.mode,persistent:STORAGE.persistent}));
 app.get('/api/admin/storage',auth,(_q,r)=>r.json(STORAGE));
 app.get('/api/public/content',async(_q,r)=>{r.set('Cache-Control','no-store');r.json(await publicContent())});
+
+app.get('/api/public/video/:driveId',async(req,res)=>{
+ try{
+  const id=String(req.params.driveId||'').trim();
+  if(!/^[A-Za-z0-9_-]{10,}$/.test(id))return res.sendStatus(400);
+  const c=await readContent();
+  const allowed=(c.videos||[]).some(v=>{
+   const refs=[v.embedUrl,v.sourceUrl].filter(Boolean).join(' ');
+   return refs.includes('/d/'+id+'/')||refs.includes('id='+id);
+  });
+  if(!allowed)return res.sendStatus(404);
+  const urls=[
+   'https://drive.usercontent.google.com/download?id='+encodeURIComponent(id)+'&export=download&confirm=t',
+   'https://drive.google.com/uc?export=download&confirm=t&id='+encodeURIComponent(id)
+  ];
+  for(const url of urls){
+   const headers={'User-Agent':'Mozilla/5.0','Accept':'video/*,application/octet-stream;q=0.9,*/*;q=0.8'};
+   if(req.headers.range)headers.Range=req.headers.range;
+   const upstream=await fetch(url,{headers,redirect:'follow',signal:AbortSignal.timeout(15000)});
+   const type=(upstream.headers.get('content-type')||'').toLowerCase();
+   if(upstream.body&&upstream.status>=200&&upstream.status<400&&!type.includes('text/html')){
+    res.status(upstream.status);
+    for(const h of ['content-type','content-length','content-range','accept-ranges','etag','last-modified']){
+     const value=upstream.headers.get(h);if(value)res.set(h,value);
+    }
+    if(!res.getHeader('Content-Type'))res.type('video/mp4');
+    res.set('Cache-Control','public,max-age=3600');
+    Readable.fromWeb(upstream.body).pipe(res);
+    return;
+   }
+   try{await upstream.body?.cancel()}catch{}
+  }
+  res.status(502).json({error:'VIDEO_SOURCE_UNAVAILABLE'});
+ }catch(error){
+  if(!res.headersSent)res.status(502).json({error:'VIDEO_PROXY_ERROR'});
+  else res.end();
+ }
+});
 app.get('/media/:id',async(req,res)=>{try{if(pool){const q=await pool.query('select name,mime,bytes,size from rd_media where id=$1',[req.params.id]);if(!q.rowCount)return res.sendStatus(404);const m=q.rows[0];res.set({'Content-Type':m.mime,'Content-Length':m.size,'Cache-Control':'public,max-age=31536000,immutable'});return res.end(m.bytes)}const p=path.join(UPLOAD_DIR,path.basename(req.params.id));if(!fs.existsSync(p))return res.sendStatus(404);return res.sendFile(p)}catch{res.sendStatus(404)}});
 
 app.post('/api/auth/login',(req,res)=>{const ip=req.ip||'x',a=attempts.get(ip)||{n:0,until:0};if(a.until>Date.now())return res.status(429).json({message:'Espera unos minutos.'});const {user,password}=req.body||{};if(user!==ADMIN_USER||password!==ADMIN_PASSWORD){a.n++;if(a.n>=6){a.n=0;a.until=Date.now()+10*60e3}attempts.set(ip,a);return res.status(401).json({message:'Credenciales incorrectas.'})}attempts.delete(ip);const raw=crypto.randomBytes(32).toString('base64url');sessions.set(hash(raw),{expires:Date.now()+12*60*60e3});res.cookie('rd_session',raw,{signed:true,httpOnly:true,sameSite:'strict',secure:IS_PROD,maxAge:12*60*60e3,path:'/'});res.json({ok:true,user:ADMIN_USER})});
