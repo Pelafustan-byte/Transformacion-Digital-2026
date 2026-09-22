@@ -5,7 +5,7 @@ const isPlate=u=>/\/assets\/illustrations\//.test(String(u||''))||/\.svg(\?|$)/i
 // (contain) en vez de recortarse, para no perder la curva territorial del pie.
 const coverImg=(url,alt,w,h)=>`<img src="${esc(url)}" alt="${esc(alt||'')}" width="${w}" height="${h}" loading="lazy" decoding="async" class="${isPlate(url)?'plate':'photo'}">`;
 const fmt=d=>{if(!d)return'';try{return new Intl.DateTimeFormat('es-CL',{day:'2-digit',month:'short',year:'numeric',timeZone:'UTC'}).format(new Date(d+'T00:00:00Z'))}catch{return d}};
-async function load(){const [r,e]=await Promise.all([fetch('/api/public/content',{cache:'no-store'}),fetch('/data/editorial.json',{cache:'no-store'}).catch(()=>null)]);if(!r.ok)throw new Error('content');D=await r.json();if(e?.ok){const x=await e.json();D={...D,materials:x.materials||D.materials,news:x.news||D.news,site:{...(D.site||{}),...(x.site||{})}}}renderAll()}
+async function load(){const [r,e,p]=await Promise.all([fetch('/api/public/content',{cache:'no-store'}),fetch('/data/editorial.json',{cache:'no-store'}).catch(()=>null),fetch('/data/policies.json',{cache:'no-store'}).catch(()=>null)]);if(!r.ok)throw new Error('content');D=await r.json();if(e?.ok){const x=await e.json();D={...D,materials:x.materials||D.materials,news:x.news||D.news,site:{...(D.site||{}),...(x.site||{})}}}if(p?.ok){const x=await p.json();D.policies=x.policies||[];D.policyNotice=x.notice||''}renderAll()}
 function text(id,v){const e=$(id);if(e)e.textContent=v||''}
 function renderAll(){const s=D.site||{};text('brandName',s.name);text('brandSubtitle',s.subtitle);text('heroEyebrow',s.heroEyebrow);text('heroTitle',s.heroTitle);text('heroEmphasis',s.heroEmphasis);text('heroText',s.heroText);text('eventLabel',s.eventLabel);text('eventTitle',s.eventTitle);text('eventText',s.eventText);text('eventDate',s.eventDate);text('videosTitle',s.videosTitle);text('videosText',s.videosText);text('materialsTitle',s.materialsTitle);text('materialsText',s.materialsText);text('capsulesTitle',s.capsulesTitle);text('capsulesText',s.capsulesText);text('localTitle',s.localTitle);text('localText',s.localText);text('resourcesTitle',s.resourcesTitle);text('resourcesText',s.resourcesText);text('notesTitle',s.notesTitle);text('notesText',s.notesText);text('newsTitle',s.newsTitle);text('newsText',s.newsText);text('labTitle',s.labTitle);text('labText',s.labText);text('footerName',s.name);text('footerText',s.footerText);text('territoryTitle',s.territoryTitle);text('territoryText',s.territoryText);[1,2,3].forEach(n=>{const img=$('territoryImage'+n),fig=img?.closest('figure'),url=s['territoryImage'+n];
  if(!img||!fig)return;
@@ -18,7 +18,7 @@ function renderAll(){const s=D.site||{};text('brandName',s.name);text('brandSubt
 // gradiente de tres paradas que había servía para tapar una imagen de 640 px.
 // Se exige un mínimo declarado por quien edita (heroImageMinWidth) antes de
 // volver a usar el hero como fondo.
-if(s.heroImage&&Number(s.heroImageMinWidth||0)>=1800){$('hero').classList.add('hasPhoto');$('hero').style.backgroundImage=`linear-gradient(100deg,rgba(3,29,48,.86),rgba(3,29,48,.45) 62%,transparent),url("${esc(s.heroImage)}")`}text('statResources',D.resources.length);text('statCapsules',D.capsules.length);text('statVideos',D.videos.length);text('statNotes',D.notes.length);renderVideos();renderMaterials();renderCapsules();renderTimeline();renderLibrary();renderNotes();renderNews()}
+if(s.heroImage&&Number(s.heroImageMinWidth||0)>=1800){$('hero').classList.add('hasPhoto');$('hero').style.backgroundImage=`linear-gradient(100deg,rgba(3,29,48,.86),rgba(3,29,48,.45) 62%,transparent),url("${esc(s.heroImage)}")`}text('statResources',D.resources.length);text('statCapsules',D.capsules.length);text('statVideos',D.videos.length);text('statNotes',D.notes.length);renderVideos();renderMaterials();renderPolicies();renderCapsules();renderTimeline();renderLibrary();renderNotes();renderNews()}
 function renderVideos(){
  const a=D.videos||[],host=$('videoHost'),playlist=$('videoPlaylist');
  if(!a.length){host.innerHTML='<div class="mediaEmpty">Sin videos publicados.</div>';playlist.innerHTML='';return}
@@ -180,6 +180,42 @@ function renderVideos(){
  show(a[0],0);
 }
 function renderMaterials(){$('materialsGrid').innerHTML=(D.materials||[]).map(m=>`<a class="baseCard" href="${esc(m.url)}" target="_blank" rel="noopener"><small>${esc(m.type||'Material')}</small><h3>${esc(m.title)}</h3><p>${esc(m.description||'')}</p><b>Abrir ↗</b></a>`).join('')}
+
+let legalPolicyId='',legalArticleNumber=1,legalSearchTerm='';
+const legalNormalize=value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/([a-z])6(?=[a-z])/g,'$1o').replace(/[^a-z0-9ñ]+/g,' ').trim();
+const legalHighlight=(value,term)=>{const safe=esc(value),q=String(term||'').trim();if(q.length<2)return safe;try{return safe.replace(new RegExp(q.replace(/[.*+?^$()|[\]\\{}]/g,'\\let capFilter='Todos';function renderCapsules()'),'gi'),m=>'<mark>'+m+'</mark>')}catch{return safe}};
+function legalBodyMarkup(value,term){return String(value||'').split(/\n{2,}/).filter(Boolean).map(block=>{const t=block.trim();if(t.startsWith('•'))return '<p class="legalBullet">'+legalHighlight(t.replace(/^•\s*/,''),term)+'</p>';if(/^\d+(?:[.,]\d+)+/.test(t))return '<h4>'+legalHighlight(t,term)+'</h4>';return '<p>'+legalHighlight(t,term).replace(/\n/g,'<br>')+'</p>'}).join('')}
+function renderPolicies(){
+ const policies=D.policies||[],select=$('policySelect');
+ if(!select||!policies.length)return;
+ if(!legalPolicyId||!policies.some(p=>p.id===legalPolicyId))legalPolicyId=policies[0].id;
+ select.innerHTML=policies.map(p=>'<option value="'+esc(p.id)+'">'+esc(p.shortName||p.title)+'</option>').join('');
+ select.value=legalPolicyId;
+ const render=()=>{
+  const p=policies.find(x=>x.id===legalPolicyId)||policies[0],q=legalSearchTerm.trim(),nq=legalNormalize(q);
+  text('legalDecreeType',p.decreeType||'Decreto');text('legalPolicyTitle',p.title);text('legalDecreeNumber',p.decreeNumber);text('legalDecreeDate',p.date);text('legalArticleCount',String((p.articles||[]).length));text('legalPolicySummary',p.summary);text('legalNotice',D.policyNotice||'');
+  const pdf=$('legalPdfLink');if(pdf)pdf.href=p.pdfUrl||'#';
+  $('legalSigners').innerHTML=(p.signers||[]).map(s=>'<div class="legalSigner"><span aria-hidden="true">✓</span><div><strong>'+esc(s.name)+'</strong><small>'+esc(s.role)+'</small></div></div>').join('');
+  $('legalQuickTerms').innerHTML=(p.quickTerms||[]).map(term=>'<button type="button" data-legal-term="'+esc(term)+'">'+esc(term)+'</button>').join('');
+  const all=p.articles||[];
+  const filtered=nq?all.filter(a=>legalNormalize(a.title+' '+a.text+' artículo '+a.number).includes(nq)):all;
+  if(!filtered.length){$('legalArticleList').innerHTML='<p class="legalEmpty">No hay artículos que coincidan con esta búsqueda.</p>';text('legalSearchStatus','0 coincidencias');return}
+  if(!filtered.some(a=>a.number===legalArticleNumber))legalArticleNumber=filtered[0].number;
+  text('legalSearchStatus',nq?filtered.length+' coincidencia'+(filtered.length===1?'':'s'):all.length+' artículos');
+  $('legalArticleList').innerHTML=filtered.map(a=>'<button type="button" class="legalArticleBtn '+(a.number===legalArticleNumber?'on':'')+'" data-legal-article="'+a.number+'"><span>Art. '+a.number+'</span><strong>'+esc(a.title)+'</strong></button>').join('');
+  const article=all.find(a=>a.number===legalArticleNumber)||all[0];
+  text('legalArticleNumber','Artículo '+article.number);text('legalViewerPolicy',p.shortName||p.title);text('legalArticleTitle',article.title);
+  $('legalArticleBody').innerHTML=legalBodyMarkup(article.text,q);
+  const complex=$('legalComplexNote');if(complex)complex.hidden=!(p.complexLayoutArticles||[]).includes(article.number);
+ };
+ select.onchange=()=>{legalPolicyId=select.value;legalArticleNumber=1;legalSearchTerm='';$('policySearch').value='';render()};
+ $('policySearch').oninput=e=>{legalSearchTerm=e.target.value;render()};
+ $('policySearchClear').onclick=()=>{legalSearchTerm='';$('policySearch').value='';$('policySearch').focus();render()};
+ $('legalQuickTerms').onclick=e=>{const b=e.target.closest('[data-legal-term]');if(!b)return;legalSearchTerm=b.dataset.legalTerm||'';$('policySearch').value=legalSearchTerm;render()};
+ $('legalArticleList').onclick=e=>{const b=e.target.closest('[data-legal-article]');if(!b)return;legalArticleNumber=Number(b.dataset.legalArticle);render();$('legalArticleTitle')?.scrollIntoView({behavior:'smooth',block:'center'})};
+ render();
+}
+
 let capFilter='Todos';function renderCapsules(){const caps=D.capsules||[],cats=['Todos',...new Set(caps.map(x=>x.category).filter(Boolean))];$('capsuleFilters').innerHTML=cats.map(c=>`<button class="capFilter ${c===capFilter?'on':''}" data-c="${esc(c)}">${esc(c)}</button>`).join('');const arr=capFilter==='Todos'?caps:caps.filter(x=>x.category===capFilter);$('capsuleGrid').innerHTML=arr.length?arr.map((c,i)=>`<article class="capCard ${i===0?'featured':''}" data-id="${c.id}">${c.imageUrl?`<div class="capImage${isPlate(c.imageUrl)?' hasPlate':''}">${coverImg(c.imageUrl,c.coverAlt,1200,750)}</div>`:''}<div class="capBody"><small>${esc(c.category||'Cápsula')} · ${esc(fmt(c.publishedAt))}</small><h3>${esc(c.title)}</h3><p>${esc(c.excerpt||'')}</p><div><span>${esc(c.author||'Equipo de Transformación Digital')}</span><button class="readBtn" data-kind="capsules" data-id="${c.id}">Leer →</button></div></div></article>`).join(''):'<div class="emptyPublic">Sin cápsulas publicadas en esta categoría.</div>';}
 $('capsuleFilters').onclick=e=>{const b=e.target.closest('button[data-c]');if(b){capFilter=b.dataset.c;renderCapsules()}};
 function renderTimeline(){$('timeline').innerHTML=(D.timeline||[]).map((x,i)=>`<article class="mile ${i===2?'now':''}"><small>${esc(x.label)}</small><h3>${esc(x.title)}</h3><p>${esc(x.text||'')}</p></article>`).join('')}
