@@ -123,6 +123,7 @@
 
   function enhanceVideoFacade(){
     const host=byId('videoHost');
+    if(host?.dataset.playerManaged==='true')return;
     const frame=host?.querySelector('iframe');
     if(!host||!frame||host.dataset.videoActivated==='true')return;
     const src=frame.getAttribute('src')||'';
@@ -206,7 +207,7 @@
   byId('closeGlobalResults')?.addEventListener('click',()=>{byId('globalResults').hidden=true;byId('globalSearch').focus()});
 
   document.addEventListener('click',event=>{
-    if(event.target.closest('.videoPick')){const host=byId('videoHost');if(host)host.dataset.videoActivated='false'}
+    if(event.target.closest('.videoPick')){const host=byId('videoHost');if(host&&host.dataset.playerManaged!=='true')host.dataset.videoActivated='false'}
     const task=event.target.closest('[data-task-query]');
     if(task)activateTask(task.dataset.taskQuery);
     if(event.target.closest('.readBtn'))lastDialogTrigger=event.target.closest('.readBtn');
