@@ -1,7 +1,7 @@
 {
   "site": {
     "materialsTitle": "Insumos esenciales para trabajar",
-    "materialsText": "Una selección rápida de normativa, guías y referencias que conviene tener a mano antes de trabajar con expedientes, firma electrónica, interoperabilidad, datos personales y ciberseguridad.",
+    "materialsText": "Normativa, guías, referencias y actos administrativos firmados que conviene tener a mano para trabajar con expedientes, firma electrónica, interoperabilidad, datos personales y ciberseguridad.",
     "newsTitle": "Radar Digital: lo que está cambiando",
     "newsText": "Noticias, agenda y señales oficiales que pueden afectar el trabajo municipal. Priorizamos cambios normativos, experiencias de otros municipios, ciberseguridad, plataformas del Estado y actividades útiles para los equipos."
   },
@@ -76,6 +76,24 @@
       "description": "Panel oficial de seguimiento de Gobierno Digital sobre habilitación y cobertura de ClaveÚnica, DocDigital, FirmaGob, PISEE y otras capacidades transversales del Estado.",
       "url": "https://portaldatos.digital.gob.cl/dashboards/dash_ltd",
       "position": 8,
+      "status": "published"
+    },
+    {
+      "id": "mat-decreto-ciber-1902e",
+      "type": "Decreto exento",
+      "title": "Decreto Exento N.º 1902E · Política Institucional de Ciberseguridad",
+      "description": "Acto administrativo firmado que aprueba la Política Institucional de Ciberseguridad de la Municipalidad de Constitución, de fecha 30 de junio de 2026.",
+      "url": "https://drive.google.com/file/d/13jAnk7-mkJHC-b8VJo0HkoGakQ3ahIXX/view?usp=sharing",
+      "position": 9,
+      "status": "published"
+    },
+    {
+      "id": "mat-decreto-td-1922e",
+      "type": "Decreto exento",
+      "title": "Decreto Exento N.º 1922E · Política Institucional de Transformación Digital",
+      "description": "Acto administrativo firmado que aprueba la Política Institucional de Transformación Digital de la Municipalidad de Constitución, de fecha 6 de julio de 2026.",
+      "url": "https://drive.google.com/file/d/1cT8_GApI5ly7h-VdduRGcyoxrTr96Nvr/view?usp=sharing",
+      "position": 10,
       "status": "published"
     }
   ],
