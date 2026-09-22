@@ -159,3 +159,124 @@ input::placeholder{color:#607785;opacity:1}
 
 .menu svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
 .stats:focus-visible,.localRail:focus-visible{outline-offset:-3px}
+
+
+/* ------------------------------------------------------------------
+   Minutos Digitales: playlist estable y reproductor robusto
+   Evita que CSS Grid comprima las 10 tarjetas dentro del max-height,
+   que era la causa del texto superpuesto en móvil.
+   ------------------------------------------------------------------ */
+.media .playlist{
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  gap:9px;
+  max-height:520px;
+  overflow-y:auto;
+  overflow-x:hidden;
+  padding-right:6px;
+  scrollbar-gutter:stable;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+}
+.media .videoPick{
+  flex:0 0 auto;
+  width:100%;
+  height:auto;
+  min-height:86px;
+  overflow:visible;
+  padding:14px 15px;
+  line-height:1.25;
+}
+.media .videoPick small,
+.media .videoPick strong,
+.media .videoPick span{
+  position:static;
+  float:none;
+  width:auto;
+  max-width:100%;
+  overflow-wrap:anywhere;
+  word-break:normal;
+}
+.media .videoPick small{line-height:1.25}
+.media .videoPick strong{margin:5px 0 4px;line-height:1.25}
+.media .videoPick span{line-height:1.42}
+.videoEmbed{
+  position:relative;
+  width:100%;
+  aspect-ratio:16/9;
+  background:#020b12;
+  overflow:hidden;
+}
+.videoEmbed iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+  background:#020b12;
+}
+.videoLoading{
+  position:absolute;
+  inset:0;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  background:#031d31;
+  color:#dcebef;
+  font-size:.82rem;
+  pointer-events:none;
+  transition:opacity .2s ease,visibility .2s ease;
+}
+.videoLoading span{
+  width:18px;height:18px;border:2px solid #ffffff45;border-top-color:#9de6e2;border-radius:50%;
+  animation:videoSpin .8s linear infinite;
+}
+.videoEmbed.is-ready .videoLoading{opacity:0;visibility:hidden}
+.videoSlow{
+  position:absolute;
+  left:12px;right:12px;bottom:12px;
+  z-index:3;
+  display:none;
+  padding:9px 11px;
+  border:1px solid #ffffff2e;
+  border-radius:8px;
+  background:#031d31e8;
+  color:#dcebef;
+  font-size:.74rem;
+  line-height:1.35;
+  pointer-events:none;
+}
+.videoEmbed.is-slow:not(.is-ready) .videoSlow{display:block}
+.videoRetry{
+  min-height:44px;
+  margin:10px 0 0 12px;
+  padding:0 12px;
+  border:1px solid #ffffff35;
+  border-radius:8px;
+  background:transparent;
+  color:#dcebef;
+  font-size:.72rem;
+  font-weight:800;
+}
+.videoRetry:hover,.videoRetry:focus-visible{border-color:#9de6e2;color:#9de6e2}
+@keyframes videoSpin{to{transform:rotate(360deg)}}
+@media(max-width:950px){
+  .media .playlist{max-height:460px}
+}
+@media(max-width:720px){
+  .mediaStage{gap:14px}
+  .media .playlist{max-height:390px;padding-right:4px}
+  .media .videoPick{min-height:64px;padding:11px 13px}
+  .media .videoPick span{display:none}
+  .media .videoPick strong{font-size:.9rem}
+  .playerInfo{padding:17px}
+  .playerInfo h3{font-size:1.18rem;line-height:1.22}
+  .playerInfo p{line-height:1.5}
+  .videoRetry{display:inline-flex;align-items:center;justify-content:center;margin-left:8px}
+}
+@media(prefers-reduced-motion:reduce){
+  .videoLoading span{animation:none}
+}
