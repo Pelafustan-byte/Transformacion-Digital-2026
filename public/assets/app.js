@@ -183,7 +183,7 @@ function renderMaterials(){$('materialsGrid').innerHTML=(D.materials||[]).map(m=
 
 let legalPolicyId='',legalArticleNumber=1,legalSearchTerm='';
 const legalNormalize=value=>String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/([a-z])6(?=[a-z])/g,'$1o').replace(/[^a-z0-9ñ]+/g,' ').trim();
-const legalHighlight=(value,term)=>{const safe=esc(value),q=String(term||'').trim();if(q.length<2)return safe;try{return safe.replace(new RegExp(q.replace(/[.*+?^$()|[\]\\{}]/g,'\\let capFilter='Todos';function renderCapsules()'),'gi'),m=>'<mark>'+m+'</mark>')}catch{return safe}};
+const legalHighlight=(value,term)=>esc(value);
 function legalBodyMarkup(value,term){return String(value||'').split(/\n{2,}/).filter(Boolean).map(block=>{const t=block.trim();if(t.startsWith('•'))return '<p class="legalBullet">'+legalHighlight(t.replace(/^•\s*/,''),term)+'</p>';if(/^\d+(?:[.,]\d+)+/.test(t))return '<h4>'+legalHighlight(t,term)+'</h4>';return '<p>'+legalHighlight(t,term).replace(/\n/g,'<br>')+'</p>'}).join('')}
 function renderPolicies(){
  const policies=D.policies||[],select=$('policySelect');
