@@ -19,7 +19,54 @@ function renderAll(){const s=D.site||{};text('brandName',s.name);text('brandSubt
 // Se exige un mínimo declarado por quien edita (heroImageMinWidth) antes de
 // volver a usar el hero como fondo.
 if(s.heroImage&&Number(s.heroImageMinWidth||0)>=1800){$('hero').classList.add('hasPhoto');$('hero').style.backgroundImage=`linear-gradient(100deg,rgba(3,29,48,.86),rgba(3,29,48,.45) 62%,transparent),url("${esc(s.heroImage)}")`}text('statResources',D.resources.length);text('statCapsules',D.capsules.length);text('statVideos',D.videos.length);text('statNotes',D.notes.length);renderVideos();renderMaterials();renderCapsules();renderTimeline();renderLibrary();renderNotes();renderNews()}
-function renderVideos(){const a=D.videos||[];if(!a.length){$('videoHost').innerHTML='<div class="mediaEmpty">Sin videos publicados.</div>';$('videoPlaylist').innerHTML='';return}const show=(v,i)=>{const u=v.embedUrl||v.sourceUrl||'';const direct=/^\/media\//.test(u)||/\.(mp4|webm)(\?|$)/i.test(u);$('videoHost').innerHTML=direct?`<video class="directVideo" src="${esc(u)}" controls preload="metadata"></video>`:`<iframe src="${esc(u)}" title="${esc(v.title)}" allow="autoplay; fullscreen" allowfullscreen loading="lazy"></iframe>`;text('videoTitle',v.title);text('videoDesc',v.description);$('videoLink').href=v.sourceUrl||u;$('videoPlaylist').querySelectorAll('button').forEach((b,j)=>b.classList.toggle('on',j===i))};$('videoPlaylist').innerHTML=a.map((v,i)=>`<button class="videoPick ${i===0?'on':''}" data-i="${i}"><small>Video ${String(i+1).padStart(2,'0')}</small><strong>${esc(v.title)}</strong><span>${esc(v.description||'')}</span></button>`).join('');$('videoPlaylist').onclick=e=>{const b=e.target.closest('button[data-i]');if(b)show(a[+b.dataset.i],+b.dataset.i)};show(a[0],0)}
+function renderVideos(){
+ const a=D.videos||[],host=$('videoHost'),playlist=$('videoPlaylist');
+ if(!a.length){host.innerHTML='<div class="mediaEmpty">Sin videos publicados.</div>';playlist.innerHTML='';return}
+ let currentIndex=0,slowTimer=null;
+ const embedUrl=value=>{
+  const raw=String(value||'').trim();
+  const m=raw.match(/drive\.google\.com\/file\/d\/([^/]+)/i);
+  return m?`https://drive.google.com/file/d/${m[1]}/preview`:raw;
+ };
+ const ensureRetry=()=>{
+  let button=$('videoRetry');
+  if(!button){
+   button=document.createElement('button');
+   button.id='videoRetry';button.type='button';button.className='videoRetry';
+   button.textContent='↻ Recargar reproductor';
+   $('videoLink')?.insertAdjacentElement('afterend',button);
+  }
+  return button;
+ };
+ const setActive=i=>{
+  playlist.querySelectorAll('button[data-i]').forEach((b,j)=>{
+   const active=j===i;b.classList.toggle('on',active);
+   b.setAttribute('aria-pressed',active?'true':'false');
+  });
+ };
+ const show=(v,i)=>{
+  currentIndex=i;clearTimeout(slowTimer);
+  const raw=v.embedUrl||v.sourceUrl||'',u=embedUrl(raw);
+  const direct=/^\/media\//.test(u)||/\.(mp4|webm)(\?|$)/i.test(u);
+  host.dataset.playerManaged='true';
+  host.innerHTML=direct
+   ?`<video class="directVideo" src="${esc(u)}" controls playsinline preload="metadata"></video>`
+   :`<div class="videoEmbed"><iframe src="${esc(u)}" title="${esc(v.title)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="eager" referrerpolicy="strict-origin-when-cross-origin"></iframe><div class="videoLoading" role="status" aria-live="polite"><span></span>Cargando reproductor…</div><div class="videoSlow">Si el reproductor no responde, usa “Recargar reproductor” o abre el archivo en Drive.</div></div>`;
+  text('videoTitle',v.title);text('videoDesc',v.description);
+  const link=$('videoLink');link.href=v.sourceUrl||raw||u;link.textContent='Abrir en Drive ↗';
+  setActive(i);
+  const retry=ensureRetry();retry.onclick=()=>show(a[currentIndex],currentIndex);
+  const frame=host.querySelector('iframe'),wrap=host.querySelector('.videoEmbed');
+  if(frame&&wrap){
+   const ready=()=>{clearTimeout(slowTimer);wrap.classList.add('is-ready');wrap.classList.remove('is-slow')};
+   frame.addEventListener('load',ready,{once:true});
+   slowTimer=setTimeout(()=>wrap.classList.add('is-slow'),7000);
+  }
+ };
+ playlist.innerHTML=a.map((v,i)=>`<button class="videoPick ${i===0?'on':''}" type="button" data-i="${i}" aria-pressed="${i===0?'true':'false'}"><small>Cápsula ${String(i+1).padStart(2,'0')}</small><strong>${esc(v.title)}</strong><span>${esc(v.description||'')}</span></button>`).join('');
+ playlist.onclick=e=>{const b=e.target.closest('button[data-i]');if(b)show(a[+b.dataset.i],+b.dataset.i)};
+ show(a[0],0);
+}
 function renderMaterials(){$('materialsGrid').innerHTML=(D.materials||[]).map(m=>`<a class="baseCard" href="${esc(m.url)}" target="_blank" rel="noopener"><small>${esc(m.type||'Material')}</small><h3>${esc(m.title)}</h3><p>${esc(m.description||'')}</p><b>Abrir ↗</b></a>`).join('')}
 let capFilter='Todos';function renderCapsules(){const caps=D.capsules||[],cats=['Todos',...new Set(caps.map(x=>x.category).filter(Boolean))];$('capsuleFilters').innerHTML=cats.map(c=>`<button class="capFilter ${c===capFilter?'on':''}" data-c="${esc(c)}">${esc(c)}</button>`).join('');const arr=capFilter==='Todos'?caps:caps.filter(x=>x.category===capFilter);$('capsuleGrid').innerHTML=arr.length?arr.map((c,i)=>`<article class="capCard ${i===0?'featured':''}" data-id="${c.id}">${c.imageUrl?`<div class="capImage${isPlate(c.imageUrl)?' hasPlate':''}">${coverImg(c.imageUrl,c.coverAlt,1200,750)}</div>`:''}<div class="capBody"><small>${esc(c.category||'Cápsula')} · ${esc(fmt(c.publishedAt))}</small><h3>${esc(c.title)}</h3><p>${esc(c.excerpt||'')}</p><div><span>${esc(c.author||'Equipo de Transformación Digital')}</span><button class="readBtn" data-kind="capsules" data-id="${c.id}">Leer →</button></div></div></article>`).join(''):'<div class="emptyPublic">Sin cápsulas publicadas en esta categoría.</div>';}
 $('capsuleFilters').onclick=e=>{const b=e.target.closest('button[data-c]');if(b){capFilter=b.dataset.c;renderCapsules()}};
