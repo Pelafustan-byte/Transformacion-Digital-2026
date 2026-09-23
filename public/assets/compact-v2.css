@@ -1,0 +1,80 @@
+/* Ruta Digital v3: portada compacta, ticker y módulos bajo demanda */
+:root{--ticker-h:38px}
+.newsTicker{position:sticky;top:78px;z-index:76;height:var(--ticker-h);display:grid;grid-template-columns:auto minmax(0,1fr);overflow:hidden;background:#052f4a;color:#fff;border-bottom:1px solid #ffffff1c;box-shadow:0 7px 20px rgba(3,32,49,.12)}
+.newsTickerLabel{position:relative;z-index:2;display:flex;align-items:center;gap:7px;padding:0 15px;background:#0a6f88;color:#fff;font-size:.65rem;font-weight:900;letter-spacing:.055em;text-transform:uppercase;white-space:nowrap}
+.newsTickerLabel i{width:7px;height:7px;border-radius:50%;background:#9de6e2;box-shadow:0 0 0 4px #9de6e226}
+.newsTickerViewport{min-width:0;overflow:hidden;display:flex;align-items:center}
+.newsTickerTrack{display:flex;align-items:center;width:max-content;min-width:max-content;animation:newsTickerMove 58s linear infinite;will-change:transform}
+.newsTicker:hover .newsTickerTrack,.newsTicker:focus-within .newsTickerTrack{animation-play-state:paused}
+.newsTickerItem{display:inline-flex;align-items:center;gap:11px;height:38px;padding:0 22px;color:#eef8fa;text-decoration:none;font-size:.72rem;font-weight:650;white-space:nowrap;border-right:1px solid #ffffff24}
+.newsTickerItem small{color:#9de6e2;font-size:.61rem;font-weight:900;text-transform:uppercase}
+.newsTickerItem:hover,.newsTickerItem:focus-visible{background:#ffffff10;color:#fff}
+@keyframes newsTickerMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* El evento deja de cubrir la fotografía: vive en la columna de información. */
+.heroIn>div:first-child{grid-row:1/3!important;align-self:center!important}
+.heroPhoto{grid-column:2!important;grid-row:1/3!important}
+.heroBrief.relocatedEvent{position:static!important;display:grid!important;grid-template-columns:auto minmax(0,1fr)!important;column-gap:13px!important;row-gap:2px!important;width:min(600px,100%)!important;margin:24px 0 0!important;padding:12px 14px!important;border:1px solid #ffffff2e!important;border-left:3px solid #9de6e2!important;border-radius:10px!important;background:#ffffff0d!important;backdrop-filter:none!important;box-shadow:none!important}
+.heroBrief.relocatedEvent .pulse{grid-row:1/4;align-self:start;display:grid!important;place-items:center;width:35px;height:35px;margin-top:1px;border-radius:9px;background:#9de6e21a;color:#9de6e2!important;font-size:0!important}
+.heroBrief.relocatedEvent .pulse:after{content:"●";font-size:.7rem}
+.heroBrief.relocatedEvent h2{grid-column:2;margin:0!important;font-size:.88rem!important;line-height:1.25!important;color:#fff}
+.heroBrief.relocatedEvent p{grid-column:2;margin:2px 0 0!important;color:#cfdee4!important;font-size:.7rem!important;line-height:1.35!important}
+.heroBrief.relocatedEvent strong{grid-column:2;margin:3px 0 0!important;padding:0!important;border:0!important;color:#9de6e2!important;font-size:.68rem!important}
+.heroPhoto:after{background:linear-gradient(180deg,transparent 68%,rgba(3,25,40,.48))!important}
+
+/* Navegación modular: el contenido sigue disponible, pero no se apila todo. */
+.moduleHub{padding:46px 0 52px;background:linear-gradient(180deg,#f5fafb,#eef5f6);border-top:1px solid #d5e3e8}
+.moduleHubHead{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,.65fr);gap:30px;align-items:end;margin-bottom:19px}
+.moduleHubHead small{display:block;margin-bottom:6px;color:#08728e;font-size:.66rem;font-weight:900;text-transform:uppercase;letter-spacing:.07em}
+.moduleHubHead h2{max-width:none;margin:0;color:#063b5c;font-size:clamp(1.8rem,3.4vw,2.8rem);letter-spacing:-.03em}
+.moduleHubHead p{margin:0;color:#5d7580;font-size:.84rem;line-height:1.5}
+.moduleRail{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(168px,1fr);gap:8px;overflow-x:auto;padding:1px 1px 9px;scroll-snap-type:x proximity;scrollbar-width:thin}
+.modulePick{position:relative;scroll-snap-align:start;display:grid;grid-template-columns:34px 1fr;gap:9px;align-items:center;min-height:74px;padding:10px 11px;border:1px solid #c0d3da;border-radius:11px;background:#fff;color:#17485c;text-align:left;cursor:pointer}
+.modulePick:hover,.modulePick:focus-visible,.modulePick.on{border-color:#0a778f;background:#eaf6f6;box-shadow:0 7px 18px #063b5c0d}
+.modulePick.on{box-shadow:inset 3px 0 #0a8796}
+.moduleIcon{display:grid;width:34px;height:34px;place-items:center;border-radius:9px;background:#e8f2f4;color:#08728e;font-size:.67rem;font-weight:950}
+.modulePick strong{display:block;font-size:.78rem;line-height:1.2}.modulePick small{display:block;margin-top:3px;color:#728690;font-size:.62rem;line-height:1.25}
+.moduleHint{display:flex;align-items:center;justify-content:center;gap:8px;margin:16px 0 0;color:#6c8089;font-size:.69rem}.moduleHint i{width:28px;height:1px;background:#aec6cf}
+
+.module-managed.module-closed{display:none!important}
+.module-managed.module-open{display:block!important;animation:moduleReveal .22s ease}
+@keyframes moduleReveal{from{opacity:.3;transform:translateY(5px)}}
+.moduleActiveBar{display:flex;justify-content:space-between;gap:16px;align-items:center;margin:-20px 0 28px;padding:9px 11px;border:1px solid #c2d5dc;border-radius:9px;background:#f7fbfc;color:#315c6d}
+.moduleActiveBar span{font-size:.69rem;font-weight:850}.moduleActiveBar b{color:#08728e}
+.moduleActiveBar button{min-height:34px;padding:5px 9px;border:1px solid #b8cfd7;border-radius:7px;background:#fff;color:#315c6d;font-size:.67rem;font-weight:850;cursor:pointer}
+.moduleActiveBar button:hover{border-color:#08768e}
+
+/* El Radar vive en el ticker; se conserva el DOM inferior para datos/compatibilidad. */
+#noticias{display:none!important}
+
+/* La portada principal gana aire sin crecer innecesariamente. */
+#tareas.sec{padding-top:64px;padding-bottom:64px}
+#herramientas.sec{padding-top:62px;padding-bottom:64px}
+.taskIntro{margin-bottom:22px!important}
+.toolkitHead{margin-bottom:20px!important}
+.toolkitPane{padding-top:26px!important;padding-bottom:26px!important}
+footer{margin-top:0}
+
+@media(max-width:950px){
+ .newsTicker{top:78px}
+ .heroBrief.relocatedEvent{margin-top:18px!important}
+ .heroPhoto{grid-column:1!important;grid-row:auto!important;margin-top:16px!important}
+ .heroIn>div:first-child{grid-column:1!important;grid-row:auto!important}
+ .moduleHubHead{grid-template-columns:1fr;gap:8px}
+ .moduleRail{grid-auto-columns:minmax(158px,72vw)}
+}
+@media(max-width:720px){
+ :root{--ticker-h:34px}
+ .newsTicker{top:70px;height:34px;grid-template-columns:auto minmax(0,1fr)}
+ .newsTickerLabel{padding:0 9px;font-size:.56rem}.newsTickerLabel span{display:none}
+ .newsTickerItem{height:34px;padding:0 15px;font-size:.66rem}.newsTickerItem small{display:none}
+ .heroIn{padding-top:36px!important}
+ .heroBrief.relocatedEvent{grid-template-columns:30px minmax(0,1fr)!important;margin:16px 0 0!important;padding:10px 11px!important}
+ .heroBrief.relocatedEvent .pulse{width:30px;height:30px}
+ .heroBrief.relocatedEvent p{display:none!important}
+ .moduleHub{padding:34px 0 40px}
+ .moduleHubHead h2{font-size:1.8rem}
+ .modulePick{min-height:68px}
+ .moduleActiveBar{margin:-8px 0 20px}
+}
+@media(prefers-reduced-motion:reduce){.newsTickerTrack{animation:none!important;transform:none!important}.module-managed.module-open{animation:none}}
