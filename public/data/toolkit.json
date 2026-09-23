@@ -1,0 +1,552 @@
+{
+  "updatedAt": "2026-09-22",
+  "notice": "Herramientas de apoyo operativo. Los flujos son orientativos y deben ajustarse al tipo de acto, procedimiento y competencias de cada unidad.",
+  "roles": [
+    {
+      "id": "jefatura",
+      "label": "Director / Jefatura",
+      "intro": "Asegura que el documento salga completo, tenga responsable claro y avance por la ruta correcta.",
+      "items": [
+        "Revisa objeto, antecedentes y unidad responsable antes de derivar.",
+        "Define quién prepara, revisa y responde observaciones.",
+        "Visa o firma sólo cuando el contenido corresponde a tu ámbito.",
+        "Si una observación cambia el acto, devuelve para corrección y repite las revisiones necesarias.",
+        "Controla plazos y evita documentos detenidos sin responsable.",
+        "Usa el expediente como registro del procedimiento, no como simple buzón."
+      ]
+    },
+    {
+      "id": "administrativo",
+      "label": "Administrativo",
+      "intro": "Tu trabajo sostiene la trazabilidad y evita devoluciones por antecedentes incompletos.",
+      "items": [
+        "Adjunta antecedentes completos, legibles y correctamente identificados.",
+        "Usa nombres de archivo y metadatos reconocibles.",
+        "Verifica destinatario, materia, expediente y documentos obligatorios.",
+        "No reemplaces una visación técnica o jurídica si tu función es de apoyo.",
+        "Evita copias paralelas por canales no institucionales.",
+        "Si un documento vuelve observado, identifica exactamente qué debe subsanarse."
+      ]
+    },
+    {
+      "id": "profesional",
+      "label": "Profesional",
+      "intro": "El fundamento técnico debe ser comprensible, verificable y trazable.",
+      "items": [
+        "Explica qué se propone, por qué y con qué respaldo.",
+        "Adjunta informes, certificados, cotizaciones u otros antecedentes pertinentes.",
+        "Responde observaciones técnicas dentro del expediente.",
+        "Distingue entre corregir el acto y responder mediante un antecedente.",
+        "Evita trabajar sobre versiones paralelas fuera del sistema.",
+        "Revisa fechas, montos, nombres, referencias y anexos antes de derivar."
+      ]
+    },
+    {
+      "id": "partes",
+      "label": "Oficina de Partes",
+      "intro": "Recepción, registro y derivación: la integridad del documento y su trazabilidad son esenciales.",
+      "items": [
+        "Recibe, registra y deriva al responsable correspondiente.",
+        "No modifica el contenido sustantivo del documento.",
+        "Verifica datos mínimos y devuelve cuando falten antecedentes básicos.",
+        "Mantén número, fecha, origen, destino y expediente correctamente asociados.",
+        "Evita canales paralelos que rompan la trazabilidad.",
+        "Al cierre, asegura registro y distribución conforme al procedimiento."
+      ]
+    },
+    {
+      "id": "control",
+      "label": "Control Interno",
+      "intro": "La revisión se concentra en legalidad, antecedentes y trazabilidad, sin reemplazar el mérito de la administración.",
+      "items": [
+        "Revisa preventivamente la legalidad del acto y sus antecedentes.",
+        "Formula observaciones concretas y subsanables.",
+        "Distingue observación, alcance preventivo y representación cuando corresponda.",
+        "Verifica que las revisiones previas pertinentes estén incorporadas.",
+        "Deja trazabilidad de revisión, devolución, respuesta y curso.",
+        "Evita pronunciarse sobre mérito u oportunidad fuera de su competencia."
+      ]
+    },
+    {
+      "id": "informatica",
+      "label": "Informática",
+      "intro": "Identidad, continuidad y seguridad: que las plataformas funcionen y el acceso sea el estrictamente necesario.",
+      "items": [
+        "Gestiona altas, bajas y cambios de acceso según funciones.",
+        "Apoya FirmaGob, segundo factor y recuperación de acceso.",
+        "Monitorea disponibilidad, respaldos y conectividad.",
+        "Registra y escala incidentes que afecten servicios o información.",
+        "Promueve software autorizado, actualización, mínimo privilegio y MFA.",
+        "Coordina con Transformación Digital cuando una falla afecta un flujo institucional."
+      ]
+    }
+  ],
+  "checklist": [
+    {
+      "id": "access",
+      "title": "Acceso a FEDOK habilitado",
+      "text": "Puedo ingresar con mi usuario institucional y sé cómo recuperar el acceso."
+    },
+    {
+      "id": "mail",
+      "title": "Correo institucional operativo",
+      "text": "Puedo recibir avisos y comunicaciones del proceso."
+    },
+    {
+      "id": "signature",
+      "title": "Firma electrónica y segundo factor",
+      "text": "Si mi rol firma, tengo FirmaGob/certificado y MFA disponibles."
+    },
+    {
+      "id": "role",
+      "title": "Sé qué rol cumplo",
+      "text": "Tengo claro si preparo, reviso, viso, firmo, registro, derivo o tomo conocimiento."
+    },
+    {
+      "id": "route",
+      "title": "Sé a quién derivar",
+      "text": "Conozco el destino siguiente y cuándo corregir, devolver u observar."
+    },
+    {
+      "id": "docs",
+      "title": "Documentos y anexos preparados",
+      "text": "El archivo principal y respaldos están completos, legibles y correctamente nombrados."
+    }
+  ],
+  "flows": [
+    {
+      "id": "acto",
+      "title": "Acto con revisión jurídica y Control",
+      "subtitle": "Ruta general para actos que requieren ambas revisiones.",
+      "steps": [
+        "Unidad requirente|Prepara acto y antecedentes",
+        "Dirección|Revisa contenido",
+        "Asesoría Jurídica|Revisión jurídica cuando corresponde",
+        "Control Interno|Control preventivo de legalidad",
+        "Administración / Alcaldía|Decisión y tramitación",
+        "Secretaría Municipal|Numeración, firma o formalización",
+        "Oficina de Partes|Registro y distribución"
+      ],
+      "notes": [
+        "Si cambian vistos, considerandos o contenido sustantivo, deben repetirse las revisiones que el cambio haga necesarias.",
+        "La ruta exacta puede variar según materia y tipo de acto."
+      ]
+    },
+    {
+      "id": "observacion",
+      "title": "Respuesta a una observación de Control",
+      "subtitle": "Distingue corrección del acto y respuesta fundada.",
+      "steps": [
+        "Control Interno|Devuelve con observación",
+        "Unidad requirente|Corrige o prepara respuesta",
+        "Dirección|Valida la respuesta",
+        "Control Interno|Revisa subsanación o cursa con alcance",
+        "Administración / Alcaldía|Continúa tramitación"
+      ],
+      "notes": [
+        "La respuesta debe quedar dentro del mismo expediente.",
+        "Si la subsanación altera el acto, debe revisarse la nueva versión."
+      ]
+    },
+    {
+      "id": "partes",
+      "title": "Ingreso y derivación por Oficina de Partes",
+      "subtitle": "Registro sin alterar el contenido.",
+      "steps": [
+        "Unidad / remitente|Entrega documento",
+        "Oficina de Partes|Recibe y registra",
+        "Dirección destinataria|Toma conocimiento y deriva",
+        "Responsable|Tramita, responde o devuelve",
+        "Oficina de Partes|Registra salida"
+      ],
+      "notes": [
+        "Oficina de Partes puede devolver si faltan antecedentes mínimos.",
+        "Registrar no implica editar el contenido sustantivo."
+      ]
+    }
+  ],
+  "problems": [
+    {
+      "id": "sign",
+      "title": "No puedo firmar",
+      "lead": "Resuelve primero identidad, certificado y segundo factor.",
+      "steps": [
+        "Confirma cuenta institucional y usuario correcto.",
+        "Revisa certificado/FirmaGob y rol habilitado.",
+        "Verifica MFA, fecha/hora y navegador.",
+        "Cierra sesión e intenta nuevamente una vez.",
+        "Registra captura del error y reporta."
+      ],
+      "escalate": "Informática / Transformación Digital"
+    },
+    {
+      "id": "exp",
+      "title": "No encuentro un expediente",
+      "lead": "Busca por identificadores y revisa si realmente te fue derivado.",
+      "steps": [
+        "Busca por número, materia, fecha u origen.",
+        "Revisa bandejas de entrada y derivados.",
+        "Confirma con la unidad anterior que la derivación se realizó.",
+        "Si existe pero no lo ves, revisa permisos o rol.",
+        "Escala con número o documento de referencia."
+      ],
+      "escalate": "Oficina de Partes / administración de FEDOK"
+    },
+    {
+      "id": "return",
+      "title": "Me devolvieron un documento",
+      "lead": "Identifica si debes corregir el acto o responder la observación.",
+      "steps": [
+        "Lee completa la observación.",
+        "Si cambia el acto, genera una nueva versión.",
+        "Si corresponde responder por memorándum, incorpóralo al expediente.",
+        "No elimines observación ni versión anterior.",
+        "Reenvía por la ruta correspondiente."
+      ],
+      "escalate": "Jefatura / unidad revisora"
+    },
+    {
+      "id": "login",
+      "title": "No puedo entrar a una plataforma",
+      "lead": "Distingue credenciales, MFA y caída del servicio.",
+      "steps": [
+        "Comprueba conexión y URL oficial.",
+        "Verifica usuario, contraseña y MFA.",
+        "Prueba ventana privada o navegador compatible.",
+        "Consulta si existe indisponibilidad general.",
+        "Reporta plataforma, hora y mensaje de error."
+      ],
+      "escalate": "Informática"
+    },
+    {
+      "id": "phishing",
+      "title": "Recibí un correo sospechoso",
+      "lead": "No interactúes con el contenido hasta validarlo.",
+      "steps": [
+        "No abras enlaces ni archivos.",
+        "No entregues contraseñas ni códigos MFA.",
+        "Revisa remitente real y dominio.",
+        "Reporta por el canal institucional.",
+        "Si ya hiciste clic, informa inmediatamente."
+      ],
+      "escalate": "Informática / Encargado de Ciberseguridad"
+    }
+  ],
+  "milestones": [
+    {
+      "id": "anci-monitor",
+      "dateLabel": "23 SEP · 10:00",
+      "title": "Charla ANCI: monitorear en tiempo real",
+      "text": "Actividad abierta del ciclo de los 9 básicos de ciberseguridad.",
+      "url": "https://anci.gob.cl/eventos/charla-basica-monitorear-en-tiempo-real/",
+      "source": "ANCI",
+      "start": "20260923T100000",
+      "end": "20260923T110000",
+      "location": "Evento virtual"
+    },
+    {
+      "id": "fedok-test",
+      "dateLabel": "25 SEP · 11:30",
+      "title": "Primera prueba presencial de FEDOK",
+      "text": "Jornada municipal para probar flujo documental, firma electrónica y derivaciones.",
+      "url": "#videos",
+      "source": "Municipalidad de Constitución",
+      "start": "20260925T113000",
+      "end": "20260925T130000",
+      "location": "Salón Municipal, Constitución"
+    },
+    {
+      "id": "data-law",
+      "dateLabel": "01 DIC 2026",
+      "title": "Entrada en vigencia de la Ley 21.719",
+      "text": "Comienza la vigencia diferida de la nueva regulación de protección de datos personales.",
+      "url": "https://www.bcn.cl/leychile/Navegar?idNorma=1209272&idVersion=2026-12-01",
+      "source": "BCN / LeyChile",
+      "start": "20261201",
+      "allDay": true
+    },
+    {
+      "id": "ongoing",
+      "dateLabel": "PERMANENTE",
+      "title": "Capacitación y adopción digital",
+      "text": "Minutos Digitales, guías y jornadas internas para preparar a los equipos.",
+      "url": "#videos",
+      "source": "Ruta Digital"
+    }
+  ],
+  "norms": [
+    {
+      "id": "l21180",
+      "tag": "Transformación Digital",
+      "title": "Ley N.º 21.180",
+      "subtitle": "Transformación Digital del Estado",
+      "requires": "Los procedimientos administrativos deben expresarse por medios electrónicos, salvo excepciones legales, y las plataformas deben soportar expedientes electrónicos con trazabilidad.",
+      "affects": "Órganos de la Administración en los ámbitos sujetos a la ley y su implementación.",
+      "actions": [
+        "Mapear procedimientos y responsables.",
+        "Usar expediente electrónico como registro.",
+        "Evitar canales paralelos que rompan trazabilidad.",
+        "Preparar interoperabilidad y plataformas habilitantes."
+      ],
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=1138479",
+      "source": "BCN / LeyChile"
+    },
+    {
+      "id": "l21663",
+      "tag": "Ciberseguridad",
+      "title": "Ley N.º 21.663",
+      "subtitle": "Marco de Ciberseguridad",
+      "requires": "Establece el marco nacional de ciberseguridad y deberes de prevención, gestión y reporte de incidentes; incluye expresamente a las municipalidades dentro de la Administración del Estado.",
+      "affects": "Municipalidades y demás organismos y prestadores comprendidos por la ley.",
+      "actions": [
+        "Definir responsables y canales de reporte.",
+        "Mantener controles y registros de incidentes.",
+        "Preparar continuidad y recuperación.",
+        "Aplicar MFA, respaldos, actualización y mínimo privilegio."
+      ],
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=1202434",
+      "source": "BCN / LeyChile"
+    },
+    {
+      "id": "l21719",
+      "tag": "Datos personales",
+      "title": "Ley N.º 21.719",
+      "subtitle": "Protección y tratamiento de datos personales",
+      "requires": "Actualiza el régimen de protección de datos y crea la Agencia de Protección de Datos Personales; incluye el tratamiento realizado por órganos públicos.",
+      "affects": "Unidades que recolectan, consultan, almacenan o comparten datos personales.",
+      "actions": [
+        "Inventariar bases y tratamientos.",
+        "Identificar finalidad, acceso y conservación.",
+        "Revisar formularios y transferencias.",
+        "Preparar gestión de derechos e incidentes antes del 1 de diciembre de 2026."
+      ],
+      "url": "https://www.bcn.cl/leychile/Navegar?idNorma=1209272&idVersion=2026-12-01",
+      "source": "BCN / LeyChile",
+      "badge": "Vigencia: 01 dic 2026"
+    },
+    {
+      "id": "policy-td",
+      "tag": "Política municipal",
+      "title": "Política Institucional de Transformación Digital",
+      "subtitle": "D.E. N.º 1922E · 6 julio 2026",
+      "requires": "Define gobernanza y hoja de ruta municipal para gestión documental, interoperabilidad, infraestructura, procesos y capacitación.",
+      "affects": "Direcciones y unidades que participan en procesos y servicios digitales.",
+      "actions": [
+        "Consultar responsabilidades por artículo.",
+        "Alinear iniciativas con la hoja de ruta.",
+        "Incorporar gestión del cambio.",
+        "Usarla como referencia de proyectos digitales."
+      ],
+      "url": "https://drive.google.com/file/d/1cT8_GApI5ly7h-VdduRGcyoxrTr96Nvr/view?usp=sharing",
+      "source": "Municipalidad de Constitución"
+    },
+    {
+      "id": "policy-cyber",
+      "tag": "Política municipal",
+      "title": "Política Institucional de Ciberseguridad",
+      "subtitle": "D.E. N.º 1902E · 30 junio 2026",
+      "requires": "Establece controles internos sobre accesos, contraseñas, respaldos, correo, incidentes, continuidad y uso seguro de activos.",
+      "affects": "Funcionarios, honorarios, personal externo con acceso, equipos y sistemas institucionales.",
+      "actions": [
+        "Usar MFA y credenciales personales.",
+        "Reportar incidentes de inmediato.",
+        "Mantener equipos autorizados y actualizados.",
+        "Aplicar respaldos y controles de acceso."
+      ],
+      "url": "https://drive.google.com/file/d/13jAnk7-mkJHC-b8VJo0HkoGakQ3ahIXX/view?usp=sharing",
+      "source": "Municipalidad de Constitución"
+    }
+  ],
+  "progress": [
+    {
+      "area": "Gestor documental FEDOK",
+      "status": "En implementación",
+      "detail": "Flujos, roles y documentos están siendo preparados para uso institucional.",
+      "next": "Próximo hito: prueba presencial del 25 de septiembre, 11:30."
+    },
+    {
+      "area": "Firma electrónica",
+      "status": "En implementación",
+      "detail": "Se integra al flujo documental para validar firma, roles y segundo factor.",
+      "next": "Próximo hito: prueba de firma dentro de FEDOK."
+    },
+    {
+      "area": "Interoperabilidad",
+      "status": "En preparación",
+      "detail": "Se identifican casos de uso para reducir solicitudes repetidas de antecedentes.",
+      "next": "Próximo hito: priorizar intercambios y responsables."
+    },
+    {
+      "area": "Ciberseguridad",
+      "status": "En implementación",
+      "detail": "Existe política institucional y material de sensibilización.",
+      "next": "Próximo hito: fortalecer continuidad, monitoreo y 9 básicos ANCI."
+    },
+    {
+      "area": "Datos personales",
+      "status": "En preparación",
+      "detail": "Se requiere ordenar tratamientos, responsables y resguardos.",
+      "next": "Próximo hito: inventario y brechas antes del 1 de diciembre de 2026."
+    },
+    {
+      "area": "Capacitación",
+      "status": "En curso",
+      "detail": "Ruta Digital, Minutos Digitales y jornadas prácticas apoyan la adopción.",
+      "next": "Próximo hito: convertir dudas reales en nuevos contenidos."
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Expediente electrónico",
+      "def": "Conjunto ordenado de documentos y actuaciones de un procedimiento, con secuencia, responsables y trazabilidad."
+    },
+    {
+      "term": "Interoperabilidad",
+      "def": "Capacidad de sistemas y organismos para intercambiar información de forma segura y utilizable."
+    },
+    {
+      "term": "Metadato",
+      "def": "Dato que describe un documento: número, fecha, autor, materia, estado, expediente u origen."
+    },
+    {
+      "term": "MFA",
+      "def": "Autenticación multifactor: exige más de una prueba de identidad."
+    },
+    {
+      "term": "FirmaGob",
+      "def": "Plataforma estatal para gestionar y utilizar firma electrónica avanzada por funcionarios habilitados."
+    },
+    {
+      "term": "DocDigital",
+      "def": "Plataforma estatal para comunicaciones oficiales electrónicas entre instituciones públicas."
+    },
+    {
+      "term": "PISEE",
+      "def": "Plataforma o red de interoperabilidad utilizada para intercambiar información entre organismos."
+    },
+    {
+      "term": "Trazabilidad",
+      "def": "Capacidad de reconstruir quién recibió, revisó, firmó, derivó o modificó un trámite y cuándo."
+    },
+    {
+      "term": "Mínimo privilegio",
+      "def": "Cada usuario recibe sólo los accesos necesarios para cumplir su función."
+    },
+    {
+      "term": "Phishing",
+      "def": "Engaño que suplanta una identidad para obtener credenciales, códigos o inducir a abrir contenido malicioso."
+    },
+    {
+      "term": "Incidente de ciberseguridad",
+      "def": "Evento que compromete o puede comprometer sistemas, información o continuidad."
+    },
+    {
+      "term": "Continuidad operacional",
+      "def": "Capacidad de mantener o recuperar servicios esenciales frente a fallas o incidentes."
+    }
+  ],
+  "faq": [
+    {
+      "q": "¿Un PDF es un expediente electrónico?",
+      "a": "No. Puede ser una pieza del expediente; el expediente además organiza actuaciones, metadatos, responsables y secuencia."
+    },
+    {
+      "q": "¿La firma electrónica reemplaza la visación?",
+      "a": "No. Acredita autoría e integridad, pero no sustituye revisiones técnicas, jurídicas, presupuestarias o de control."
+    },
+    {
+      "q": "¿Qué pasa si me devuelven un documento?",
+      "a": "Revisa el motivo. Si cambia el acto, genera una nueva versión y conserva trazabilidad; si respondes mediante antecedente, incorpóralo al mismo expediente."
+    },
+    {
+      "q": "¿Puedo usar mi correo personal para una gestión municipal?",
+      "a": "Para comunicaciones laborales y servicios institucionales debe utilizarse el correo institucional conforme a la política municipal de ciberseguridad."
+    },
+    {
+      "q": "¿Oficina de Partes puede editar el documento?",
+      "a": "Su función principal es recibir, registrar y derivar; puede devolver por falta de antecedentes, pero no alterar el contenido sustantivo."
+    },
+    {
+      "q": "¿Qué hago si llega un enlace sospechoso?",
+      "a": "No lo abras ni entregues credenciales. Repórtalo a Informática o ciberseguridad; si ya interactuaste, informa de inmediato."
+    },
+    {
+      "q": "¿Qué diferencia hay entre observar y devolver?",
+      "a": "La observación identifica qué debe subsanarse; la devolución retorna el documento al responsable para corregir o responder."
+    },
+    {
+      "q": "¿Puedo compartir mi código MFA?",
+      "a": "No. Credenciales y códigos son personales e intransferibles."
+    },
+    {
+      "q": "¿Qué hago si el sistema se cae y hay un plazo?",
+      "a": "Reporta la indisponibilidad y conserva evidencia. La continuidad o soporte alternativo debe sujetarse al procedimiento y autorización aplicable."
+    },
+    {
+      "q": "¿Dónde reviso una política municipal?",
+      "a": "En Normativa puedes seleccionar la política, buscar conceptos y navegar artículo por artículo; el PDF firmado sigue siendo la fuente oficial."
+    }
+  ],
+  "downloads": [
+    {
+      "title": "Política Institucional de Transformación Digital",
+      "type": "Política municipal",
+      "desc": "D.E. N.º 1922E. Marco local para gobernanza, procesos e interoperabilidad.",
+      "url": "https://drive.google.com/file/d/1cT8_GApI5ly7h-VdduRGcyoxrTr96Nvr/view?usp=sharing"
+    },
+    {
+      "title": "Política Institucional de Ciberseguridad",
+      "type": "Política municipal",
+      "desc": "D.E. N.º 1902E. Controles, responsabilidades, incidentes y continuidad.",
+      "url": "https://drive.google.com/file/d/13jAnk7-mkJHC-b8VJo0HkoGakQ3ahIXX/view?usp=sharing"
+    },
+    {
+      "title": "Presentación institucional de Transformación Digital",
+      "type": "Presentación",
+      "desc": "Material base sobre Ley 21.180, expediente e interoperabilidad.",
+      "url": "https://docs.google.com/presentation/d/1n_DPLArahay65RNg1dXX63aZB8Lz7yER/edit?usp=sharing&ouid=117581261701006734222&rtpof=true&sd=true"
+    },
+    {
+      "title": "Ley N.º 21.180",
+      "type": "Normativa",
+      "desc": "Texto oficial de Transformación Digital del Estado.",
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=1138479"
+    },
+    {
+      "title": "Ley N.º 21.663",
+      "type": "Normativa",
+      "desc": "Texto oficial de la Ley Marco de Ciberseguridad.",
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=1202434"
+    },
+    {
+      "title": "Ley N.º 21.719",
+      "type": "Normativa",
+      "desc": "Protección de datos personales. Vigencia diferida al 1 de diciembre de 2026.",
+      "url": "https://www.bcn.cl/leychile/Navegar?idNorma=1209272&idVersion=2026-12-01"
+    },
+    {
+      "title": "9 básicos de la ciberseguridad",
+      "type": "Guía ANCI",
+      "desc": "Actualización, respaldos, MFA, contraseñas, redes, equipos y monitoreo.",
+      "url": "https://anci.gob.cl/9basicos/"
+    },
+    {
+      "title": "Guía Técnica de Documentos y Expedientes Electrónicos",
+      "type": "Gobierno Digital",
+      "desc": "Referencia oficial para documentos y expedientes electrónicos.",
+      "url": "https://wikiguias.digital.gob.cl/guias/guia-tecnica-documentosyexpedientes"
+    },
+    {
+      "title": "Manual del Coordinador de Transformación Digital",
+      "type": "Gobierno Digital",
+      "desc": "Guía para coordinación institucional de la transformación digital.",
+      "url": "https://wikiguias.digital.gob.cl/Manuales/manual-del-coordinador"
+    },
+    {
+      "title": "Cómo utilizar FirmaGob",
+      "type": "Firma electrónica",
+      "desc": "Guía oficial paso a paso para habilitación y uso.",
+      "url": "https://firma.digital.gob.cl/como-utilizarla/"
+    }
+  ]
+}
