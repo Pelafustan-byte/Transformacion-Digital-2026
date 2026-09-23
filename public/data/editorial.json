@@ -2,8 +2,8 @@
   "site": {
     "materialsTitle": "Insumos esenciales para trabajar",
     "materialsText": "Normativa, guías, referencias y actos administrativos firmados que conviene tener a mano para trabajar con expedientes, firma electrónica, interoperabilidad, datos personales y ciberseguridad.",
-    "newsTitle": "Radar Digital: lo que está cambiando",
-    "newsText": "Noticias, agenda y señales oficiales que pueden afectar el trabajo municipal. Priorizamos cambios normativos, experiencias de otros municipios, ciberseguridad, plataformas del Estado y actividades útiles para los equipos."
+    "newsTitle": "Radar Digital · actualización 23 de septiembre",
+    "newsText": "Ronda de actualidad enfocada en implementación municipal: transformación digital, ciberseguridad, datos, inteligencia artificial en el Estado, continuidad operacional y obligaciones que afectan el trabajo local."
   },
   "materials": [
     {
@@ -99,70 +99,114 @@
   ],
   "news": [
     {
+      "id": "news-chilecompra-ia-2026",
+      "publishedAt": "2026-09-22",
+      "tag": "IA · Compras públicas",
+      "title": "ChileCompra avanza en IA para detectar riesgos y modernizar Mercado Público",
+      "description": "ChileCompra presentó avances en analítica e inteligencia artificial aplicadas a compras públicas: monitoreo automatizado de procesos, nuevos análisis con modelos de lenguaje y una arquitectura más modular. Para municipios, la señal es clara: la IA se está integrando al control preventivo, la eficiencia y la integridad de la contratación.",
+      "source": "ChileCompra",
+      "url": "https://www.chilecompra.cl/2026/09/chilecompra-comparte-avances-en-inteligencia-artificial-y-modernizacion-en-encuentro-con-paises-lideres-en-compras-publicas-a-nivel-mundial/",
+      "status": "published",
+      "position": 1
+    },
+    {
+      "id": "news-stack-publico-agentic",
+      "publishedAt": "2026-09-23",
+      "tag": "Agenda · IA en el Estado",
+      "title": "Stack Público cierra septiembre con una sesión sobre IA agéntica para funcionarios",
+      "description": "La sesión del 24 de septiembre abordará agentes de IA, automatización de procesos y casos de uso en gobierno. Es especialmente útil para equipos municipales que evalúan automatizaciones sin perder trazabilidad, supervisión humana y control de datos.",
+      "source": "MinCiencia · Laboratorio de Gobierno",
+      "url": "https://www.minciencia.gob.cl/areas/inteligencia-artificial/stack-publico/",
+      "status": "published",
+      "position": 2
+    },
+    {
       "id": "news-anci-monitoreo",
       "publishedAt": "2026-09-23",
       "tag": "Agenda · Ciberseguridad",
-      "title": "ANCI realizará charla abierta sobre monitoreo en tiempo real",
-      "description": "La sesión del 23 de septiembre revisará cómo detectar actividad maliciosa, evaluar su impacto y activar una respuesta temprana. Es un insumo útil para equipos municipales que trabajan continuidad operacional y respuesta a incidentes.",
+      "title": "ANCI aborda hoy monitoreo, detección y respuesta temprana a incidentes",
+      "description": "La charla del 23 de septiembre revisa cómo detectar actividad maliciosa, evaluar su impacto y activar una respuesta coordinada. Para un municipio, esto se conecta directamente con continuidad operacional, registro de incidentes y escalamiento oportuno.",
       "source": "ANCI",
       "url": "https://anci.gob.cl/eventos/charla-basica-monitorear-en-tiempo-real/",
       "status": "published",
-      "position": 1
+      "position": 3
     },
     {
       "id": "news-magallanes-municipios",
       "publishedAt": "2026-09-17",
       "tag": "Transformación digital municipal",
-      "title": "Magallanes instala mesa regional de transformación digital con sus municipios",
-      "description": "La instancia reúne al Gobierno Regional, los diez municipios, Gobierno Digital y Subdere para coordinar implementación, compartir capacidades e identificar brechas. El modelo muestra cómo la transformación digital se está articulando territorialmente.",
+      "title": "Magallanes instala una mesa regional de transformación digital con sus diez municipios",
+      "description": "La instancia reúne al GORE, municipios, Gobierno Digital y Subdere para compartir capacidades, identificar brechas y coordinar implementación. Es un modelo directamente comparable con la necesidad municipal de gobernanza, acompañamiento y gestión del cambio.",
       "source": "SUBDERE",
       "url": "https://www.subdere.gov.cl/sala-de-prensa/la-regi%C3%B3n-de-magallanes-avanza-en-la-trasformaci%C3%B3n-digital-con-coordinaci%C3%B3n-entre-el",
       "status": "published",
-      "position": 2
+      "position": 4
     },
     {
       "id": "news-anci-simulacro",
       "publishedAt": "2026-09-11",
       "tag": "Continuidad operacional",
-      "title": "Sector público pone a prueba planes de gestión de crisis ante ransomware",
-      "description": "Una submesa del Gobierno Central realizó un ejercicio de simulación para revisar decisiones, coordinación y etapas de respuesta frente a un incidente de ransomware. Refuerza la importancia de contar con planes practicados y roles claros.",
+      "title": "Sector público prueba sus planes de crisis frente a un ataque de ransomware",
+      "description": "Una submesa de ciberseguridad del Gobierno Central realizó un ejercicio tabletop de ransomware para revisar decisiones, coordinación y respuesta. La práctica es replicable a escala municipal para validar roles, contactos, respaldos y continuidad antes de un incidente real.",
       "source": "ANCI",
       "url": "https://anci.gob.cl/noticias/tercera-submesa-ciberseguridad-gobierno-central/",
       "status": "published",
-      "position": 3
+      "position": 5
     },
     {
       "id": "news-anci-reporte",
       "publishedAt": "2026-09-11",
-      "tag": "Reporte de incidentes",
-      "title": "ANCI destaca el valor de reportar incidentes y aplicar controles básicos",
-      "description": "La Agencia señaló que la información de los reportes permite investigar amenazas, detectar vulnerabilidades y generar alertas preventivas, y vinculó estos aprendizajes con los controles de sus 9 básicos de ciberseguridad.",
+      "tag": "Gestión de incidentes",
+      "title": "ANCI refuerza el valor del reporte de incidentes y de los controles básicos",
+      "description": "La Agencia destacó que los reportes permiten investigar amenazas, detectar vulnerabilidades y generar alertas preventivas. Para las instituciones públicas, esto refuerza la necesidad de formalizar canales internos de reporte y mantener evidencia de los incidentes.",
       "source": "ANCI",
       "url": "https://anci.gob.cl/noticias/anci-reporte-comite-ciberseguridad-ccs/",
       "status": "published",
-      "position": 4
+      "position": 6
     },
     {
-      "id": "news-anci-fraude",
-      "publishedAt": "2026-09-10",
-      "tag": "Ciberconsejo",
-      "title": "ANCI alerta sobre fraude que busca obtener códigos de segundo factor",
-      "description": "La modalidad simula un bloqueo bancario y luego intenta convencer a la víctima de entregar códigos o aprobar solicitudes. La recomendación es no compartir códigos ni autorizar operaciones que no fueron iniciadas por el propio usuario.",
-      "source": "ANCI",
-      "url": "https://anci.gob.cl/ciberconsejos/ciberconsejos-el-fraude-de-la-cuenta-bancaria-bloqueada/",
+      "id": "news-cplt-transparencia-municipal",
+      "publishedAt": "2026-09-01",
+      "tag": "Datos · Transparencia municipal",
+      "title": "CPLT actualiza reglas de Transparencia Activa con obligaciones específicas para municipios",
+      "description": "La guía explica la nueva Instrucción General de Transparencia Activa e incorpora exigencias sobre remuneraciones, honorarios, permisos de construcción, organigramas interactivos y lenguaje claro. Es un frente que cruza gestión documental, publicación web y resguardo de datos personales.",
+      "source": "Consejo para la Transparencia",
+      "url": "https://www.consejotransparencia.cl/cplt-actualiza-las-reglas-de-publicacion-informacion-desde-remuneraciones-y-contrataciones-en-la-administracion-del-estado-hasta-permisos-de-construccion-en-municipalidades/",
       "status": "published",
-      "position": 5
+      "position": 7
+    },
+    {
+      "id": "news-anci-cens-salud",
+      "publishedAt": "2026-08-31",
+      "tag": "Seguridad de datos · Salud",
+      "title": "ANCI y CENS publican recomendaciones para proteger sistemas de información en salud",
+      "description": "La guía recoge controles y aprendizajes de incidentes del sector Salud. Es particularmente relevante para municipios con atención primaria, porque combina continuidad, seguridad de sistemas y protección de información sensible.",
+      "source": "ANCI · CENS",
+      "url": "https://anci.gob.cl/noticias/anci-y-cens-lanzan-recomendaciones-de-ciberseguridad-para-sistemas-de-informacion-en-salud/",
+      "status": "published",
+      "position": 8
     },
     {
       "id": "news-anci-basicos",
       "publishedAt": "2026-08-20",
       "tag": "Estándares de ciberseguridad",
-      "title": "ANCI publica resultados de consulta sobre estándares básicos de ciberseguridad",
-      "description": "El resumen ejecutivo recoge observaciones a seis controles propuestos como parte de los estándares básicos. Es relevante para anticipar medidas que pueden transformarse en exigencias formales para sujetos obligados.",
+      "title": "ANCI publica resultados de la consulta sobre estándares básicos de ciberseguridad",
+      "description": "La consulta abordó seis controles de los 9 básicos que podrían transformarse en medidas obligatorias para sujetos de la Ley 21.663. Conviene seguirlos como referencia para priorizar MFA, respaldos, actualización, privilegios y monitoreo institucional.",
       "source": "ANCI",
       "url": "https://anci.gob.cl/noticias/anci-resumen-ejecutivo-consulta-publica-normativa-basicos/",
       "status": "published",
-      "position": 6
+      "position": 9
+    },
+    {
+      "id": "news-hacienda-modernizacion-2030",
+      "publishedAt": "2026-08-14",
+      "tag": "Modernización del Estado",
+      "title": "Agenda 2026–2030 incorpora IA, ciberseguridad y masificación de servicios digitales",
+      "description": "Hacienda incluyó inteligencia artificial aplicada a la gestión pública, ciberseguridad y masificación de la Casilla Única dentro de su agenda de modernización. Para municipios, marca la dirección de las capacidades digitales que se volverán cada vez más transversales.",
+      "source": "Ministerio de Hacienda",
+      "url": "https://www.hacienda.cl/noticias-y-eventos/noticias/ministro-jorge-quiroz-y-cuenta-publica-del-ministerio-de-hacienda-vamos-a",
+      "status": "published",
+      "position": 10
     }
   ]
 }

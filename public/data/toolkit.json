@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-22",
+  "updatedAt": "2026-09-23",
   "notice": "Herramientas de apoyo operativo. Los flujos son orientativos y deben ajustarse al tipo de acto, procedimiento y competencias de cada unidad.",
   "roles": [
     {
@@ -236,8 +236,8 @@
     {
       "id": "anci-monitor",
       "dateLabel": "23 SEP · 10:00",
-      "title": "Charla ANCI: monitorear en tiempo real",
-      "text": "Actividad abierta del ciclo de los 9 básicos de ciberseguridad.",
+      "title": "ANCI: monitoreo en tiempo real",
+      "text": "Charla de los 9 básicos sobre detección temprana, análisis y respuesta inicial ante actividad maliciosa. Relevante para continuidad operacional municipal.",
       "url": "https://anci.gob.cl/eventos/charla-basica-monitorear-en-tiempo-real/",
       "source": "ANCI",
       "start": "20260923T100000",
@@ -245,33 +245,76 @@
       "location": "Evento virtual"
     },
     {
+      "id": "stack-publico-agentic",
+      "dateLabel": "24 SEP · 15:00",
+      "title": "Stack Público: IA agéntica para el Estado",
+      "text": "Sesión online para funcionarios públicos sobre agentes de IA, automatización de procesos y casos de uso en gobierno. Útil para evaluar usos responsables en procesos municipales.",
+      "url": "https://www.minciencia.gob.cl/areas/inteligencia-artificial/stack-publico/",
+      "source": "MinCiencia · Laboratorio de Gobierno",
+      "start": "20260924T150000",
+      "end": "20260924T160000",
+      "location": "Evento online"
+    },
+    {
       "id": "fedok-test",
       "dateLabel": "25 SEP · 11:30",
       "title": "Primera prueba presencial de FEDOK",
-      "text": "Jornada municipal para probar flujo documental, firma electrónica y derivaciones.",
-      "url": "#videos",
+      "text": "Jornada municipal para probar flujo documental, firma electrónica, derivaciones, observaciones y trazabilidad entre direcciones.",
+      "url": "#herramientas/checklist",
       "source": "Municipalidad de Constitución",
       "start": "20260925T113000",
       "end": "20260925T130000",
       "location": "Salón Municipal, Constitución"
     },
     {
+      "id": "anci-mfa",
+      "dateLabel": "27 OCT · 10:00",
+      "title": "ANCI: múltiples factores de autenticación (MFA)",
+      "text": "Charla práctica sobre tipos de MFA, plataformas y dispositivos para proteger cuentas que acceden a sistemas críticos.",
+      "url": "https://anci.gob.cl/eventos/charla-b%C3%A1sica-usar-mecanismos-de-m%C3%BAltiples-factores-de-autenticaci%C3%B3n-mfa/",
+      "source": "ANCI",
+      "start": "20261027T100000",
+      "end": "20261027T110000",
+      "location": "Evento virtual"
+    },
+    {
+      "id": "anci-password-manager",
+      "dateLabel": "19 NOV · 10:00",
+      "title": "ANCI: uso institucional de gestores de contraseñas",
+      "text": "Sesión sobre almacenamiento y gestión segura de contraseñas, especialmente útil para administradores de sistemas y equipos municipales.",
+      "url": "https://anci.gob.cl/eventos/charla-b%C3%A1sica-usar-gestor-de-contrase%C3%B1a/",
+      "source": "ANCI",
+      "start": "20261119T100000",
+      "end": "20261119T110000",
+      "location": "Evento virtual"
+    },
+    {
       "id": "data-law",
       "dateLabel": "01 DIC 2026",
-      "title": "Entrada en vigencia de la Ley 21.719",
-      "text": "Comienza la vigencia diferida de la nueva regulación de protección de datos personales.",
+      "title": "Entra en vigencia la Ley N.º 21.719",
+      "text": "Comienza la vigencia de la nueva regulación de protección y tratamiento de datos personales, aplicable también a órganos públicos.",
       "url": "https://www.bcn.cl/leychile/Navegar?idNorma=1209272&idVersion=2026-12-01",
       "source": "BCN / LeyChile",
       "start": "20261201",
       "allDay": true
     },
     {
-      "id": "ongoing",
-      "dateLabel": "PERMANENTE",
-      "title": "Capacitación y adopción digital",
-      "text": "Minutos Digitales, guías y jornadas internas para preparar a los equipos.",
-      "url": "#videos",
-      "source": "Ruta Digital"
+      "id": "anci-incident-course",
+      "dateLabel": "HASTA 31 DIC",
+      "title": "Curso ANCI: respuesta a incidentes y taxonomía",
+      "text": "Curso gratuito disponible durante 2026 sobre respuesta a incidentes, modelamiento de amenazas, protocolo, reporte y ejercicio práctico.",
+      "url": "https://anci.gob.cl/eventos/curso-respuesta-a-incidentes-y-taxonom%C3%ADa/",
+      "source": "ANCI",
+      "start": "20261231",
+      "allDay": true
+    },
+    {
+      "id": "ltd-2026",
+      "dateLabel": "HITO 2026",
+      "title": "Ley 21.180: expediente electrónico en implementación",
+      "text": "La hoja de ruta 2026 incorpora expediente electrónico para los grupos A, B y C; además contempla digitalización de papel para A/B e interoperabilidad para el grupo C.",
+      "url": "https://digital.gob.cl/transformacion-digital/ley-de-transformacion-digital/",
+      "source": "Secretaría de Gobierno Digital"
     }
   ],
   "norms": [
