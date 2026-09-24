@@ -14,7 +14,7 @@ function renderAll(){const s=D.site||{};text('brandName',s.name);text('brandSubt
  img.width=1200;img.height=750;img.loading='lazy';img.decoding='async';
  img.classList.add(isPlate(url)?'plate':'photo');
  fig.classList.toggle('hasPlate',isPlate(url));
-});['territoryCaption1','territoryCaption2','territoryCaption3'].forEach(k=>text(k,s[k]));if($('brandLogoImg')&&s.brandLogo)$('brandLogoImg').src=s.brandLogo;if($('municipalCrestImg')&&s.municipalCrest)$('municipalCrestImg').src=s.municipalCrest;if(s.contactEmail&&$('footerEmail')){$('footerEmail').textContent='Correo institucional';$('footerEmail').href='mailto:'+s.contactEmail;$('footerEmail').setAttribute('aria-label','Escribir al Equipo de Transformación Digital')}// Un fondo fotográfico solo se aplica si la fotografía aguanta el tamaño: el
+});['territoryCaption1','territoryCaption2','territoryCaption3'].forEach(k=>text(k,s[k]));/* La identidad 2026 del encabezado es fija para preservar la marca. */if($('municipalCrestImg')&&s.municipalCrest)$('municipalCrestImg').src=s.municipalCrest;if(s.contactEmail&&$('footerEmail')){$('footerEmail').textContent='Correo institucional';$('footerEmail').href='mailto:'+s.contactEmail;$('footerEmail').setAttribute('aria-label','Escribir al Equipo de Transformación Digital')}// Un fondo fotográfico solo se aplica si la fotografía aguanta el tamaño: el
 // gradiente de tres paradas que había servía para tapar una imagen de 640 px.
 // Se exige un mínimo declarado por quien edita (heroImageMinWidth) antes de
 // volver a usar el hero como fondo.
