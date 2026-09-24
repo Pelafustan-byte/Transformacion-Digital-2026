@@ -105,7 +105,20 @@ app.get('/api/public/video/:driveId',async(req,res)=>{
   for(const url of urls){
    const headers={'User-Agent':'Mozilla/5.0','Accept':'video/*,application/octet-stream;q=0.9,*/*;q=0.8'};
    if(req.headers.range)headers.Range=req.headers.range;
-   const upstream=await fetch(url,{headers,redirect:'follow',signal:AbortSignal.timeout(15000)});
+   let upstream;
+   const controller=new AbortController();
+   const timer=setTimeout(()=>controller.abort(),12000);
+   try{
+    upstream=await fetch(url,{headers,redirect:'follow',signal:controller.signal});
+   }catch(error){
+    clearTimeout(timer);
+    console.warn('[video-proxy] upstream connection failed',id,error?.name||'Error');
+    continue;
+   }
+   // The timeout only protects connection/header acquisition. Keeping the
+   // AbortSignal alive while piping a video aborts long playbacks and can
+   // crash Node through an unhandled Readable error.
+   clearTimeout(timer);
    const type=(upstream.headers.get('content-type')||'').toLowerCase();
    if(upstream.body&&upstream.status>=200&&upstream.status<400&&!type.includes('text/html')){
     res.status(upstream.status);
@@ -114,15 +127,23 @@ app.get('/api/public/video/:driveId',async(req,res)=>{
     }
     if(!res.getHeader('Content-Type'))res.type('video/mp4');
     res.set('Cache-Control','public,max-age=3600');
-    Readable.fromWeb(upstream.body).pipe(res);
+    const stream=Readable.fromWeb(upstream.body);
+    stream.on('error',error=>{
+     console.warn('[video-proxy] stream error',id,error?.name||'Error',error?.message||'');
+     if(!res.headersSent&&!res.writableEnded)res.status(502).end();
+     else if(!res.writableEnded)res.destroy();
+    });
+    res.on('close',()=>{if(!stream.destroyed)stream.destroy()});
+    stream.pipe(res);
     return;
    }
    try{await upstream.body?.cancel()}catch{}
   }
   res.status(502).json({error:'VIDEO_SOURCE_UNAVAILABLE'});
  }catch(error){
-  if(!res.headersSent)res.status(502).json({error:'VIDEO_PROXY_ERROR'});
-  else res.end();
+  console.warn('[video-proxy] request error',error?.name||'Error',error?.message||'');
+  if(!res.headersSent&&!res.writableEnded)res.status(502).json({error:'VIDEO_PROXY_ERROR'});
+  else if(!res.writableEnded)res.end();
  }
 });
 app.get('/media/:id',async(req,res)=>{try{if(pool){const q=await pool.query('select name,mime,bytes,size from rd_media where id=$1',[req.params.id]);if(!q.rowCount)return res.sendStatus(404);const m=q.rows[0];res.set({'Content-Type':m.mime,'Content-Length':m.size,'Cache-Control':'public,max-age=31536000,immutable'});return res.end(m.bytes)}const p=path.join(UPLOAD_DIR,path.basename(req.params.id));if(!fs.existsSync(p))return res.sendStatus(404);return res.sendFile(p)}catch{res.sendStatus(404)}});
