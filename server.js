@@ -62,7 +62,8 @@ const rich=new Set(['capsules','notes']);
 async function initDb(){
  if(!pool) return;
  await pool.query(`create table if not exists rd_content(id int primary key default 1, data jsonb not null, updated_at timestamptz not null default now());
- create table if not exists rd_media(id uuid primary key, name text not null, mime text not null, bytes bytea not null, size int not null, created_at timestamptz not null default now());`);
+ create table if not exists rd_media(id uuid primary key, name text not null, mime text not null, bytes bytea not null, size int not null, created_at timestamptz not null default now());
+ create table if not exists rd_contact_submissions(id bigserial primary key, name text not null, unit text, email text, category text not null, subject text not null, message text not null, status text not null default 'new', created_at timestamptz not null default now());`);
  const r=await pool.query('select id from rd_content where id=1');
  if(!r.rowCount) await pool.query('insert into rd_content(id,data) values(1,$1::jsonb)',[JSON.stringify(seed)]);
 }
@@ -78,12 +79,12 @@ const sort=(a=[])=>[...a].sort((x,y)=>(+x.position||9999)-(+y.position||9999));
 async function publicContent(){const c=await readContent();const vis=a=>sort((a||[]).filter(x=>!['draft','hidden'].includes(x.status)));return{site:c.site||{},videos:vis(c.videos),materials:vis(c.materials),capsules:vis(c.capsules),notes:vis(c.notes),timeline:sort(c.timeline||[]),resources:sort(c.resources||[]),news:vis(c.news),libraryCollections:vis(c.libraryCollections)}};
 function safeItem(col,body,old={}){const out={...old,...body};if(!out.id)out.id=`${col.slice(0,4)}-${crypto.randomUUID()}`;if(rich.has(col))out.bodyHtml=sanitizeHtml(String(out.bodyHtml||''),sanitizeOpts);['title','description','excerpt','author','category','tag','source','type','label','text','coverAlt','embedUrl','sourceUrl','url','imageUrl'].forEach(k=>{if(typeof out[k]==='string')out[k]=out[k].trim().slice(0,k==='description'||k==='excerpt'||k==='text'?1600:700)});out.position=Number(out.position)||1;out.updatedAt=new Date().toISOString();out.createdAt=old.createdAt||out.createdAt||out.updatedAt;return out}
 
-const sessions=new Map();const attempts=new Map();
+const sessions=new Map();const attempts=new Map();const contactAttempts=new Map();
 function hash(t){return crypto.createHmac('sha256',SESSION_SECRET).update(t).digest('hex')}
 function auth(req,res,next){const raw=req.signedCookies.rd_session;if(!raw)return res.status(401).json({error:'AUTH_REQUIRED'});const s=sessions.get(hash(raw));if(!s||s.expires<Date.now())return res.status(401).json({error:'AUTH_REQUIRED'});next()}
 const upload=multer({storage:multer.memoryStorage(),limits:{fileSize:80*1024*1024},fileFilter:(_r,f,cb)=>cb(null,/^(image\/(png|jpeg|webp|gif)|video\/(mp4|webm)|application\/pdf)$/.test(f.mimetype))});
 
-const app=express();app.set('trust proxy',1);app.disable('x-powered-by');app.use(helmet({contentSecurityPolicy:false,crossOriginEmbedderPolicy:false}));app.use(express.json({limit:'8mb'}));app.use(cookieParser(SESSION_SECRET));
+const app=express();app.set('trust proxy',1);app.disable('x-powered-by');app.use(helmet({contentSecurityPolicy:false,crossOriginEmbedderPolicy:false}));app.use(express.json({limit:'8mb'}));app.use(express.urlencoded({extended:false,limit:'64kb'}));app.use(cookieParser(SESSION_SECRET));
 app.get('/health',(_q,r)=>r.json({ok:true,db:!!pool,service:'ruta-digital-cms',storage:STORAGE.mode,persistent:STORAGE.persistent}));
 app.get('/api/admin/storage',auth,(_q,r)=>r.json(STORAGE));
 app.get('/api/public/content',async(_q,r)=>{r.set('Cache-Control','no-store');r.json(await publicContent())});
@@ -225,6 +226,48 @@ async function renderIndex(){
  }
  return html;
 }
+
+
+function cleanPlain(value,max=4000){return sanitizeHtml(String(value??''),{allowedTags:[],allowedAttributes:{}}).replace(/\s+/g,' ').trim().slice(0,max)}
+function wantsHtml(req){return String(req.headers.accept||'').includes('text/html')&&!String(req.headers.accept||'').includes('application/json')}
+app.post('/api/contact',async(req,res)=>{
+ try{
+  const now=Date.now(),ip=req.ip||'x',windowMs=30*60*1000;
+  let a=contactAttempts.get(ip)||{n:0,at:now};
+  if(now-a.at>windowMs)a={n:0,at:now};
+  a.n++;contactAttempts.set(ip,a);
+  if(a.n>6)return res.status(429).json({message:'Has enviado varias solicitudes en poco tiempo. Intenta nuevamente más tarde.'});
+  const body=req.body||{};
+  if(cleanPlain(body.website,200))return wantsHtml(req)?res.redirect(303,'/#contacto?enviado=1'):res.status(201).json({ok:true,message:'Tu solicitud fue recibida correctamente.'});
+  const name=cleanPlain(body.name,120),unit=cleanPlain(body.unit,160),email=cleanPlain(body.email,160),category=cleanPlain(body.category,40),subject=cleanPlain(body.subject,180),message=cleanPlain(body.message,4000);
+  const allowed=new Set(['duda','sugerencia','problema','acompanamiento','otro']);
+  if(name.length<2||!allowed.has(category)||subject.length<3||message.length<10)return res.status(400).json({message:'Completa nombre, tipo de solicitud, asunto y un mensaje con al menos 10 caracteres.'});
+  if(email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))return res.status(400).json({message:'Revisa el correo ingresado o déjalo vacío.'});
+  if(pool){
+   await pool.query('insert into rd_contact_submissions(name,unit,email,category,subject,message) values($1,$2,$3,$4,$5,$6)',[name,unit||null,email||null,category,subject,message]);
+  }else{
+   const line=JSON.stringify({name,unit,email,category,subject,message,status:'new',createdAt:new Date().toISOString()})+'\n';
+   fs.appendFileSync(path.join(DATA_DIR,'contact-submissions.jsonl'),line,'utf8');
+  }
+  if(wantsHtml(req))return res.redirect(303,'/#contacto?enviado=1');
+  res.status(201).json({ok:true,message:'Tu solicitud fue recibida correctamente. El Equipo de Transformación Digital podrá revisarla desde el registro interno.'});
+ }catch(error){
+  console.error('contact form error',error?.message||error);
+  res.status(500).json({message:'No fue posible registrar la solicitud. Intenta nuevamente.'});
+ }
+});
+app.get('/api/admin/contact-submissions',auth,async(_req,res)=>{
+ try{
+  if(pool){
+   const q=await pool.query('select id,name,unit,email,category,subject,message,status,created_at from rd_contact_submissions order by created_at desc limit 250');
+   return res.json(q.rows);
+  }
+  const file=path.join(DATA_DIR,'contact-submissions.jsonl');
+  if(!fs.existsSync(file))return res.json([]);
+  const rows=fs.readFileSync(file,'utf8').split('\n').filter(Boolean).map(line=>{try{return JSON.parse(line)}catch{return null}}).filter(Boolean).reverse().slice(0,250);
+  res.json(rows);
+ }catch(error){console.error(error);res.status(500).json({message:'No fue posible leer las solicitudes.'})}
+});
 
 app.get(['/','/index.html'],async(_q,res)=>{
  try{res.type('html').set('Cache-Control','no-store').send(await renderIndex())}
