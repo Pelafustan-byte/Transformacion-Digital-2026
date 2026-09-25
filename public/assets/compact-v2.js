@@ -79,12 +79,37 @@ function bind(){
  });
  window.addEventListener('hashchange',()=>handleHash());
 }
+
+function initFedokCarousel(){
+ const root=q('fedokCarousel');if(!root)return;
+ const track=root.querySelector('.fedokCarouselTrack'),slides=qa('.fedokSlide',root),dots=qa('[data-fedok-slide]',root),current=q('fedokSlideCurrent');
+ if(!track||slides.length<2)return;
+ let index=0;
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const set=i=>{
+   index=(i+slides.length)%slides.length;
+   track.style.transition=reduced?'none':'transform .45s ease';
+   track.style.transform=`translateX(-${index*100}%)`;
+   slides.forEach((s,n)=>s.classList.toggle('is-active',n===index));
+   dots.forEach((d,n)=>d.classList.toggle('on',n===index));
+   if(current)current.textContent=String(index+1);
+ };
+ root.querySelector('.fedokPrev')?.addEventListener('click',()=>set(index-1));
+ root.querySelector('.fedokNext')?.addEventListener('click',()=>set(index+1));
+ dots.forEach(d=>d.addEventListener('click',()=>set(Number(d.dataset.fedokSlide)||0)));
+ root.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')set(index-1);if(e.key==='ArrowRight')set(index+1)});
+ let touchX=null;
+ root.addEventListener('touchstart',e=>{touchX=e.touches?.[0]?.clientX??null},{passive:true});
+ root.addEventListener('touchend',e=>{if(touchX==null)return;const x=e.changedTouches?.[0]?.clientX??touchX,dx=x-touchX;touchX=null;if(Math.abs(dx)>45)set(index+(dx<0?1:-1))},{passive:true});
+ set(0);
+}
+
 function updateNav(){
  const nav=document.querySelector('#nav');if(!nav)return;
  const news=nav.querySelector('a[href="#noticias"]');if(news)news.href='#radar-digital';
 }
 async function init(){
- relocateEvent();updateNav();buildModuleHub();bind();handleHash({initial:true});
+ relocateEvent();updateNav();buildModuleHub();bind();initFedokCarousel();handleHash({initial:true});
  try{buildTicker(await loadNews())}catch(e){console.error('ticker',e)}
  if(location.hash==='#noticias'||location.hash==='#radar-digital')setTimeout(()=>q('radar-digital')?.scrollIntoView({block:'start'}),80);
  window.routeModules={open:openModule,close:closeModules,current:()=>currentModule};
