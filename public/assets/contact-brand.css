@@ -94,67 +94,61 @@
   .rdFooterBrand>img{max-width:250px}
 }
 
-/* Hero identity logo: replaces the former text title */
-.hero h1.heroIdentity{max-width:650px}
-.heroIdentity .heroLogoLockup{
+/* Hero principal · identidad tipográfica Ruta Digital */
+.hero h1.heroWordmark{
+  max-width:680px!important;
+  margin:0 0 20px!important;
+  font-family:"Aptos Display","Segoe UI Variable Display","Segoe UI",sans-serif!important;
+  line-height:1!important;
+  letter-spacing:0!important;
+}
+.heroWordmarkTop,
+.heroWordmarkBottom{
   display:block;
-  width:min(100%,620px);
-  margin:0 0 18px;
-  padding:11px 16px 10px;
-  border:1px solid rgba(255,255,255,.32);
-  border-radius:18px;
-  background:rgba(255,255,255,.96);
-  box-shadow:0 16px 38px rgba(1,20,35,.18);
+  width:max-content;
+  max-width:100%;
+  font-style:normal;
+  text-transform:none;
+  text-wrap:balance;
 }
-.heroIdentity .heroLogoLockup img{
-  display:block;
-  width:100%;
-  height:auto;
-  max-height:185px;
-  object-fit:contain;
+.heroWordmarkTop{
+  color:#ffffff;
+  font-size:clamp(3.5rem,5.8vw,5.9rem);
+  font-weight:800;
+  line-height:.88;
+  letter-spacing:-.055em;
 }
-.hero h1.heroIdentity em{margin-top:0}
-@media(max-width:720px){
-  .heroIdentity .heroLogoLockup{
-    width:min(100%,520px);
-    margin-bottom:13px;
-    padding:8px 11px 7px;
-    border-radius:14px;
-  }
-  .heroIdentity .heroLogoLockup img{max-height:145px}
+.heroWordmarkBottom{
+  margin-top:2px;
+  color:#9de6e2;
+  font-size:clamp(3.05rem,5vw,5.1rem);
+  font-weight:720;
+  line-height:.92;
+  letter-spacing:-.045em;
 }
-
-
-/* Hero logo correction: no oversized white container */
-.heroIdentity .heroLogoLockup{
+.hero h1.heroWordmark em{
   display:block!important;
-  width:min(100%,590px)!important;
-  margin:0 0 14px!important;
-  padding:0!important;
-  border:0!important;
-  border-radius:0!important;
-  background:transparent!important;
-  box-shadow:none!important;
-  overflow:visible!important;
+  max-width:34ch!important;
+  margin:22px 0 0!important;
+  color:#e0f6f5!important;
+  font-family:"Aptos","Segoe UI Variable Text","Segoe UI",sans-serif!important;
+  font-size:clamp(1.05rem,1.35vw,1.35rem)!important;
+  font-style:normal!important;
+  font-weight:450!important;
+  line-height:1.32!important;
+  letter-spacing:0!important;
 }
-.heroIdentity .heroLogoLockup img{
-  display:block!important;
-  width:100%!important;
-  height:auto!important;
-  max-height:none!important;
-  object-fit:contain!important;
-  object-position:left center!important;
-  filter:drop-shadow(0 8px 18px rgba(1,20,35,.16));
-}
-.hero h1.heroIdentity{
-  max-width:650px!important;
-}
-.hero h1.heroIdentity em{
-  margin-top:4px!important;
+@media(max-width:950px){
+  .heroWordmarkTop{font-size:clamp(3.2rem,10vw,5rem)}
+  .heroWordmarkBottom{font-size:clamp(2.85rem,9vw,4.5rem)}
 }
 @media(max-width:720px){
-  .heroIdentity .heroLogoLockup{
-    width:min(100%,520px)!important;
-    margin-bottom:10px!important;
+  .hero h1.heroWordmark{margin-bottom:16px!important}
+  .heroWordmarkTop{font-size:clamp(2.7rem,13vw,3.8rem);line-height:.9}
+  .heroWordmarkBottom{font-size:clamp(2.45rem,11.5vw,3.45rem)}
+  .hero h1.heroWordmark em{
+    margin-top:14px!important;
+    font-size:1rem!important;
+    line-height:1.35!important;
   }
 }
