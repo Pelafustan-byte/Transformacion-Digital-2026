@@ -93,3 +93,34 @@
   .rdContactVisual>img{width:min(520px,100%)!important;margin-bottom:14px!important}
   .rdFooterBrand>img{max-width:250px}
 }
+
+/* Hero identity logo: replaces the former text title */
+.hero h1.heroIdentity{max-width:650px}
+.heroIdentity .heroLogoLockup{
+  display:block;
+  width:min(100%,620px);
+  margin:0 0 18px;
+  padding:11px 16px 10px;
+  border:1px solid rgba(255,255,255,.32);
+  border-radius:18px;
+  background:rgba(255,255,255,.96);
+  box-shadow:0 16px 38px rgba(1,20,35,.18);
+}
+.heroIdentity .heroLogoLockup img{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:185px;
+  object-fit:contain;
+}
+.hero h1.heroIdentity em{margin-top:0}
+@media(max-width:720px){
+  .heroIdentity .heroLogoLockup{
+    width:min(100%,520px);
+    margin-bottom:13px;
+    padding:8px 11px 7px;
+    border-radius:14px;
+  }
+  .heroIdentity .heroLogoLockup img{max-height:145px}
+}
+
