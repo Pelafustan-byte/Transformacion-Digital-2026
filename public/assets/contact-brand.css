@@ -124,3 +124,37 @@
   .heroIdentity .heroLogoLockup img{max-height:145px}
 }
 
+
+/* Hero logo correction: no oversized white container */
+.heroIdentity .heroLogoLockup{
+  display:block!important;
+  width:min(100%,590px)!important;
+  margin:0 0 14px!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+}
+.heroIdentity .heroLogoLockup img{
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  max-height:none!important;
+  object-fit:contain!important;
+  object-position:left center!important;
+  filter:drop-shadow(0 8px 18px rgba(1,20,35,.16));
+}
+.hero h1.heroIdentity{
+  max-width:650px!important;
+}
+.hero h1.heroIdentity em{
+  margin-top:4px!important;
+}
+@media(max-width:720px){
+  .heroIdentity .heroLogoLockup{
+    width:min(100%,520px)!important;
+    margin-bottom:10px!important;
+  }
+}
