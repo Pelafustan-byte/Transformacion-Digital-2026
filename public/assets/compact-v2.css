@@ -119,3 +119,26 @@ footer{margin-top:0}
  .fedokPhotoMain strong{font-size:1.15rem}
  #tareas.sec{padding-top:58px!important}
 }
+
+
+/* Carrusel fotográfico HD · jornada FEDOK */
+.fedokCarousel{position:relative;min-width:0}
+.fedokCarouselViewport{overflow:hidden;border-radius:16px;border:1px solid #bfd2d9;background:#dce9ed;box-shadow:0 16px 38px rgba(6,59,92,.10)}
+.fedokCarouselTrack{display:flex;transition:transform .45s ease;will-change:transform}
+.fedokSlide{position:relative;flex:0 0 100%;margin:0;aspect-ratio:4/3;background:#dce9ed;overflow:hidden}
+.fedokSlide img{width:100%;height:100%;object-fit:cover;display:block}
+.fedokSlide figcaption{position:absolute;left:0;right:0;bottom:0;margin:0;padding:28px 18px 14px;background:linear-gradient(180deg,transparent,rgba(4,35,53,.82));color:#fff;font-size:.72rem;font-weight:750;line-height:1.35}
+.fedokCarouselBtn{position:absolute;top:50%;z-index:3;display:grid;place-items:center;width:42px;height:42px;border:1px solid #ffffff87;border-radius:50%;background:#063b5ccc;color:#fff;font-size:1.05rem;font-weight:900;cursor:pointer;transform:translateY(-50%);backdrop-filter:blur(7px);box-shadow:0 6px 18px rgba(0,0,0,.14)}
+.fedokCarouselBtn:hover,.fedokCarouselBtn:focus-visible{background:#08728e}
+.fedokPrev{left:12px}.fedokNext{right:12px}
+.fedokCarouselMeta{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:10px 2px 0;color:#5c747f;font-size:.68rem;font-weight:800}
+.fedokCarouselMeta b{color:#08728e}
+.fedokCarouselDots{display:flex;gap:6px;align-items:center}
+.fedokCarouselDots button{width:7px;height:7px;padding:0;border:0;border-radius:999px;background:#b8cbd2;cursor:pointer;transition:width .2s ease,background .2s ease}
+.fedokCarouselDots button.on{width:22px;background:#08728e}
+@media(max-width:680px){
+ .fedokCarouselBtn{width:36px;height:36px}
+ .fedokPrev{left:8px}.fedokNext{right:8px}
+ .fedokSlide figcaption{font-size:.66rem;padding:24px 13px 11px}
+}
+@media(prefers-reduced-motion:reduce){.fedokCarouselTrack{transition:none}}
