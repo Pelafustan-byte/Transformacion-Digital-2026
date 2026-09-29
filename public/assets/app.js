@@ -55,7 +55,7 @@ function renderVideos(){
   if(seq!==playerSeq)return;
   clearTimeout(slowTimer);
   const u=embedUrl(raw);
-  host.innerHTML=`<div class="videoEmbed videoEmbedFallback"><iframe src="${esc(u)}" title="${esc(v.title)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="eager" referrerpolicy="strict-origin-when-cross-origin"></iframe><div class="videoLoading" role="status" aria-live="polite"><span></span>Cargando reproductor alternativo…</div><div class="videoSlow">Si el reproductor no responde, usa “Recargar reproductor” o abre el archivo en Drive.</div></div>`;
+  host.innerHTML=`<div class="videoEmbed videoEmbedFallback"><iframe src="${esc(u)}" title="${esc(v.title)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="eager" referrerpolicy="strict-origin-when-cross-origin"></iframe><div class="videoLoading" role="status" aria-live="polite"><span></span>Cargando reproductor alternativo…</div><div class="videoSlow">Si el reproductor no responde, usa “Recargar reproductor” o abre el archivo original.</div></div>`;
   const frame=host.querySelector('iframe'),wrap=host.querySelector('.videoEmbed');
   if(frame&&wrap){
    const ready=()=>{clearTimeout(slowTimer);wrap.classList.add('is-ready');wrap.classList.remove('is-slow')};
@@ -165,7 +165,7 @@ function renderVideos(){
   const direct=/^\/media\//.test(u)||/\.(mp4|webm)(\?|$)/i.test(u);
   host.dataset.playerManaged='true';
   text('videoTitle',v.title);text('videoDesc',v.description);
-  const link=$('videoLink');link.href=v.sourceUrl||raw||u;link.textContent='Abrir en Drive ↗';
+  const link=$('videoLink');link.href=v.sourceUrl||raw||u;link.textContent='Abrir video ↗';
   setActive(i);
   const retry=ensureRetry();retry.onclick=()=>show(a[currentIndex],currentIndex);
   if(id){mountNativeDrive(v,id,raw,seq);return}
