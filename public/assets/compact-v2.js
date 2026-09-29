@@ -95,7 +95,7 @@ function initFedokCarousel(){
    if(current)current.textContent=String(index+1);
  };
  const stop=()=>{if(timer){clearInterval(timer);timer=null}};
- const startAuto=()=>{if(reduced||document.hidden)return;stop();timer=setInterval(()=>set(index+1),5000)};
+ const startAuto=()=>{stop();timer=setInterval(()=>set(index+1),5000)};
  const pauseThenResume=()=>{stop();clearTimeout(resumeTimer);resumeTimer=setTimeout(startAuto,8000)};
  root.querySelector('.fedokPrev')?.addEventListener('click',()=>{set(index-1);pauseThenResume()});
  root.querySelector('.fedokNext')?.addEventListener('click',()=>{set(index+1);pauseThenResume()});
@@ -104,12 +104,9 @@ function initFedokCarousel(){
  let touchX=null;
  root.addEventListener('touchstart',e=>{touchX=e.touches?.[0]?.clientX??null;stop()},{passive:true});
  root.addEventListener('touchend',e=>{if(touchX==null)return;const x=e.changedTouches?.[0]?.clientX??touchX,dx=x-touchX;touchX=null;if(Math.abs(dx)>45)set(index+(dx<0?1:-1));pauseThenResume()},{passive:true});
- root.addEventListener('mouseenter',stop);
- root.addEventListener('mouseleave',startAuto);
- root.addEventListener('focusin',stop);
- root.addEventListener('focusout',()=>setTimeout(()=>{if(!root.contains(document.activeElement))startAuto()},150));
  document.addEventListener('visibilitychange',()=>document.hidden?stop():startAuto());
- set(0);startAuto();
+ set(0);
+ setTimeout(startAuto,700);
 }
 
 function updateNav(){
