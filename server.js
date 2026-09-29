@@ -352,4 +352,4 @@ app.use(express.static(path.join(__dirname,'public'),{maxAge:IS_PROD?'5m':0,exte
 app.use((err,_q,res,_n)=>{console.error(err);if(err?.code==='LIMIT_FILE_SIZE')return res.status(413).json({message:'Máximo 80 MB por archivo.'});res.status(500).json({message:'Error interno.'})});
 await initDb();app.listen(PORT,()=>console.log(`Ruta Digital CMS :${PORT} | db=${!!pool}`));
 
-// r2 inventory refresh
+// r2 inventory refresh videos
