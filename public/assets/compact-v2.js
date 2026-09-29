@@ -84,24 +84,32 @@ function initFedokCarousel(){
  const root=q('fedokCarousel');if(!root)return;
  const track=root.querySelector('.fedokCarouselTrack'),slides=qa('.fedokSlide',root),dots=qa('[data-fedok-slide]',root),current=q('fedokSlideCurrent');
  if(!track||slides.length<2)return;
- let index=0;
+ let index=0,timer=null,resumeTimer=null;
  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
  const set=i=>{
    index=(i+slides.length)%slides.length;
-   track.style.transition=reduced?'none':'transform .45s ease';
+   track.style.transition=reduced?'none':'transform .6s cubic-bezier(.2,.7,.2,1)';
    track.style.transform=`translateX(-${index*100}%)`;
    slides.forEach((s,n)=>s.classList.toggle('is-active',n===index));
    dots.forEach((d,n)=>d.classList.toggle('on',n===index));
    if(current)current.textContent=String(index+1);
  };
- root.querySelector('.fedokPrev')?.addEventListener('click',()=>set(index-1));
- root.querySelector('.fedokNext')?.addEventListener('click',()=>set(index+1));
- dots.forEach(d=>d.addEventListener('click',()=>set(Number(d.dataset.fedokSlide)||0)));
- root.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')set(index-1);if(e.key==='ArrowRight')set(index+1)});
+ const stop=()=>{if(timer){clearInterval(timer);timer=null}};
+ const startAuto=()=>{if(reduced||document.hidden)return;stop();timer=setInterval(()=>set(index+1),5000)};
+ const pauseThenResume=()=>{stop();clearTimeout(resumeTimer);resumeTimer=setTimeout(startAuto,8000)};
+ root.querySelector('.fedokPrev')?.addEventListener('click',()=>{set(index-1);pauseThenResume()});
+ root.querySelector('.fedokNext')?.addEventListener('click',()=>{set(index+1);pauseThenResume()});
+ dots.forEach(d=>d.addEventListener('click',()=>{set(Number(d.dataset.fedokSlide)||0);pauseThenResume()}));
+ root.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){set(index-1);pauseThenResume()}if(e.key==='ArrowRight'){set(index+1);pauseThenResume()}});
  let touchX=null;
- root.addEventListener('touchstart',e=>{touchX=e.touches?.[0]?.clientX??null},{passive:true});
- root.addEventListener('touchend',e=>{if(touchX==null)return;const x=e.changedTouches?.[0]?.clientX??touchX,dx=x-touchX;touchX=null;if(Math.abs(dx)>45)set(index+(dx<0?1:-1))},{passive:true});
- set(0);
+ root.addEventListener('touchstart',e=>{touchX=e.touches?.[0]?.clientX??null;stop()},{passive:true});
+ root.addEventListener('touchend',e=>{if(touchX==null)return;const x=e.changedTouches?.[0]?.clientX??touchX,dx=x-touchX;touchX=null;if(Math.abs(dx)>45)set(index+(dx<0?1:-1));pauseThenResume()},{passive:true});
+ root.addEventListener('mouseenter',stop);
+ root.addEventListener('mouseleave',startAuto);
+ root.addEventListener('focusin',stop);
+ root.addEventListener('focusout',()=>setTimeout(()=>{if(!root.contains(document.activeElement))startAuto()},150));
+ document.addEventListener('visibilitychange',()=>document.hidden?stop():startAuto());
+ set(0);startAuto();
 }
 
 function updateNav(){
