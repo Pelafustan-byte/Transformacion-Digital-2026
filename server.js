@@ -18,6 +18,14 @@ const ADMIN_USER = process.env.ADMIN_USER || 'editor';
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'ruta-digital-local';
 const SESSION_SECRET = process.env.SESSION_SECRET || 'change-me-in-production';
 const DATABASE_URL = process.env.DATABASE_URL || '';
+const R2_ACCOUNT_ID = String(process.env.R2_ACCOUNT_ID || '').trim();
+const R2_ACCESS_KEY_ID = String(process.env.R2_ACCESS_KEY_ID || '').trim();
+const R2_SECRET_ACCESS_KEY = String(process.env.R2_SECRET_ACCESS_KEY || '').trim();
+const R2_BUCKET = String(process.env.R2_BUCKET || '').trim();
+const R2_PUBLIC_BASE_URL = String(process.env.R2_PUBLIC_BASE_URL || '').trim().replace(/\/$/,'');
+const R2_ENDPOINT = String(process.env.R2_ENDPOINT || (R2_ACCOUNT_ID ? `https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com` : '')).trim().replace(/\/$/,'');
+const R2_PREFIX = String(process.env.R2_PREFIX || 'ruta-digital').trim().replace(/^\/+|\/+$/g,'');
+const R2_ENABLED = Boolean(R2_ENDPOINT && R2_ACCESS_KEY_ID && R2_SECRET_ACCESS_KEY && R2_BUCKET && R2_PUBLIC_BASE_URL);
 const IS_PROD = process.env.NODE_ENV === 'production';
 const SEED_FILE = path.join(__dirname, 'seed', 'content.seed.json');
 // Si Railway monta un volumen, se usa por defecto: basta adjuntarlo en el panel,
@@ -39,7 +47,8 @@ fs.mkdirSync(DATA_DIR,{recursive:true}); fs.mkdirSync(UPLOAD_DIR,{recursive:true
  * RAILWAY_VOLUME_MOUNT_PATH cuando hay un volumen adjunto.
  */
 function detectStorage(){
- if(pool) return {mode:'postgres',persistent:true,detail:'Contenido y medios en PostgreSQL.'};
+ if(pool&&R2_ENABLED) return {mode:'postgres+r2',persistent:true,detail:'Contenido en PostgreSQL; los medios nuevos se almacenan en Cloudflare R2.',media:'r2'};
+ if(pool) return {mode:'postgres',persistent:true,detail:'Contenido y medios en PostgreSQL.',media:'postgres'};
  const mount=VOLUME_MOUNT;
  const onVolume=!!mount&&(DATA_DIR===path.resolve(mount)||DATA_DIR.startsWith(path.resolve(mount)+path.sep));
  if(onVolume) return {mode:'volume',persistent:true,detail:`Contenido y medios en el volumen montado en ${mount}.`};
@@ -54,6 +63,41 @@ if(!STORAGE.persistent){
 const seed = JSON.parse(fs.readFileSync(SEED_FILE,'utf8'));
 if (!pool && !fs.existsSync(CONTENT_FILE)) fs.writeFileSync(CONTENT_FILE,JSON.stringify(seed,null,2));
 
+function r2ObjectKey(file){
+ const mime=String(file?.mimetype||'application/octet-stream').toLowerCase();
+ const extByMime={'image/jpeg':'jpg','image/png':'png','image/webp':'webp','image/gif':'gif','video/mp4':'mp4','video/webm':'webm','application/pdf':'pdf'};
+ const ext=extByMime[mime]||String(path.extname(file?.originalname||'').slice(1)||'bin').toLowerCase().replace(/[^a-z0-9]/g,'').slice(0,8)||'bin';
+ const family=mime.startsWith('image/')?'images':mime.startsWith('video/')?'videos':mime==='application/pdf'?'documents':'files';
+ const now=new Date();
+ const yyyy=String(now.getUTCFullYear()),mm=String(now.getUTCMonth()+1).padStart(2,'0');
+ const leaf=crypto.randomUUID()+'.'+ext;
+ return [R2_PREFIX,family,yyyy,mm,leaf].filter(Boolean).join('/');
+}
+function awsEncode(value){return encodeURIComponent(value).replace(/[!'()*]/g,c=>'%'+c.charCodeAt(0).toString(16).toUpperCase())}
+function r2CanonicalUri(key){return '/'+[R2_BUCKET,...String(key).split('/')].map(awsEncode).join('/')}
+function sha256Hex(data){return crypto.createHash('sha256').update(data).digest('hex')}
+function hmac(key,data,encoding){return crypto.createHmac('sha256',key).update(data).digest(encoding)}
+async function putR2Object(key,buffer,mime){
+ if(!R2_ENABLED) throw new Error('R2_NOT_CONFIGURED');
+ const now=new Date();
+ const amzDate=now.toISOString().replace(/[:-]|\.\d{3}/g,'');
+ const dateStamp=amzDate.slice(0,8),region='auto',service='s3';
+ const endpoint=new URL(R2_ENDPOINT),canonicalUri=r2CanonicalUri(key),payloadHash=sha256Hex(buffer);
+ const canonicalHeaders=`host:${endpoint.host}\nx-amz-content-sha256:${payloadHash}\nx-amz-date:${amzDate}\n`;
+ const signedHeaders='host;x-amz-content-sha256;x-amz-date';
+ const canonicalRequest=['PUT',canonicalUri,'',canonicalHeaders,signedHeaders,payloadHash].join('\n');
+ const scope=`${dateStamp}/${region}/${service}/aws4_request`;
+ const stringToSign=['AWS4-HMAC-SHA256',amzDate,scope,sha256Hex(canonicalRequest)].join('\n');
+ const kDate=hmac(Buffer.from('AWS4'+R2_SECRET_ACCESS_KEY,'utf8'),dateStamp);
+ const kRegion=hmac(kDate,region),kService=hmac(kRegion,service),kSigning=hmac(kService,'aws4_request');
+ const signature=hmac(kSigning,stringToSign,'hex');
+ const authorization=`AWS4-HMAC-SHA256 Credential=${R2_ACCESS_KEY_ID}/${scope}, SignedHeaders=${signedHeaders}, Signature=${signature}`;
+ const url=R2_ENDPOINT+canonicalUri;
+ const response=await fetch(url,{method:'PUT',headers:{Authorization:authorization,'x-amz-date':amzDate,'x-amz-content-sha256':payloadHash,'Content-Type':mime||'application/octet-stream','Cache-Control':'public, max-age=31536000, immutable'},body:buffer});
+ if(!response.ok){const detail=(await response.text().catch(()=>'' )).slice(0,500);throw new Error(`R2_UPLOAD_FAILED_${response.status}: ${detail}`)}
+ return R2_PUBLIC_BASE_URL+'/'+String(key).split('/').map(awsEncode).join('/');
+}
+
 const richTags=['p','br','b','strong','i','em','u','h2','h3','blockquote','ul','ol','li','a'];
 const sanitizeOpts={allowedTags:richTags,allowedAttributes:{a:['href','target','rel']},allowedSchemes:['http','https','mailto'],transformTags:{a:sanitizeHtml.simpleTransform('a',{target:'_blank',rel:'noopener noreferrer'})}};
 const collections=new Set(['videos','materials','capsules','notes','timeline','resources','news','libraryCollections']);
@@ -63,6 +107,8 @@ async function initDb(){
  if(!pool) return;
  await pool.query(`create table if not exists rd_content(id int primary key default 1, data jsonb not null, updated_at timestamptz not null default now());
  create table if not exists rd_media(id uuid primary key, name text not null, mime text not null, bytes bytea not null, size int not null, created_at timestamptz not null default now());
+ create table if not exists rd_media_index(id uuid primary key, name text not null, mime text not null, size int not null, storage text not null, object_key text, public_url text not null, created_at timestamptz not null default now());
+ create index if not exists rd_media_index_created_at_idx on rd_media_index(created_at desc);
  create table if not exists rd_contact_submissions(id bigserial primary key, name text not null, unit text, email text, category text not null, subject text not null, message text not null, status text not null default 'new', created_at timestamptz not null default now());`);
  const r=await pool.query('select id from rd_content where id=1');
  if(!r.rowCount) await pool.query('insert into rd_content(id,data) values(1,$1::jsonb)',[JSON.stringify(seed)]);
@@ -85,7 +131,7 @@ function auth(req,res,next){const raw=req.signedCookies.rd_session;if(!raw)retur
 const upload=multer({storage:multer.memoryStorage(),limits:{fileSize:80*1024*1024},fileFilter:(_r,f,cb)=>cb(null,/^(image\/(png|jpeg|webp|gif)|video\/(mp4|webm)|application\/pdf)$/.test(f.mimetype))});
 
 const app=express();app.set('trust proxy',1);app.disable('x-powered-by');app.use(helmet({contentSecurityPolicy:false,crossOriginEmbedderPolicy:false}));app.use(express.json({limit:'8mb'}));app.use(express.urlencoded({extended:false,limit:'64kb'}));app.use(cookieParser(SESSION_SECRET));
-app.get('/health',(_q,r)=>r.json({ok:true,db:!!pool,service:'ruta-digital-cms',storage:STORAGE.mode,persistent:STORAGE.persistent}));
+app.get('/health',(_q,r)=>r.json({ok:true,db:!!pool,r2:R2_ENABLED,service:'ruta-digital-cms',storage:STORAGE.mode,persistent:STORAGE.persistent}));
 app.get('/api/admin/storage',auth,(_q,r)=>r.json(STORAGE));
 app.get('/api/public/content',async(_q,r)=>{r.set('Cache-Control','no-store');r.json(await publicContent())});
 
@@ -154,7 +200,7 @@ app.post('/api/auth/logout',auth,(req,res)=>{const raw=req.signedCookies.rd_sess
 app.get('/api/auth/session',(req,res)=>{const raw=req.signedCookies.rd_session,s=raw?sessions.get(hash(raw)):null;if(!s||s.expires<Date.now())return res.status(401).json({authenticated:false});res.json({authenticated:true,user:ADMIN_USER})});
 app.get('/api/admin/content',auth,async(_q,r)=>r.json(await readContent()));
 app.put('/api/admin/site',auth,async(req,res)=>{const c=await readContent();c.site={...c.site,...req.body};await saveContent(c);res.json(c.site)});
-app.post('/api/admin/media',auth,upload.single('file'),async(req,res)=>{if(!req.file)return res.status(400).json({message:'Archivo no válido.'});if(req.file.mimetype.startsWith('image/')&&req.file.size>8*1024*1024)return res.status(413).json({message:'Las imágenes no pueden superar 8 MB. Optimízala antes de subirla.'});const id=crypto.randomUUID();if(pool)await pool.query('insert into rd_media(id,name,mime,bytes,size) values($1,$2,$3,$4,$5)',[id,req.file.originalname,req.file.mimetype,req.file.buffer,req.file.size]);else fs.writeFileSync(path.join(UPLOAD_DIR,id),req.file.buffer);res.status(201).json({id,url:`/media/${id}`,name:req.file.originalname,mime:req.file.mimetype,size:req.file.size})});
+app.post('/api/admin/media',auth,upload.single('file'),async(req,res)=>{try{if(!req.file)return res.status(400).json({message:'Archivo no válido.'});if(req.file.mimetype.startsWith('image/')&&req.file.size>8*1024*1024)return res.status(413).json({message:'Las imágenes no pueden superar 8 MB. Optimízala antes de subirla.'});const id=crypto.randomUUID();if(R2_ENABLED){const key=r2ObjectKey(req.file),url=await putR2Object(key,req.file.buffer,req.file.mimetype);if(pool)await pool.query('insert into rd_media_index(id,name,mime,size,storage,object_key,public_url) values($1,$2,$3,$4,$5,$6,$7)',[id,req.file.originalname,req.file.mimetype,req.file.size,'r2',key,url]);return res.status(201).json({id,url,name:req.file.originalname,mime:req.file.mimetype,size:req.file.size,storage:'r2'})}if(pool)await pool.query('insert into rd_media(id,name,mime,bytes,size) values($1,$2,$3,$4,$5)',[id,req.file.originalname,req.file.mimetype,req.file.buffer,req.file.size]);else fs.writeFileSync(path.join(UPLOAD_DIR,id),req.file.buffer);res.status(201).json({id,url:`/media/${id}`,name:req.file.originalname,mime:req.file.mimetype,size:req.file.size,storage:pool?'postgres':'local'})}catch(error){console.error('[media-upload]',error?.message||error);res.status(502).json({message:'No fue posible almacenar el archivo.',error:IS_PROD?undefined:String(error?.message||error)})}});
 app.post('/api/admin/:collection',auth,async(req,res)=>{const col=req.params.collection;if(!collections.has(col))return res.sendStatus(404);const c=await readContent();c[col] ||= [];const item=safeItem(col,req.body);if(!req.body.position)item.position=c[col].length+1;c[col].push(item);await saveContent(c);res.status(201).json(item)});
 app.patch('/api/admin/:collection/:id',auth,async(req,res)=>{const col=req.params.collection;if(!collections.has(col))return res.sendStatus(404);const c=await readContent(),i=(c[col]||[]).findIndex(x=>x.id===req.params.id);if(i<0)return res.sendStatus(404);c[col][i]=safeItem(col,req.body,c[col][i]);await saveContent(c);res.json(c[col][i])});
 app.delete('/api/admin/:collection/:id',auth,async(req,res)=>{const col=req.params.collection;if(!collections.has(col))return res.sendStatus(404);const c=await readContent();c[col]=(c[col]||[]).filter(x=>x.id!==req.params.id);await saveContent(c);res.json({ok:true})});
@@ -179,7 +225,7 @@ app.put('/api/admin/asset-meta/:id',auth,async(req,res)=>{
  c.assetMeta[req.params.id]={...(c.assetMeta[req.params.id]||{}),...clean,updatedAt:new Date().toISOString()};
  await saveContent(c);res.json(c.assetMeta[req.params.id]);
 });
-app.get('/api/admin/media',auth,async(_q,res)=>{if(pool){const q=await pool.query('select id,name,mime,size,created_at from rd_media order by created_at desc limit 100');return res.json({items:q.rows.map(x=>({...x,url:`/media/${x.id}`}))})}res.json({items:fs.readdirSync(UPLOAD_DIR).map(id=>({id,url:`/media/${id}`}))})});
+app.get('/api/admin/media',auth,async(_q,res)=>{if(pool){const [legacy,r2]=await Promise.all([pool.query('select id,name,mime,size,created_at from rd_media order by created_at desc limit 100'),pool.query('select id,name,mime,size,created_at,storage,public_url from rd_media_index order by created_at desc limit 100')]);const items=[...r2.rows.map(x=>({...x,url:x.public_url})),...legacy.rows.map(x=>({...x,url:`/media/${x.id}`,storage:'postgres'}))].sort((a,b)=>new Date(b.created_at)-new Date(a.created_at)).slice(0,100);return res.json({items})}res.json({items:fs.readdirSync(UPLOAD_DIR).map(id=>({id,url:`/media/${id}`,storage:'local'}))})});
 app.get('/api/admin/export/content.json',auth,async(_q,res)=>{res.type('json').attachment('ruta-digital-content.json').send(JSON.stringify(await readContent(),null,2))});
 app.get('/api/admin/export/site.zip',auth,async(_q,res)=>{const c=await readContent();res.attachment(`ruta-digital-${new Date().toISOString().slice(0,10)}.zip`);const z=archiver('zip',{zlib:{level:9}});z.pipe(res);z.file(path.join(__dirname,'server.js'),{name:'server.js'});z.file(path.join(__dirname,'package.json'),{name:'package.json'});z.directory(path.join(__dirname,'public'),'public');z.directory(path.join(__dirname,'seed'),'seed');z.append(JSON.stringify(c,null,2),{name:'data/content.json'});z.append('PORT=3000\nADMIN_USER=editor\nADMIN_PASSWORD=CAMBIAR\nSESSION_SECRET=CAMBIAR\nDATA_DIR=./data\n',{name:'.env.example'});z.append('Instalar Node.js 20+, ejecutar npm install --omit=dev y node server.js. El panel está en /admin/. Para servidor municipal sin DATABASE_URL se usa data/content.json y data/uploads/.',{name:'README_INSTALACION.txt'});await z.finalize()});
 /*
