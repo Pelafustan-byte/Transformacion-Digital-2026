@@ -97,6 +97,33 @@ async function putR2Object(key,buffer,mime){
  if(!response.ok){const detail=(await response.text().catch(()=>'' )).slice(0,500);throw new Error(`R2_UPLOAD_FAILED_${response.status}: ${detail}`)}
  return R2_PUBLIC_BASE_URL+'/'+String(key).split('/').map(awsEncode).join('/');
 }
+async function listR2Objects(maxKeys=200){
+ if(!R2_ENABLED)return [];
+ const now=new Date();
+ const amzDate=now.toISOString().replace(/[:-]|\.\d{3}/g,'');
+ const dateStamp=amzDate.slice(0,8),region='auto',service='s3';
+ const endpoint=new URL(R2_ENDPOINT),payloadHash=sha256Hex('');
+ const canonicalUri='/'+awsEncode(R2_BUCKET);
+ const canonicalQuery='list-type=2&max-keys='+Math.max(1,Math.min(1000,Number(maxKeys)||200));
+ const canonicalHeaders=`host:${endpoint.host}\nx-amz-content-sha256:${payloadHash}\nx-amz-date:${amzDate}\n`;
+ const signedHeaders='host;x-amz-content-sha256;x-amz-date';
+ const canonicalRequest=['GET',canonicalUri,canonicalQuery,canonicalHeaders,signedHeaders,payloadHash].join('\n');
+ const scope=`${dateStamp}/${region}/${service}/aws4_request`;
+ const stringToSign=['AWS4-HMAC-SHA256',amzDate,scope,sha256Hex(canonicalRequest)].join('\n');
+ const kDate=hmac(Buffer.from('AWS4'+R2_SECRET_ACCESS_KEY,'utf8'),dateStamp),kRegion=hmac(kDate,region),kService=hmac(kRegion,service),kSigning=hmac(kService,'aws4_request');
+ const signature=hmac(kSigning,stringToSign,'hex');
+ const authorization=`AWS4-HMAC-SHA256 Credential=${R2_ACCESS_KEY_ID}/${scope}, SignedHeaders=${signedHeaders}, Signature=${signature}`;
+ const response=await fetch(R2_ENDPOINT+canonicalUri+'?'+canonicalQuery,{headers:{Authorization:authorization,'x-amz-date':amzDate,'x-amz-content-sha256':payloadHash}});
+ if(!response.ok)throw new Error('R2_LIST_FAILED_'+response.status);
+ const xml=await response.text(),items=[];
+ for(const match of xml.matchAll(/<Contents>([\s\S]*?)<\/Contents>/g)){
+  const block=match[1],key=(block.match(/<Key>([\s\S]*?)<\/Key>/)?.[1]||'').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&#39;/g,"'").replace(/&quot;/g,'"');
+  const size=Number(block.match(/<Size>(\d+)<\/Size>/)?.[1]||0),modified=block.match(/<LastModified>([^<]+)<\/LastModified>/)?.[1]||'';
+  if(key)items.push({key,size,modified,url:R2_PUBLIC_BASE_URL+'/'+key.split('/').map(awsEncode).join('/')});
+ }
+ return items;
+}
+
 
 const richTags=['p','br','b','strong','i','em','u','h2','h3','blockquote','ul','ol','li','a'];
 const sanitizeOpts={allowedTags:richTags,allowedAttributes:{a:['href','target','rel']},allowedSchemes:['http','https','mailto'],transformTags:{a:sanitizeHtml.simpleTransform('a',{target:'_blank',rel:'noopener noreferrer'})}};
@@ -132,6 +159,7 @@ const upload=multer({storage:multer.memoryStorage(),limits:{fileSize:80*1024*102
 
 const app=express();app.set('trust proxy',1);app.disable('x-powered-by');app.use(helmet({contentSecurityPolicy:false,crossOriginEmbedderPolicy:false}));app.use(express.json({limit:'8mb'}));app.use(express.urlencoded({extended:false,limit:'64kb'}));app.use(cookieParser(SESSION_SECRET));
 app.get('/health',(_q,r)=>r.json({ok:true,db:!!pool,r2:R2_ENABLED,service:'ruta-digital-cms',storage:STORAGE.mode,persistent:STORAGE.persistent}));
+if(R2_ENABLED) listR2Objects(250).then(items=>console.log('[r2-inventory] '+JSON.stringify(items))).catch(error=>console.warn('[r2-inventory]',error?.message||error));
 app.get('/api/admin/storage',auth,(_q,r)=>r.json(STORAGE));
 app.get('/api/public/content',async(_q,r)=>{r.set('Cache-Control','no-store');r.json(await publicContent())});
 
