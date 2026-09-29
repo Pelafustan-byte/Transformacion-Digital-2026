@@ -14,7 +14,7 @@
     "eventText": "Gestor documental, firma electrónica y trabajo coordinado entre direcciones municipales.",
     "eventDate": "25 septiembre · 11:30 · Salón Municipal",
     "videosTitle": "Minutos Digitales",
-    "videosText": "Serie de 10 cápsulas breves de ciberseguridad y buenas prácticas digitales, disponibles para reproducción directa desde Google Drive.",
+    "videosText": "Serie de 18 cápsulas breves de ciberseguridad, transformación digital y buenas prácticas para el trabajo municipal, disponibles para reproducción directa desde Ruta Digital.",
     "materialsTitle": "Insumos esenciales para trabajar",
     "materialsText": "Normativa, guías, referencias y actos administrativos firmados que conviene tener a mano para trabajar con expedientes, firma electrónica, interoperabilidad, datos personales y ciberseguridad.",
     "capsulesTitle": "Cápsulas del equipo",
@@ -45,8 +45,8 @@
       "id": "minutos-digitales-01",
       "title": "Contraseñas seguras",
       "description": "Consejos para crear, usar y proteger contraseñas robustas en las cuentas y sistemas de trabajo.",
-      "embedUrl": "https://drive.google.com/file/d/1yNK-JJzPa0UeqWRXMOgCVxxLQixumTJ9/preview",
-      "sourceUrl": "https://drive.google.com/file/d/1yNK-JJzPa0UeqWRXMOgCVxxLQixumTJ9/view?usp=sharing",
+      "embedUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2301%20Minutos%20Digitales%20-Contrase%C3%B1as%20Seguras.mp4",
+      "sourceUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2301%20Minutos%20Digitales%20-Contrase%C3%B1as%20Seguras.mp4",
       "status": "published",
       "position": 1
     },
@@ -54,8 +54,8 @@
       "id": "minutos-digitales-02",
       "title": "Cuidado con los correos sospechosos",
       "description": "Claves para reconocer correos potencialmente maliciosos y evitar enlaces, archivos o solicitudes de datos riesgosas.",
-      "embedUrl": "https://drive.google.com/file/d/1YXQ6vj4X7fe0Fd9SR9gmp1GBOzLXcod-/preview",
-      "sourceUrl": "https://drive.google.com/file/d/1YXQ6vj4X7fe0Fd9SR9gmp1GBOzLXcod-/view?usp=sharing",
+      "embedUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2302%20Minutos%20Digitales%20-%20Cuidado%20con%20los%20correos%20sospechosos.mp4",
+      "sourceUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2302%20Minutos%20Digitales%20-%20Cuidado%20con%20los%20correos%20sospechosos.mp4",
       "status": "published",
       "position": 2
     },
@@ -63,8 +63,8 @@
       "id": "minutos-digitales-03",
       "title": "Bloquea tu equipo",
       "description": "Buenas prácticas para bloquear la sesión al ausentarse y evitar accesos no autorizados a información municipal.",
-      "embedUrl": "https://drive.google.com/file/d/1Sxic9S6lH1Eym3HLDIqGQCoGdxLWOl0e/preview",
-      "sourceUrl": "https://drive.google.com/file/d/1Sxic9S6lH1Eym3HLDIqGQCoGdxLWOl0e/view?usp=sharing",
+      "embedUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2303%20Minutos%20Digitales%20-%20Bloquea%20tu%20equipo.mp4",
+      "sourceUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2303%20Minutos%20Digitales%20-%20Bloquea%20tu%20equipo.mp4",
       "status": "published",
       "position": 3
     },
@@ -72,8 +72,8 @@
       "id": "minutos-digitales-04",
       "title": "Evita USB desconocidos",
       "description": "Riesgos de conectar dispositivos USB de origen desconocido y recomendaciones para proteger los equipos institucionales.",
-      "embedUrl": "https://drive.google.com/file/d/1kXodV2c5PHZrNAzlbX4KczsRXLWGu0oV/preview",
-      "sourceUrl": "https://drive.google.com/file/d/1kXodV2c5PHZrNAzlbX4KczsRXLWGu0oV/view?usp=sharing",
+      "embedUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2304%20Minutos%20Digitales%20-%20Evita%20USB%20desconocidos.mp4",
+      "sourceUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2304%20Minutos%20Digitales%20-%20Evita%20USB%20desconocidos.mp4",
       "status": "published",
       "position": 4
     },
@@ -81,8 +81,8 @@
       "id": "minutos-digitales-05",
       "title": "Utiliza sistemas y apps autorizados",
       "description": "Importancia de trabajar con aplicaciones y sistemas institucionalmente autorizados para resguardar datos, soporte y continuidad.",
-      "embedUrl": "https://drive.google.com/file/d/1v1VKge6mQnt8HUxUKmpD61yPKn6B-HCs/preview",
-      "sourceUrl": "https://drive.google.com/file/d/1v1VKge6mQnt8HUxUKmpD61yPKn6B-HCs/view?usp=sharing",
+      "embedUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2305%20Minutos%20Digitales%20-%20Utiliza%20sistemas%20y%20apps%20autorizados.mp4",
+      "sourceUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2305%20Minutos%20Digitales%20-%20Utiliza%20sistemas%20y%20apps%20autorizados.mp4",
       "status": "published",
       "position": 5
     },
@@ -90,8 +90,8 @@
       "id": "minutos-digitales-06",
       "title": "Protege la red municipal",
       "description": "Medidas básicas para cuidar la conectividad y reducir riesgos sobre la red institucional y los servicios municipales.",
-      "embedUrl": "https://drive.google.com/file/d/1J13ZE2HaaA705_NornQMxDGuxcPRlG-I/preview",
-      "sourceUrl": "https://drive.google.com/file/d/1J13ZE2HaaA705_NornQMxDGuxcPRlG-I/view?usp=sharing",
+      "embedUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2306%20Minutos%20Digitales%20-%20Protege%20la%20red%20municipal.mp4",
+      "sourceUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2306%20Minutos%20Digitales%20-%20Protege%20la%20red%20municipal.mp4",
       "status": "published",
       "position": 6
     },
@@ -99,8 +99,8 @@
       "id": "minutos-digitales-07",
       "title": "¿Algo extraño en tu equipo?",
       "description": "Qué hacer ante comportamientos inusuales, alertas o señales que podrían indicar un incidente de seguridad.",
-      "embedUrl": "https://drive.google.com/file/d/14KJ49ZAnlv-qvn3nsFwPlQdooL3QOIiq/preview",
-      "sourceUrl": "https://drive.google.com/file/d/14KJ49ZAnlv-qvn3nsFwPlQdooL3QOIiq/view?usp=sharing",
+      "embedUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2307%20Minutos%20digitales%20-%20Algo%20extra%C3%B1o%20en%20tu%20equipo.mp4",
+      "sourceUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2307%20Minutos%20digitales%20-%20Algo%20extra%C3%B1o%20en%20tu%20equipo.mp4",
       "status": "published",
       "position": 7
     },
@@ -108,8 +108,8 @@
       "id": "minutos-digitales-08",
       "title": "Mantén tu equipo actualizado",
       "description": "Por qué instalar actualizaciones y parches ayuda a corregir vulnerabilidades y mantener los equipos protegidos.",
-      "embedUrl": "https://drive.google.com/file/d/1RmtrcibiW7sljw4SEUWFwfaRM5kczY3D/preview",
-      "sourceUrl": "https://drive.google.com/file/d/1RmtrcibiW7sljw4SEUWFwfaRM5kczY3D/view?usp=sharing",
+      "embedUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2308%20Minutos%20Digitales-%20Manten%20tu%20equipo%20actualizado.mp4",
+      "sourceUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2308%20Minutos%20Digitales-%20Manten%20tu%20equipo%20actualizado.mp4",
       "status": "published",
       "position": 8
     },
@@ -117,8 +117,8 @@
       "id": "minutos-digitales-09",
       "title": "Trabaja de forma segura desde casa",
       "description": "Recomendaciones para proteger información, accesos y dispositivos cuando se trabaja fuera de la red municipal.",
-      "embedUrl": "https://drive.google.com/file/d/1faVAUgBCmlNauu4Ws42mOh0PiAloZejH/preview",
-      "sourceUrl": "https://drive.google.com/file/d/1faVAUgBCmlNauu4Ws42mOh0PiAloZejH/view?usp=sharing",
+      "embedUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2309%20Minutos%20digitales%20-Trabaja%20de%20forma%20segura%20desde%20casa.mp4",
+      "sourceUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2309%20Minutos%20digitales%20-Trabaja%20de%20forma%20segura%20desde%20casa.mp4",
       "status": "published",
       "position": 9
     },
@@ -126,10 +126,82 @@
       "id": "minutos-digitales-10",
       "title": "Minutos Digitales · Cápsula 10",
       "description": "Décima cápsula de la serie Minutos Digitales, orientada a reforzar hábitos y buenas prácticas para un trabajo digital seguro.",
-      "embedUrl": "https://drive.google.com/file/d/1Q1sOaLQq2A6o5iufGsHuzlh62DryTHP2/preview",
-      "sourceUrl": "https://drive.google.com/file/d/1Q1sOaLQq2A6o5iufGsHuzlh62DryTHP2/view?usp=sharing",
+      "embedUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2310%20Minutos%20Digitales.mp4",
+      "sourceUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2310%20Minutos%20Digitales.mp4",
       "status": "published",
       "position": 10
+    },
+    {
+      "id": "minutos-digitales-11",
+      "title": "Activa la autenticación multifactor (MFA)",
+      "description": "Cómo una segunda verificación ayuda a proteger las cuentas institucionales incluso si una contraseña se ve comprometida.",
+      "embedUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2311%20Minutos%20digitales%20-%20MFA.mp4",
+      "sourceUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2311%20Minutos%20digitales%20-%20MFA.mp4",
+      "status": "published",
+      "position": 11
+    },
+    {
+      "id": "minutos-digitales-12",
+      "title": "¿Dónde guardas tus archivos?",
+      "description": "Buenas prácticas para almacenar documentos en ubicaciones institucionales, mantener respaldo y evitar pérdidas de información.",
+      "embedUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2312%20Minutos%20Digitales%20-%20%C2%BFD%C3%B3nde%20guardas%20tus%20archivos.mp4",
+      "sourceUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2312%20Minutos%20Digitales%20-%20%C2%BFD%C3%B3nde%20guardas%20tus%20archivos.mp4",
+      "status": "published",
+      "position": 12
+    },
+    {
+      "id": "minutos-digitales-13",
+      "title": "Antes de imprimir, revisa si realmente lo necesitas",
+      "description": "Promueve un uso más eficiente de documentos digitales, evitando impresiones innecesarias y favoreciendo procesos electrónicos.",
+      "embedUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2313%20Minutos%20Digitales%20-%20Antes%20de%20imprimir%2C%20revisa%20si%20realmente%20lo%20necesitas.mp4",
+      "sourceUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2313%20Minutos%20Digitales%20-%20Antes%20de%20imprimir%2C%20revisa%20si%20realmente%20lo%20necesitas.mp4",
+      "status": "published",
+      "position": 13
+    },
+    {
+      "id": "minutos-digitales-14",
+      "title": "Nombra tus archivos de manera clara y ordenada",
+      "description": "Recomendaciones para usar nombres consistentes que faciliten encontrar, identificar y gestionar documentos digitales.",
+      "embedUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2314%20Minutos%20Digitales%20-%20Nombrar%20archivos%20de%20manera%20clara%20y%20ordenada.mp4",
+      "sourceUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2314%20Minutos%20Digitales%20-%20Nombrar%20archivos%20de%20manera%20clara%20y%20ordenada.mp4",
+      "status": "published",
+      "position": 14
+    },
+    {
+      "id": "minutos-digitales-15",
+      "title": "Utiliza la IA de manera segura",
+      "description": "Criterios básicos para usar herramientas de inteligencia artificial sin exponer información sensible ni datos institucionales.",
+      "embedUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2315%20Minutos%20Digitales%20-%20Utiliza%20la%20IA%20de%20manera%20segura.mp4",
+      "sourceUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2315%20Minutos%20Digitales%20-%20Utiliza%20la%20IA%20de%20manera%20segura.mp4",
+      "status": "published",
+      "position": 15
+    },
+    {
+      "id": "minutos-digitales-16",
+      "title": "¿Toda la información se puede compartir?",
+      "description": "Orientaciones para distinguir información pública, interna o sensible antes de enviarla, publicarla o compartirla.",
+      "embedUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2316%20Minutos%20Digitales%20-%20%C2%BFToda%20inf.%20se%20puede%20compartir.mp4",
+      "sourceUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2316%20Minutos%20Digitales%20-%20%C2%BFToda%20inf.%20se%20puede%20compartir.mp4",
+      "status": "published",
+      "position": 16
+    },
+    {
+      "id": "minutos-digitales-17",
+      "title": "¿Qué hacer ante un incidente?",
+      "description": "Pasos iniciales ante una situación de ciberseguridad: reconocerla, evitar agravarla y comunicarla oportunamente.",
+      "embedUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2317%20Minutos%20Digitales%20-%20%C2%BFQu%C3%A9%20hacer%20ante%20un%20incidente.mp4",
+      "sourceUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2317%20Minutos%20Digitales%20-%20%C2%BFQu%C3%A9%20hacer%20ante%20un%20incidente.mp4",
+      "status": "published",
+      "position": 17
+    },
+    {
+      "id": "minutos-digitales-18",
+      "title": "¿Vas a compartir información personal?",
+      "description": "Precauciones antes de compartir datos personales y recomendaciones para proteger la privacidad de las personas.",
+      "embedUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2318%20Minutos%20Digitales-%C2%BFVas%20a%20compartir%20informaci%C3%B3n%20personal.mp4",
+      "sourceUrl": "https://pub-8c06f31e649943eb9a59bf09da6a3219.r2.dev/Capsulas/%2318%20Minutos%20Digitales-%C2%BFVas%20a%20compartir%20informaci%C3%B3n%20personal.mp4",
+      "status": "published",
+      "position": 18
     }
   ],
   "materials": [
