@@ -139,6 +139,16 @@ async function initDb(){
  create table if not exists rd_contact_submissions(id bigserial primary key, name text not null, unit text, email text, category text not null, subject text not null, message text not null, status text not null default 'new', created_at timestamptz not null default now());`);
  const r=await pool.query('select id from rd_content where id=1');
  if(!r.rowCount) await pool.query('insert into rd_content(id,data) values(1,$1::jsonb)',[JSON.stringify(seed)]);
+ const current=await pool.query('select data from rd_content where id=1');
+ const content=current.rows[0]?.data||seed;
+ content._migrations=content._migrations||{};
+ if(!content._migrations.minutosDigitalesR2v1){
+  content.videos=JSON.parse(JSON.stringify(seed.videos||[]));
+  content.site={...(content.site||{}),videosTitle:seed.site?.videosTitle||'Minutos Digitales',videosText:seed.site?.videosText||''};
+  content._migrations.minutosDigitalesR2v1=new Date().toISOString();
+  await pool.query('update rd_content set data=$1::jsonb,updated_at=now() where id=1',[JSON.stringify(content)]);
+  console.log('[content-migration] Minutos Digitales migrated to R2:',content.videos.length);
+ }
 }
 async function readContent(){
  if(pool){const r=await pool.query('select data from rd_content where id=1'); return r.rows[0]?.data||seed;}
@@ -159,7 +169,6 @@ const upload=multer({storage:multer.memoryStorage(),limits:{fileSize:80*1024*102
 
 const app=express();app.set('trust proxy',1);app.disable('x-powered-by');app.use(helmet({contentSecurityPolicy:false,crossOriginEmbedderPolicy:false}));app.use(express.json({limit:'8mb'}));app.use(express.urlencoded({extended:false,limit:'64kb'}));app.use(cookieParser(SESSION_SECRET));
 app.get('/health',(_q,r)=>r.json({ok:true,db:!!pool,r2:R2_ENABLED,service:'ruta-digital-cms',storage:STORAGE.mode,persistent:STORAGE.persistent}));
-if(R2_ENABLED) listR2Objects(250).then(items=>console.log('[r2-inventory] '+JSON.stringify(items))).catch(error=>console.warn('[r2-inventory]',error?.message||error));
 app.get('/api/admin/storage',auth,(_q,r)=>r.json(STORAGE));
 app.get('/api/public/content',async(_q,r)=>{r.set('Cache-Control','no-store');r.json(await publicContent())});
 
@@ -352,4 +361,3 @@ app.use(express.static(path.join(__dirname,'public'),{maxAge:IS_PROD?'5m':0,exte
 app.use((err,_q,res,_n)=>{console.error(err);if(err?.code==='LIMIT_FILE_SIZE')return res.status(413).json({message:'Máximo 80 MB por archivo.'});res.status(500).json({message:'Error interno.'})});
 await initDb();app.listen(PORT,()=>console.log(`Ruta Digital CMS :${PORT} | db=${!!pool}`));
 
-// r2 inventory refresh videos
