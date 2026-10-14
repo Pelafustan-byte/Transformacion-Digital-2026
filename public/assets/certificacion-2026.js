@@ -31,7 +31,14 @@
     else{status.textContent='Galería temporalmente no disponible';track.querySelector('.certificacionLoading').textContent='Fotografías en preparación. Actualiza esta página en unos minutos.'}
     return;
    }
-   photos=data.photos;
+   // Orden editorial de la galería: anteriores fotos 5,1,4 primero y 12 en séptimo lugar.
+   // Se conservan URL R2, pie y descripción de cada fotografía.
+   const editorialOrder=[15,14,12,13,11,1,7,2,3,4,5,6,8,9,10,16];
+   const photoRanks=new Map(editorialOrder.map((original,i)=>[original,i]));
+   photos=[...data.photos];
+   if(photos.every(p=>photoRanks.has(Number(p.originalPosition)))&&new Set(photos.map(p=>Number(p.originalPosition))).size===16){
+    photos.sort((a,b)=>photoRanks.get(Number(a.originalPosition))-photoRanks.get(Number(b.originalPosition)));
+   }
    track.innerHTML=photos.map((p,i)=>'<figure class="fedokSlide'+(i===0?' is-active':'')+(p.originalPosition===16?' is-poster':'')+'"><img src="'+escape(p.url)+'" alt="'+escape(p.alt)+'" loading="'+(i===0?'eager':'lazy')+'" decoding="async"><figcaption><b>'+String(i+1).padStart(2,'0')+'</b> <span>'+escape(p.caption)+'</span></figcaption></figure>').join('');
    dots.innerHTML=photos.map((p,i)=>'<button type="button" data-cert-slide="'+i+'" role="tab" aria-label="Ver fotografía '+(i+1)+'" aria-selected="'+(i===0?'true':'false')+'" class="'+(i===0?'on':'')+'"></button>').join('');
    total.textContent=String(photos.length);
