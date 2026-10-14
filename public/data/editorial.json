@@ -2,8 +2,8 @@
   "site": {
     "materialsTitle": "Insumos esenciales para trabajar",
     "materialsText": "Normativa, guías, referencias y actos administrativos firmados que conviene tener a mano para trabajar con expedientes, firma electrónica, interoperabilidad, datos personales y ciberseguridad.",
-    "newsTitle": "Radar Digital · actualización 23 de septiembre",
-    "newsText": "Ronda de actualidad enfocada en implementación municipal: transformación digital, ciberseguridad, datos, inteligencia artificial en el Estado, continuidad operacional y obligaciones que afectan el trabajo local."
+    "newsTitle": "Radar Digital · actualización 14 de octubre de 2026",
+    "newsText": "Novedades oficiales para la gestión municipal: transformación digital, compras públicas, ciberseguridad, transparencia, inteligencia artificial y actividades de capacitación."
   },
   "materials": [
     {
@@ -99,14 +99,102 @@
   ],
   "news": [
     {
+      "id": "news-chilecompra-cierre-2026",
+      "publishedAt": "2026-10-13",
+      "tag": "Compras públicas · Cierre 2026",
+      "title": "ChileCompra entrega orientaciones para cerrar 2026 y planificar las compras de 2027",
+      "description": "La Dirección ChileCompra recomienda verificar recepciones conformes, revisar el Plan Anual de Compras, evitar contrataciones innecesarias y anticipar el control de procesos. Incluye orientaciones para preparar el PAC 2027 y resguardar la probidad y eficiencia.",
+      "source": "ChileCompra",
+      "url": "https://www.chilecompra.cl/2026/10/chilecompra-entrega-orientaciones-tecnicas-para-fortalecer-la-eficiencia-de-las-compras-publicas-del-ultimo-trimestre-de-2026/",
+      "position": 1,
+      "status": "published"
+    },
+    {
       "id": "news-certificacion-td-2026",
       "publishedAt": "2026-10-09",
       "tag": "Constitución · Formación",
       "title": "50 funcionarios municipales se certifican en Transformación Digital",
-      "description": "La Municipalidad de Constitución y la Universidad de Talca reconocieron el compromiso de 50 funcionarios que aprobaron capacitaciones en ciberseguridad, liderazgo digital y gestión del cambio. Jornada coordinada por el Equipo de Transformación Digital municipal y la Universidad de Talca.",
+      "description": "La Municipalidad de Constitución y la Universidad de Talca reconocieron a 50 funcionarios que aprobaron capacitaciones en ciberseguridad, liderazgo digital y gestión del cambio. Jornada coordinada por el Equipo de Transformación Digital municipal y la Universidad de Talca.",
       "source": "Ruta Digital Constitución",
       "url": "/#certificacion-transformacion-digital",
-      "position": 1,
+      "position": 2,
+      "status": "published"
+    },
+    {
+      "id": "news-chilecompra-xdr-oct-2026",
+      "publishedAt": "2026-10-08",
+      "tag": "Compras coordinadas · Seguridad TIC",
+      "title": "Compra Coordinada de Ciberseguridad: inscripción de organismos hasta el 2 de noviembre",
+      "description": "ChileCompra convoca a organismos públicos a agregar demanda para licencias XDR destinadas a equipos y servidores, con instalación y soporte. El plazo de inscripción vence el 2 de noviembre y la selección de productos, el 9 de noviembre de 2026.",
+      "source": "ChileCompra",
+      "url": "https://www.chilecompra.cl/2026/10/compra-coordinada-de-ciberseguridad-organismos-publicos-pueden-inscribirse-hasta-el-2-de-noviembre/",
+      "position": 3,
+      "status": "published"
+    },
+    {
+      "id": "news-anci-pdi-oct-2026",
+      "publishedAt": "2026-10-08",
+      "tag": "Ciberseguridad · Reporte de incidentes",
+      "title": "ANCI refuerza el reporte de incidentes y vulnerabilidades en seminario de la PDI",
+      "description": "Durante un encuentro internacional organizado por la PDI, la ANCI expuso tendencias de amenazas, hacking ético y su mecanismo de Reporte Ciudadano, que permite comunicar vulnerabilidades de forma segura y anónima.",
+      "source": "ANCI",
+      "url": "https://anci.gob.cl/noticias/anci-particip%C3%B3-del-noveno-seminario-de-ciberseguridad-de-la-pdi/",
+      "position": 4,
+      "status": "published"
+    },
+    {
+      "id": "news-anci-ejercicio-nacional-oct-2026",
+      "publishedAt": "2026-10-07",
+      "tag": "Agenda · Ciberseguridad",
+      "title": "ANCI anuncia su primer Ejercicio Nacional de Ciberseguridad para el 29 de octubre",
+      "description": "El ejercicio en línea busca poner a prueba capacidades de respuesta a incidentes y está orientado a especialistas y estudiantes con conocimientos intermedios o superiores. Forma parte de la preparación prevista en la Ley Marco de Ciberseguridad.",
+      "source": "ANCI",
+      "url": "https://anci.gob.cl/noticias/anci-ejercicio-nacional/",
+      "position": 5,
+      "status": "published"
+    },
+    {
+      "id": "news-chilecompra-seminario-oct-2026",
+      "publishedAt": "2026-10-02",
+      "tag": "Agenda · Compras y ciberseguridad",
+      "title": "ChileCompra, ANCI y Contraloría convocan a seminario de ciberseguridad el 21 de octubre",
+      "description": "La actividad abordará riesgos, gobernanza y estándares de ciberseguridad en las compras públicas. Se realizará el 21 de octubre, de 9:00 a 12:00 horas, y está dirigida, entre otros, a equipos de abastecimiento, TIC, control y transformación digital.",
+      "source": "ChileCompra · ANCI · CGR",
+      "url": "https://www.chilecompra.cl/2026/10/chilecompra-anci-y-contraloria-realizaran-seminario-sobre-ciberseguridad-en-las-compras-publicas/",
+      "position": 6,
+      "status": "published"
+    },
+    {
+      "id": "news-anci-mes-ciberseguridad-2026",
+      "publishedAt": "2026-10-02",
+      "tag": "Mes de la Ciberseguridad",
+      "title": "ANCI inaugura el Mes de la Ciberseguridad y presenta un portal de Reporte Ciudadano",
+      "description": "La ANCI anunció un nuevo canal de reporte de incidentes y vulnerabilidades, con opciones de identificación mediante ClaveÚnica o aviso anónimo. También presentó el primer Ejercicio Nacional de Ciberseguridad.",
+      "source": "ANCI",
+      "url": "https://anci.gob.cl/noticias/anci-mes-de-la-ciberseguridad-2026/",
+      "position": 7,
+      "status": "published"
+    },
+    {
+      "id": "news-cplt-ia-transparencia-2026",
+      "publishedAt": "2026-09-30",
+      "tag": "IA · Transparencia pública",
+      "title": "CPLT prepara un Portal de Transparencia con buscador de información apoyado por IA",
+      "description": "El Consejo para la Transparencia anunció una agenda de modernización que contempla licitar un nuevo portal, incorporar herramientas de búsqueda con apoyo de inteligencia artificial y mejorar el acceso a datos públicos. Son iniciativas previstas, no funciones ya desplegadas.",
+      "source": "Consejo para la Transparencia",
+      "url": "https://www.consejotransparencia.cl/la-ia-aterriza-en-el-acceso-a-informacion-publica-cplt-impulsa-inedita-agenda-de-modernizacion-que-facilitara-a-millones-de-personas-encontrar-datos-publicos/",
+      "position": 8,
+      "status": "published"
+    },
+    {
+      "id": "news-cplt-fiscalizacion-aljibe-2026",
+      "publishedAt": "2026-10-05",
+      "tag": "Transparencia · Gestión municipal",
+      "title": "Fiscalización del CPLT identifica brechas de información en contrataciones de camiones aljibe",
+      "description": "El Consejo revisó contrataciones de 2023 y 2024 por más de $30 mil millones y detectó dificultades para conocer cuánta agua se entregó y a cuántas familias llegó. El análisis releva la trazabilidad de resultados y el acceso a información municipal.",
+      "source": "Consejo para la Transparencia",
+      "url": "https://consejotransparencia.cl/fiscalizacion-cplt-municipios-y-delegaciones-contrataron-mas-de-30-mil-millones-en-camiones-aljibe-en-2023-y-2024-pero-a-cuantas-familias-llego-el-agua-potable/",
+      "position": 9,
       "status": "published"
     },
     {
@@ -118,29 +206,7 @@
       "source": "ChileCompra",
       "url": "https://www.chilecompra.cl/2026/09/chilecompra-comparte-avances-en-inteligencia-artificial-y-modernizacion-en-encuentro-con-paises-lideres-en-compras-publicas-a-nivel-mundial/",
       "status": "published",
-      "position": 1
-    },
-    {
-      "id": "news-stack-publico-agentic",
-      "publishedAt": "2026-09-23",
-      "tag": "Agenda · IA en el Estado",
-      "title": "Stack Público cierra septiembre con una sesión sobre IA agéntica para funcionarios",
-      "description": "La sesión del 24 de septiembre abordará agentes de IA, automatización de procesos y casos de uso en gobierno. Es especialmente útil para equipos municipales que evalúan automatizaciones sin perder trazabilidad, supervisión humana y control de datos.",
-      "source": "MinCiencia · Laboratorio de Gobierno",
-      "url": "https://www.minciencia.gob.cl/areas/inteligencia-artificial/stack-publico/",
-      "status": "published",
-      "position": 2
-    },
-    {
-      "id": "news-anci-monitoreo",
-      "publishedAt": "2026-09-23",
-      "tag": "Agenda · Ciberseguridad",
-      "title": "ANCI aborda hoy monitoreo, detección y respuesta temprana a incidentes",
-      "description": "La charla del 23 de septiembre revisa cómo detectar actividad maliciosa, evaluar su impacto y activar una respuesta coordinada. Para un municipio, esto se conecta directamente con continuidad operacional, registro de incidentes y escalamiento oportuno.",
-      "source": "ANCI",
-      "url": "https://anci.gob.cl/eventos/charla-basica-monitorear-en-tiempo-real/",
-      "status": "published",
-      "position": 3
+      "position": 10
     },
     {
       "id": "news-magallanes-municipios",
@@ -151,7 +217,7 @@
       "source": "SUBDERE",
       "url": "https://www.subdere.gov.cl/sala-de-prensa/la-regi%C3%B3n-de-magallanes-avanza-en-la-trasformaci%C3%B3n-digital-con-coordinaci%C3%B3n-entre-el",
       "status": "published",
-      "position": 4
+      "position": 11
     },
     {
       "id": "news-anci-simulacro",
@@ -162,7 +228,7 @@
       "source": "ANCI",
       "url": "https://anci.gob.cl/noticias/tercera-submesa-ciberseguridad-gobierno-central/",
       "status": "published",
-      "position": 5
+      "position": 12
     },
     {
       "id": "news-anci-reporte",
@@ -173,7 +239,7 @@
       "source": "ANCI",
       "url": "https://anci.gob.cl/noticias/anci-reporte-comite-ciberseguridad-ccs/",
       "status": "published",
-      "position": 6
+      "position": 13
     },
     {
       "id": "news-cplt-transparencia-municipal",
@@ -184,7 +250,7 @@
       "source": "Consejo para la Transparencia",
       "url": "https://www.consejotransparencia.cl/cplt-actualiza-las-reglas-de-publicacion-informacion-desde-remuneraciones-y-contrataciones-en-la-administracion-del-estado-hasta-permisos-de-construccion-en-municipalidades/",
       "status": "published",
-      "position": 7
+      "position": 14
     },
     {
       "id": "news-anci-cens-salud",
@@ -195,7 +261,7 @@
       "source": "ANCI · CENS",
       "url": "https://anci.gob.cl/noticias/anci-y-cens-lanzan-recomendaciones-de-ciberseguridad-para-sistemas-de-informacion-en-salud/",
       "status": "published",
-      "position": 8
+      "position": 15
     },
     {
       "id": "news-anci-basicos",
@@ -206,7 +272,7 @@
       "source": "ANCI",
       "url": "https://anci.gob.cl/noticias/anci-resumen-ejecutivo-consulta-publica-normativa-basicos/",
       "status": "published",
-      "position": 9
+      "position": 16
     },
     {
       "id": "news-hacienda-modernizacion-2030",
@@ -217,7 +283,7 @@
       "source": "Ministerio de Hacienda",
       "url": "https://www.hacienda.cl/noticias-y-eventos/noticias/ministro-jorge-quiroz-y-cuenta-publica-del-ministerio-de-hacienda-vamos-a",
       "status": "published",
-      "position": 10
+      "position": 17
     }
   ]
 }
