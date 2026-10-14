@@ -10,6 +10,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import pg from 'pg';
+import zlib from 'node:zlib';
 
 const { Pool } = pg;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -359,5 +360,86 @@ app.get(['/','/index.html'],async(_q,res)=>{
 
 app.use(express.static(path.join(__dirname,'public'),{maxAge:IS_PROD?'5m':0,extensions:['html']}));
 app.use((err,_q,res,_n)=>{console.error(err);if(err?.code==='LIMIT_FILE_SIZE')return res.status(413).json({message:'Máximo 80 MB por archivo.'});res.status(500).json({message:'Error interno.'})});
+
+/* Certificación 2026: ingesta automática e idempotente en Cloudflare R2.
+   Las fotos originales residen en seed/certificacion-2026-fotos.zip, conservadas
+   como respaldo para que un despliegue nuevo no dependa del disco efímero. */
+function certificationZipFiles(){
+ const archive=path.join(__dirname,'seed','certificacion-2026-fotos.zip');
+ if(!fs.existsSync(archive))return [];
+ const bytes=fs.readFileSync(archive);
+ let end=-1;
+ for(let i=bytes.length-22;i>=Math.max(0,bytes.length-65557);i--){
+  if(bytes.readUInt32LE(i)===0x06054b50){end=i;break}
+ }
+ if(end<0)throw new Error('CERTIFICACION_ZIP_EOCD_MISSING');
+ const total=bytes.readUInt16LE(end+10);
+ let off=bytes.readUInt32LE(end+16);
+ const entries=[];
+ for(let i=0;i<total;i++){
+  if(bytes.readUInt32LE(off)!==0x02014b50)throw new Error('CERTIFICACION_ZIP_CENTRAL_INVALID');
+  const method=bytes.readUInt16LE(off+10),compressedSize=bytes.readUInt32LE(off+20);
+  const nameLen=bytes.readUInt16LE(off+28),extraLen=bytes.readUInt16LE(off+30),commentLen=bytes.readUInt16LE(off+32);
+  const localOff=bytes.readUInt32LE(off+42);
+  const name=bytes.subarray(off+46,off+46+nameLen).toString('utf8');
+  if(/\.(?:jpe?g)$/i.test(name)){
+   if(bytes.readUInt32LE(localOff)!==0x04034b50)throw new Error('CERTIFICACION_ZIP_LOCAL_INVALID');
+   const dataOff=localOff+30+bytes.readUInt16LE(localOff+26)+bytes.readUInt16LE(localOff+28);
+   const raw=bytes.subarray(dataOff,dataOff+compressedSize);
+   const buffer=method===0?Buffer.from(raw):method===8?zlib.inflateRawSync(raw):null;
+   if(!buffer)throw new Error('CERTIFICACION_ZIP_UNSUPPORTED_COMPRESSION');
+   entries.push({name,buffer,originalPosition:entries.length+1});
+  }
+  off+=46+nameLen+extraLen+commentLen;
+ }
+ return entries;
+}
+const CERTIFICACION_ORDER=[14,13,11,12,15,1,2,3,4,5,6,7,8,9,10,16];
+const CERTIFICACION_CAPTIONS=[
+ 'Entrega de diplomas y reconocimiento a los funcionarios municipales.',
+ 'Funcionarias y funcionarios participantes en la ceremonia.',
+ 'Vista general de la ceremonia realizada en el Salón Municipal.',
+ 'Intervención durante la jornada de certificación.',
+ 'Presentación de la ceremonia de Transformación Digital 2026.',
+ 'Entrega de diplomas a participantes de los cursos.',
+ 'Reconocimiento al compromiso con el aprendizaje.',
+ 'Participantes reciben sus certificados.',
+ 'La formación fortalece la gestión municipal.',
+ 'Diplomas de los cursos realizados con la Universidad de Talca.',
+ 'Reconocimientos a funcionarios de distintas unidades.',
+ 'Asistentes a la actividad institucional.',
+ 'Palabras durante el encuentro de certificación.',
+ 'Participación y acompañamiento de los equipos municipales.',
+ 'Funcionarios reunidos en el Salón Municipal.',
+ 'Afiche municipal de la certificación en Transformación Digital.'
+];
+async function uploadCertificationPhotos(){
+ if(!R2_ENABLED){console.error('[certificacion-2026] Cloudflare R2 no configurado; pendiente ingesta de fotos.');return}
+ const existing=await readContent();
+ if(Array.isArray(existing.certification2026Photos)&&existing.certification2026Photos.length===16)return;
+ const inputs=certificationZipFiles();
+ if(inputs.length!==16)throw new Error('CERTIFICACION_ZIP_EXPECTED_16_FOUND_'+inputs.length);
+ const photos=[];
+ for(let i=0;i<CERTIFICACION_ORDER.length;i++){
+  const originalPosition=CERTIFICACION_ORDER[i],photo=inputs[originalPosition-1];
+  const key=[R2_PREFIX,'images','certificacion-2026',String(originalPosition).padStart(2,'0')+'.jpeg'].filter(Boolean).join('/');
+  const url=await putR2Object(key,photo.buffer,'image/jpeg');
+  photos.push({position:i+1,originalPosition,caption:CERTIFICACION_CAPTIONS[i],url,alt:'Certificación municipal en Transformación Digital 2026, fotografía '+(i+1)});
+  console.log('[certificacion-2026] Imagen R2',i+1,'/',inputs.length);
+ }
+ const latest=await readContent();
+ latest.certification2026Photos=photos;
+ await saveContent(latest);
+ console.log('[certificacion-2026] GALERIA_READY: '+photos.length+' fotografías en Cloudflare R2');
+}
+app.get('/api/public/certificacion-photos',async(_q,res)=>{
+ try{
+  res.set('Cache-Control','no-store');
+  const data=await readContent(),photos=Array.isArray(data.certification2026Photos)?data.certification2026Photos:[];
+  res.json({ready:photos.length===16,photos});
+ }catch(e){console.error('[certificacion-2026] media manifest:',e?.message||e);res.status(500).json({ready:false,photos:[]})}
+});
+
 await initDb();app.listen(PORT,()=>console.log(`Ruta Digital CMS :${PORT} | db=${!!pool}`));
+uploadCertificationPhotos().catch(e=>console.error('[certificacion-2026] Error al cargar en R2:',e?.message||e));
 

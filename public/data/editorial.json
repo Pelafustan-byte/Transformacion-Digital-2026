@@ -99,6 +99,17 @@
   ],
   "news": [
     {
+      "id": "news-certificacion-td-2026",
+      "publishedAt": "2026-10-09",
+      "tag": "Constitución · Formación",
+      "title": "50 funcionarios municipales se certifican en Transformación Digital",
+      "description": "La Municipalidad de Constitución y la Universidad de Talca reconocieron el compromiso de 50 funcionarios que aprobaron capacitaciones en ciberseguridad, liderazgo digital y gestión del cambio. Jornada coordinada por el Equipo de Transformación Digital municipal y la Universidad de Talca.",
+      "source": "Ruta Digital Constitución",
+      "url": "/#certificacion-transformacion-digital",
+      "position": 1,
+      "status": "published"
+    },
+    {
       "id": "news-chilecompra-ia-2026",
       "publishedAt": "2026-09-22",
       "tag": "IA · Compras públicas",

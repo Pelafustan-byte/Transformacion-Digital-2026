@@ -1,0 +1,17 @@
+/* Certificación Transformación Digital · sección editorial de 9 de octubre */
+.certificacionNews{background:linear-gradient(180deg,#f1f8fa 0%,#fff 100%);scroll-margin-top:88px}
+.certificacionNews .fedokNewsKicker{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.certificacionNews .fedokLaunchStory h2{font-size:clamp(1.88rem,3.4vw,2.85rem);line-height:1.08}
+.certificacionNews .fedokLaunchStory p{font-size:.89rem;line-height:1.72}
+.certificacionNews .fedokLaunchStory .fedokLaunchLead{font-size:1.04rem}
+.certificacionNews .fedokLaunchFoot a{color:#087597;text-decoration:underline;font-weight:800}
+.certificacionNews .fedokSlide{aspect-ratio:4/3}
+.certificacionNews .fedokCarouselViewport{background:#d5e6ec}
+.certificacionNews .fedokSlide img{object-fit:cover;object-position:center}
+.certificacionNews .fedokSlide.is-poster img{object-fit:contain;background:#17445c}
+.certificacionNews .certificacionLoading{display:grid;place-items:center;height:100%;padding:38px;text-align:center;color:#234c60;font-weight:800;font-size:.92rem}
+.certificacionNews .fedokCarouselBtn:disabled{opacity:.35;cursor:not-allowed}
+.certificacionNews .fedokCarouselTop strong{font-size:.71rem}
+.certificacionNews .fedokSlide figcaption{padding-bottom:18px}
+@media(max-width:980px){.certificacionNews .fedokCarousel{max-width:780px;width:100%;margin-inline:auto}}
+@media(max-width:640px){.certificacionNews{padding:32px 0}.certificacionNews .fedokLaunchStory h2{font-size:1.87rem}.certificacionNews .fedokSlide{aspect-ratio:1/1}.certificacionNews .fedokLaunchStory p{font-size:.85rem}}
