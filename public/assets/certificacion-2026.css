@@ -15,3 +15,42 @@
 .certificacionNews .fedokSlide figcaption{padding-bottom:18px}
 @media(max-width:980px){.certificacionNews .fedokCarousel{max-width:780px;width:100%;margin-inline:auto}}
 @media(max-width:640px){.certificacionNews{padding:32px 0}.certificacionNews .fedokLaunchStory h2{font-size:1.87rem}.certificacionNews .fedokSlide{aspect-ratio:1/1}.certificacionNews .fedokLaunchStory p{font-size:.85rem}}
+
+
+/* Controles centrados sobre la fotografía, no sobre el contenedor editorial.
+   El escenario excluye título y contador; funciona con cualquier proporción
+   de imagen tanto en escritorio como en teléfonos. */
+.certificacionNews .fedokCarouselStage{position:relative;isolation:isolate}
+.certificacionNews .fedokCarouselStage .fedokCarouselBtn{
+ position:absolute;
+ top:50%;
+ transform:translateY(-50%);
+ width:44px;
+ height:44px;
+ padding:0;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ line-height:1;
+ border-radius:50%;
+ z-index:3;
+}
+.certificacionNews .fedokCarouselStage .fedokCarouselBtn svg{
+ display:block;
+ flex:none;
+ width:22px;
+ height:22px;
+ pointer-events:none;
+}
+.certificacionNews .fedokCarouselStage .fedokPrev{left:12px}
+.certificacionNews .fedokCarouselStage .fedokNext{right:12px}
+.certificacionNews .fedokCarouselStage .fedokCarouselBtn:focus-visible{
+ outline:3px solid #ffd16d;
+ outline-offset:3px;
+}
+@media(max-width:640px){
+ .certificacionNews .fedokCarouselStage .fedokCarouselBtn{width:38px;height:38px}
+ .certificacionNews .fedokCarouselStage .fedokCarouselBtn svg{width:19px;height:19px}
+ .certificacionNews .fedokCarouselStage .fedokPrev{left:8px}
+ .certificacionNews .fedokCarouselStage .fedokNext{right:8px}
+}
