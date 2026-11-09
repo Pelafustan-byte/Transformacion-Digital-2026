@@ -23,9 +23,18 @@
  const interact=n=>{move(n);play()};
  async function load(){
   try{
-   const r=await fetch('/api/public/certificacion-photos',{cache:'no-store'});
-   if(!r.ok)throw new Error('No se pudo cargar la galería');
-   const data=await r.json();
+   // Cloudflare Worker serves the live manifest. The static file in GitHub
+   // keeps the gallery usable when the API layer is unavailable.
+   let data=null;
+   try{
+    const r=await fetch('/api/public/certificacion-photos',{cache:'no-store'});
+    if(r.ok&&/application\\/json/i.test(r.headers.get('content-type')||''))data=await r.json();
+   }catch{}
+   if(!data?.ready||!Array.isArray(data.photos)||data.photos.length!==16){
+    const backup=await fetch('/data/certificacion-2026-photos.json',{cache:'no-store'});
+    if(!backup.ok)throw new Error('No se pudo cargar la galería');
+    data=await backup.json();
+   }
    if(!data.ready||!Array.isArray(data.photos)||data.photos.length!==16){
     if(++waits<90){status.textContent='Subiendo fotografías a Cloudflare R2...';setTimeout(load,4000)}
     else{status.textContent='Galería temporalmente no disponible';track.querySelector('.certificacionLoading').textContent='Fotografías en preparación. Actualiza esta página en unos minutos.'}
