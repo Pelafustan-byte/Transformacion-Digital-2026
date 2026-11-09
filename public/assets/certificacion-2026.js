@@ -28,7 +28,7 @@
    let data=null;
    try{
     const r=await fetch('/api/public/certificacion-photos',{cache:'no-store'});
-    if(r.ok&&/application\\/json/i.test(r.headers.get('content-type')||''))data=await r.json();
+    if(r.ok&&/application\/json/i.test(r.headers.get('content-type')||''))data=await r.json();
    }catch{}
    if(!data?.ready||!Array.isArray(data.photos)||data.photos.length!==16){
     const backup=await fetch('/data/certificacion-2026-photos.json',{cache:'no-store'});
